@@ -1,45 +1,76 @@
-# this script creates symlinks from the home directory to any desired files in ~/dotfiles directory
+#!/bin/bash
+# Dotfiles installer — creates symlinks from home directory to this repo
+# Usage: bash install.sh
 
-# Variables
-dir=~/dotfiles
-files=( vim vimrc tmux.conf zshrc )
+set -e
 
-# Open to dotfiles directory
-echo -n "Changing to the $dir directory ..."
-cd $dir
-echo "Done"
+DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-# Create symlinks from the homedir to any files in the dotfiles directory specified in $files
-for file in ${files[@]}; do
-	echo "Creating symlinks to $file in home directory ..."
-	ln -s $dir/.$file ~/.$file
-done
+echo "Dotfiles directory: $DOTFILES_DIR"
+echo ""
 
-# Check or install zsh
-install_zsh() {
-  # test to see if zshell is installed. if it is:
-  if [ -f /bin/zsh -o -f /usr/bin/zsh ]; then
-    # clone my oh-my-zsh repo from github only if it isnt already
-    if [[ ! -d $dir/oh-my-zsh/ ]]; then
-      git clone http://github.com/robbyrussell/oh-my-zsh.git
-    fi
-    # set the default shell to zsh if it isnt currently set to zsh
-    if [[ ! $(echo $SHELL) == $(which zsh) ]]; then
-      chsh -s $(which zsh)
-    fi
-  else
-    # If zsh isn't installed, get the platform of the current machine
-    platform=$(uname);
-    # If the platform is Linux, try an apt-get to install zsh and then recurse
-    if [[ $platform == 'Linux' ]]; then
-            sudo apt-get install zsh
-            install_zsh
-        # If the platform is OS X, tell the user to install zsh :)
-        elif [[ $platform == 'Darwin' ]]; then
-            echo "Please install zsh, then re-run this script!"
-            exit
-        fi
+# ------------------------------------
+# Helper: create symlink with backup
+# ------------------------------------
+link_file() {
+  local src="$1"
+  local dest="$2"
+
+  if [ -L "$dest" ]; then
+    rm "$dest"
+  elif [ -e "$dest" ]; then
+    echo "  Backing up existing $dest -> ${dest}.bak"
+    mv "$dest" "${dest}.bak"
   fi
+
+  ln -s "$src" "$dest"
+  echo "  Linked $dest -> $src"
 }
 
-install_zsh
+# ------------------------------------
+# Home directory dotfiles
+# ------------------------------------
+echo "==> Linking dotfiles to home directory..."
+
+link_file "$DOTFILES_DIR/.zshrc"      "$HOME/.zshrc"
+link_file "$DOTFILES_DIR/.tmux.conf"  "$HOME/.tmux.conf"
+link_file "$DOTFILES_DIR/.vimrc"      "$HOME/.vimrc"
+
+# ------------------------------------
+# XDG config directories (~/.config/)
+# ------------------------------------
+echo ""
+echo "==> Linking .config directories..."
+
+mkdir -p "$HOME/.config"
+
+# Neovim
+if [ -d "$DOTFILES_DIR/.config/nvim" ]; then
+  link_file "$DOTFILES_DIR/.config/nvim" "$HOME/.config/nvim"
+fi
+
+# Starship
+if [ -f "$DOTFILES_DIR/.config/starship.toml" ]; then
+  link_file "$DOTFILES_DIR/.config/starship.toml" "$HOME/.config/starship.toml"
+fi
+
+# ------------------------------------
+# Scripts (deven tmux session)
+# ------------------------------------
+echo ""
+echo "==> Linking scripts..."
+
+mkdir -p "$HOME/.local/bin"
+link_file "$DOTFILES_DIR/deven" "$HOME/.local/bin/deven"
+chmod +x "$HOME/.local/bin/deven"
+
+# ------------------------------------
+# Done
+# ------------------------------------
+echo ""
+echo "Done! Symlinks created."
+echo ""
+echo "Next steps:"
+echo "  1. Run 'bash brew-install.sh' to install tools (if not done)"
+echo "  2. Restart your terminal (or run: source ~/.zshrc)"
+echo "  3. Open nvim — plugins will auto-install on first launch"
