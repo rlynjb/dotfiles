@@ -123,7 +123,7 @@ Full list in [`.config/nvim/init.lua`](./.config/nvim/init.lua).
 
 Plugins tracked under [`.claude/`](./.claude/) so the same set follows the dotfiles to any machine running a compatible CLI agent (Claude Code, Codex, etc.):
 
-- **superpowers** — Workflow scaffolding for multi-step agent work: brainstorming, plan writing/executing, TDD, systematic debugging, parallel subagent dispatch, code review request/receive, git worktree isolation.
+- **[superpowers](https://github.com/obra/superpowers)** — Workflow scaffolding for multi-step agent work: brainstorming, plan writing/executing, TDD, systematic debugging, parallel subagent dispatch, code review request/receive, git worktree isolation.
 - **aipe** — Engineering task templates: features, refactors, migrations, debugging, tests, performance, integrations, audits, planning, study guides, user-story rewrites.
 
 Marketplaces + enabled plugins live in [`.claude/settings.json`](./.claude/settings.json). Install commands for a new machine: [Quick start → step 5](#5-install-claude-code-plugins).
