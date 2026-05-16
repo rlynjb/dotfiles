@@ -55,16 +55,6 @@ if [ -f "$DOTFILES_DIR/.config/starship.toml" ]; then
 fi
 
 # ------------------------------------
-# Scripts (deven tmux session)
-# ------------------------------------
-echo ""
-echo "==> Linking scripts..."
-
-mkdir -p "$HOME/.local/bin"
-link_file "$DOTFILES_DIR/deven" "$HOME/.local/bin/deven"
-chmod +x "$HOME/.local/bin/deven"
-
-# ------------------------------------
 # Done
 # ------------------------------------
 echo ""

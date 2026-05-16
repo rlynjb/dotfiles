@@ -12,9 +12,9 @@ Modern developer environment for macOS — Zsh, Neovim, tmux, and a suite of fas
   - [Tmux sessions (CLI)](#tmux-sessions-cli)
   - [Tmux prefix bindings](#tmux-prefix-optiona)
   - [Tmux extras worth knowing](#tmux--extras-worth-knowing)
+  - [Tmux saved sessions (resurrect + continuum)](#tmux-saved-sessions-resurrect--continuum)
   - [Neovim](#neovim-leader-space)
   - [Shell aliases](#shell-aliases-zsh)
-- [Tmux workspace (`deven`)](#tmux-workspace-deven)
 - [Troubleshooting](#troubleshooting)
 
 ## Quick start
@@ -102,7 +102,6 @@ nvim
 | Kill the tmux server (all sessions) | `tmux kill-server` |
 | Rename a window (from a shell inside tmux) | `tmux rename-window <name>` |
 | Rename a session | `tmux rename-session -t <old> <new>` |
-| Run the project dev layout | `deven` |
 
 **iTerm2 native mode** — opens tmux panes as iTerm2 splits with real ⌘ shortcuts:
 
@@ -179,6 +178,31 @@ set -g allow-rename off
 setw -g automatic-rename off
 ```
 
+### Tmux saved sessions (resurrect + continuum)
+
+Sessions, windows, panes, working dirs, and pane layouts are persisted via `tmux-resurrect` + `tmux-continuum`. Continuum auto-saves every 15 minutes and auto-restores on tmux start, so after a reboot or kill you get your workspace back.
+
+**One-time setup** (run once after cloning this repo):
+
+```bash
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+tmux source ~/.tmux.conf
+```
+
+Then inside tmux press `prefix` `Shift+I` to install the plugins.
+
+**Daily use:**
+
+| Action | Command |
+|--------|---------|
+| Start a fresh session | `tmux new -s <name>` |
+| Open the last saved session (auto-restore) | `tmux` — continuum restores the snapshot |
+| Attach to a running session | `tmux a -t <name>` |
+| Save now (don't wait for the 15-min tick) | `prefix` `Ctrl+s` |
+| Restore last snapshot manually | `prefix` `Ctrl+r` |
+
+**What's restored:** sessions, windows, panes, working directories, layout, and whitelisted processes (`vim`, `nvim`, `ssh`, `node`, `python`, …). Edit `@resurrect-processes` in `.tmux.conf` to whitelist more. Snapshots live in `~/.local/share/tmux/resurrect/`.
+
 ### Neovim (leader: `Space`)
 
 **Splits & windows:**
@@ -236,16 +260,6 @@ setw -g automatic-rename off
 | `cat` | `bat --style=auto` |
 
 Plus `Ctrl+T` (fzf files), `Ctrl+R` (atuin/fzf history), `z <dir>` (zoxide jump).
-
-## Tmux workspace (`deven`)
-
-The `deven` script launches a 3-window tmux session:
-
-- **Window 0** — editor layout: left pane runs `vim`, two shell panes on the right
-- **Window 1** — two shells side by side (70/30 split)
-- **Window 2** — two shells side by side (70/30 split)
-
-Run `deven` to create or attach.
 
 ## Troubleshooting
 
