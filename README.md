@@ -37,17 +37,34 @@ bash install.sh
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
-### 2. Configure iTerm2 so `Option+A` works as the tmux prefix
+### 2. Configure iTerm2
 
-macOS sends `Option+A` as `å` by default — tmux never sees the prefix. One-time fix in iTerm2:
+In `⌘, → Profiles → your profile → Keys`:
 
-1. `⌘,` to open Settings
-2. **Profiles** → your profile → **Keys** → **General**
-3. Set **Left Option key** to `Esc+` (and Right Option too, if you use it)
+- **General tab:** set **Left Option key** (and Right, if used) to `Esc+`. Required so `Option+A` reaches tmux as the prefix instead of being eaten by macOS as `å`.
+- **Key Mappings tab → Presets…:** apply **Natural Text Editing**. Adds macOS-style word/line navigation: `Option+←/→` jumps a word, `Cmd+←/→` jumps to line start/end, `Option+Backspace` deletes a word, etc.
+- **Multi-line input in Claude Code / other CLIs:** open Claude Code and type `/terminal-setup`. It auto-adds the iTerm2 key mapping so `Shift+Enter` inserts a newline instead of submitting.
 
-Verify: press `Ctrl+V` then `Option+A` in a shell. Before the fix it prints `å`; after, it prints `^[a` (Esc + a = Meta-A).
+Verify the Option key fix: in a shell press `Ctrl+V` then `Option+A`. Before the fix it prints `å`; after, `^[a`.
 
-### 3. Restart your terminal, then start the workspace
+### 3. Sync iTerm2 prefs to this repo (one-time)
+
+So your iTerm2 settings travel with your dotfiles to the next machine:
+
+1. `⌘, → General → Preferences` tab
+2. Check **Load preferences from a custom folder or URL**
+3. Browse to `~/Public/dotfiles/iterm2`
+4. When prompted, click **Copy current settings**
+5. Check **Save changes to folder when iTerm2 quits** so future tweaks sync automatically
+6. Make the plist git-diff friendly by converting it to XML:
+
+```bash
+plutil -convert xml1 ~/Public/dotfiles/iterm2/com.googlecode.iterm2.plist
+```
+
+On a future fresh machine the plist is already in the repo — just do steps 1-3 above and restart iTerm2; all the keys/themes auto-load.
+
+### 4. Restart your terminal, then start the workspace
 
 ```bash
 reincodes
@@ -55,7 +72,7 @@ reincodes
 
 That bootstraps the personal 7-window tmux session (see [layout](#tmux-workspace-reincodes)). Inside tmux, press `Option+A` `Shift+I` once to install the resurrect + continuum plugins. From then on, your session auto-saves every 15 min and auto-restores on next launch — re-run `reincodes` only on a fresh machine or after wiping `~/.local/share/tmux/`.
 
-### 4. Open Neovim — plugins auto-install on first launch
+### 5. Open Neovim — plugins auto-install on first launch
 
 ```bash
 nvim
@@ -350,4 +367,4 @@ The two systems handle different jobs. Walk through this example to see how they
 
 ### tmux prefix (Option+A) does nothing
 
-See [Quick start → step 2](#2-configure-iterm2-so-optiona-works-as-the-tmux-prefix) — iTerm2 needs **Left Option key** set to `Esc+`.
+See [Quick start → step 2](#2-configure-iterm2) — iTerm2 needs **Left Option key** set to `Esc+`.
