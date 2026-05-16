@@ -80,9 +80,11 @@ nvim
 
 ## What's installed
 
-### Shell & CLI tools
+<table>
+<tr>
+<td valign="top" width="50%">
 
-Highlights:
+### Shell & CLI tools
 
 - **starship** — prompt with git/language/duration info
 - **fzf** — fuzzy finder (`Ctrl+T` files, `Ctrl+R` history)
@@ -91,11 +93,12 @@ Highlights:
 - **lazygit**, **yazi**, **neovim**, **tmux**
 - `eza`, `bat`, `ripgrep`, `fd` — modern replacements for `ls`, `cat`, `grep`, `find`
 
-Full list lives in [`brew-install.sh`](./brew-install.sh).
+Full list in [`brew-install.sh`](./brew-install.sh).
+
+</td>
+<td valign="top" width="50%">
 
 ### Neovim plugins (managed by lazy.nvim)
-
-Highlights:
 
 - **catppuccin/nvim** — Mocha color scheme
 - **telescope.nvim** — fuzzy file/grep/buffer finder (`Space ff`, `fg`, `fb`)
@@ -107,6 +110,10 @@ Highlights:
 - **which-key.nvim** — keybinding hints as you type
 
 Full list in [`.config/nvim/init.lua`](./.config/nvim/init.lua).
+
+</td>
+</tr>
+</table>
 
 ## Commands
 
