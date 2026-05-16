@@ -8,6 +8,7 @@ Modern developer environment for macOS — Zsh, Neovim, tmux, and a suite of fas
 - [What's installed](#whats-installed)
   - [Shell & CLI tools](#shell--cli-tools)
   - [Neovim plugins](#neovim-plugins-managed-by-lazynvim)
+  - [Coding agent tools](#coding-agent-tools)
 - [Commands](#commands)
   - [Tmux sessions (CLI)](#tmux-sessions-cli)
   - [Tmux prefix bindings](#tmux-prefix-optiona)
@@ -117,6 +118,15 @@ Highlights:
 - **which-key.nvim** — keybinding hints as you type
 
 Full list in [`.config/nvim/init.lua`](./.config/nvim/init.lua).
+
+### Coding agent tools
+
+Plugins tracked under [`.claude/`](./.claude/) so the same set follows the dotfiles to any machine running a compatible CLI agent (Claude Code, Codex, etc.):
+
+- **superpowers** — Workflow scaffolding for multi-step agent work: brainstorming, plan writing/executing, TDD, systematic debugging, parallel subagent dispatch, code review request/receive, git worktree isolation.
+- **aipe** — Engineering task templates: features, refactors, migrations, debugging, tests, performance, integrations, audits, planning, study guides, user-story rewrites.
+
+Marketplaces + enabled plugins live in [`.claude/settings.json`](./.claude/settings.json). Install commands for a new machine: [Quick start → step 5](#5-install-claude-code-plugins).
 
 ## Commands
 
