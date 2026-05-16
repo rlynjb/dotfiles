@@ -82,50 +82,31 @@ nvim
 
 ### Shell & CLI tools
 
-| Tool | Purpose |
-|------|---------|
-| starship | Cross-shell prompt with git, language, duration info |
-| zsh-autosuggestions | Fish-like suggestions as you type |
-| zsh-syntax-highlighting | Colors valid/invalid commands in real time |
-| fzf | Fuzzy finder bound to `Ctrl+T` (files) and `Ctrl+R` (history) |
-| zoxide | Smart `cd` — `z dirname` jumps to frecent dirs |
-| atuin | SQLite shell history with fuzzy search and sync |
-| eza | `ls` replacement (colors, icons, git status) |
-| bat | `cat` replacement (syntax highlighting) |
-| ripgrep | `grep` replacement, much faster (`rg`) |
-| fd | `find` replacement, simpler syntax |
-| lazygit | Git TUI for staging, log, rebase, stash |
-| btop | System monitor |
-| yazi | Terminal file manager with previews |
-| neovim | Modern Vim |
-| tmux | Terminal multiplexer |
+Highlights:
+
+- **starship** — prompt with git/language/duration info
+- **fzf** — fuzzy finder (`Ctrl+T` files, `Ctrl+R` history)
+- **zoxide** — `z <dirname>` jumps to frecent dirs
+- **atuin** — searchable shell history
+- **lazygit**, **yazi**, **neovim**, **tmux**
+- `eza`, `bat`, `ripgrep`, `fd` — modern replacements for `ls`, `cat`, `grep`, `find`
+
+Full list lives in [`brew-install.sh`](./brew-install.sh).
 
 ### Neovim plugins (managed by lazy.nvim)
 
-| Plugin | Purpose |
-|--------|---------|
-| catppuccin/nvim | Color scheme (mocha) |
-| nvim-lualine/lualine.nvim | Status line |
-| nvim-tree/nvim-web-devicons | File-type icons |
-| nvim-telescope/telescope.nvim | Fuzzy file/grep/buffer finder |
-| nvim-telescope/telescope-fzf-native.nvim | Native fzf sorter for telescope |
-| nvim-lua/plenary.nvim | Lua utility lib (telescope dep) |
-| nvim-tree/nvim-tree.lua | File explorer sidebar |
-| nvim-treesitter/nvim-treesitter | Syntax highlighting + indent for many langs |
-| neovim/nvim-lspconfig | Language server configs |
-| mason-org/mason.nvim | Auto-installs LSP servers, linters, formatters |
-| mason-org/mason-lspconfig.nvim | Bridges mason with lspconfig |
-| hrsh7th/nvim-cmp | Autocompletion engine |
-| hrsh7th/cmp-nvim-lsp | LSP source for nvim-cmp |
-| hrsh7th/cmp-buffer | Buffer-words source for nvim-cmp |
-| hrsh7th/cmp-path | Filesystem-path source for nvim-cmp |
-| L3MON4D3/LuaSnip | Snippet engine |
-| saadparwaiz1/cmp_luasnip | Snippet source for nvim-cmp |
-| lewis6991/gitsigns.nvim | Git diff markers in the gutter |
-| windwp/nvim-autopairs | Auto-close brackets, quotes, etc. |
-| lukas-reineke/indent-blankline.nvim | Indent guide lines |
-| numToStr/Comment.nvim | Toggle comments with `gcc` / `gc` |
-| folke/which-key.nvim | Shows available keybindings as you type |
+Highlights:
+
+- **catppuccin/nvim** — Mocha color scheme
+- **telescope.nvim** — fuzzy file/grep/buffer finder (`Space ff`, `fg`, `fb`)
+- **nvim-tree.lua** — file explorer sidebar (`Space e`)
+- **nvim-treesitter** — syntax highlighting + indent
+- **nvim-lspconfig** + **mason.nvim** — LSP setup
+- **nvim-cmp** — autocompletion
+- **gitsigns.nvim** — git diff in the gutter
+- **which-key.nvim** — keybinding hints as you type
+
+Full list in [`.config/nvim/init.lua`](./.config/nvim/init.lua).
 
 ## Commands
 
