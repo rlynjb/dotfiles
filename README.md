@@ -2,6 +2,21 @@
 
 Modern developer environment for macOS — Zsh, Neovim, tmux, and a suite of fast Rust-based CLI tools.
 
+## Contents
+
+- [Quick start](#quick-start)
+- [What's installed](#whats-installed)
+  - [Shell & CLI tools](#shell--cli-tools)
+  - [Neovim plugins](#neovim-plugins-managed-by-lazynvim)
+- [Commands](#commands)
+  - [Tmux sessions (CLI)](#tmux-sessions-cli)
+  - [Tmux prefix bindings](#tmux-prefix-optiona)
+  - [Tmux extras worth knowing](#tmux--extras-worth-knowing)
+  - [Neovim](#neovim-leader-space)
+  - [Shell aliases](#shell-aliases-zsh)
+- [Tmux workspace (`deven`)](#tmux-workspace-deven)
+- [Troubleshooting](#troubleshooting)
+
 ## Quick start
 
 ```bash
