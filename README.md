@@ -125,6 +125,7 @@ Plugins tracked under [`.claude/`](./.claude/) so the same set follows the dotfi
 
 - **[superpowers](https://github.com/obra/superpowers)** — Workflow scaffolding for multi-step agent work: brainstorming, plan writing/executing, TDD, systematic debugging, parallel subagent dispatch, code review request/receive, git worktree isolation.
 - **[aipe](https://github.com/rlynjb/aipe)** — Engineering task templates: features, refactors, migrations, debugging, tests, performance, integrations, audits, planning, study guides, user-story rewrites.
+- **[claude-skills](https://github.com/alirezarezvani/claude-skills)** *(not yet installed)* — 268+ skills spanning engineering, product, marketing, compliance, and executive advisory; portable across most coding-agent CLIs.
 
 Marketplaces + enabled plugins live in [`.claude/settings.json`](./.claude/settings.json). Install commands for a new machine: [Quick start → step 5](#5-install-claude-code-plugins).
 
