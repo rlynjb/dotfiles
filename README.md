@@ -100,6 +100,8 @@ nvim
 | Detach from inside a session | `prefix` `:detach` |
 | Kill a specific session | `tmux kill-session -t <name>` |
 | Kill the tmux server (all sessions) | `tmux kill-server` |
+| Rename a window (from a shell inside tmux) | `tmux rename-window <name>` |
+| Rename a session | `tmux rename-session -t <old> <new>` |
 | Run the project dev layout | `deven` |
 
 **iTerm2 native mode** — opens tmux panes as iTerm2 splits with real ⌘ shortcuts:
@@ -168,6 +170,13 @@ tmux capture-pane -t <session>:<win>.<pane> -p          # dump pane contents to 
 ```
 prefix :setw synchronize-panes on
 prefix :setw synchronize-panes off
+```
+
+**Stop tmux from auto-renaming windows** — by default, tmux overwrites your window name with whatever command is running. To keep your manual names sticky, add to `.tmux.conf`:
+
+```tmux
+set -g allow-rename off
+setw -g automatic-rename off
 ```
 
 ### Neovim (leader: `Space`)
