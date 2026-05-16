@@ -72,7 +72,17 @@ reincodes
 
 That bootstraps the personal 7-window tmux session (see [layout](#tmux-workspace-reincodes)). Inside tmux, press `Option+A` `Shift+I` once to install the resurrect + continuum plugins. From then on, your session auto-saves every 15 min and auto-restores on next launch — re-run `reincodes` only on a fresh machine or after wiping `~/.local/share/tmux/`.
 
-### 5. Open Neovim — plugins auto-install on first launch
+### 5. Install Claude Code plugins
+
+`install.sh` already symlinks `~/.claude/settings.json` (which knows which plugins should be enabled and which marketplaces to trust). But Claude Code does **not** auto-install plugins from `settings.json` — the plugin code still needs to be fetched on each new machine. One-time, inside `claude`:
+
+```
+/plugin marketplace add rlynjb/aipe
+/plugin install superpowers@claude-plugins-official
+/plugin install aipe@rlynjb-aipe
+```
+
+### 6. Open Neovim — plugins auto-install on first launch
 
 ```bash
 nvim

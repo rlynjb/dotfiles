@@ -1,0 +1,14 @@
+{
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true,
+    "aipe@rlynjb-aipe": true
+  },
+  "extraKnownMarketplaces": {
+    "rlynjb-aipe": {
+      "source": {
+        "source": "github",
+        "repo": "rlynjb/aipe"
+      }
+    }
+  }
+}

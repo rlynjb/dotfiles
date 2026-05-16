@@ -55,6 +55,16 @@ if [ -f "$DOTFILES_DIR/.config/starship.toml" ]; then
 fi
 
 # ------------------------------------
+# Claude Code settings (plugins, marketplaces)
+# ------------------------------------
+if [ -f "$DOTFILES_DIR/.claude/settings.json" ]; then
+  echo ""
+  echo "==> Linking Claude Code settings..."
+  mkdir -p "$HOME/.claude"
+  link_file "$DOTFILES_DIR/.claude/settings.json" "$HOME/.claude/settings.json"
+fi
+
+# ------------------------------------
 # Scripts (tmux workspace bootstrap)
 # ------------------------------------
 echo ""
