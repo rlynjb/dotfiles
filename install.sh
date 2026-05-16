@@ -55,6 +55,16 @@ if [ -f "$DOTFILES_DIR/.config/starship.toml" ]; then
 fi
 
 # ------------------------------------
+# Scripts (tmux workspace bootstrap)
+# ------------------------------------
+echo ""
+echo "==> Linking scripts..."
+
+mkdir -p "$HOME/.local/bin"
+link_file "$DOTFILES_DIR/reincodes" "$HOME/.local/bin/reincodes"
+chmod +x "$HOME/.local/bin/reincodes"
+
+# ------------------------------------
 # Done
 # ------------------------------------
 echo ""

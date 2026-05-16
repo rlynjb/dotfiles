@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# reincodes — bootstrap personal tmux workspace.
+#
+# Creates the "reincodes" session with a home window plus one window per
+# project, each split into two panes inside the project directory.
+# Re-attaches if the session already exists.
+
+set -euo pipefail
+
+SESSION="reincodes"
+
+if tmux has-session -t "$SESSION" 2>/dev/null; then
+  exec tmux attach -t "$SESSION"
+fi
+
+tmux new-session -d -s "$SESSION" -n home -c "$HOME"
+
+projects=(
+  "unshippd|$HOME/Public/unshippd"
+  "dotfiles|$HOME/Public/dotfiles"
+  "aipe|$HOME/Public/aipe"
+  "contrl|$HOME/Public/contrl"
+  "loopd|$HOME/Public/loopd"
+  "reincodes|$HOME/Public/reincodes"
+)
+
+for entry in "${projects[@]}"; do
+  name="${entry%%|*}"
+  path="${entry##*|}"
+  tmux new-window   -t "$SESSION" -n "$name" -c "$path"
+  tmux split-window -t "$SESSION:$name" -h -l 36% -c "$path"
+  tmux select-pane  -t "$SESSION:$name.1"
+done
+
+tmux select-window -t "$SESSION:home"
+exec tmux attach -t "$SESSION"
