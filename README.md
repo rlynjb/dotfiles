@@ -20,20 +20,44 @@ Modern developer environment for macOS — Zsh, Neovim, tmux, and a suite of fas
 
 ## Quick start
 
+### 1. Clone and install
+
 ```bash
-# 1. Clone the repo
+# Clone
 git clone https://github.com/your-username/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 
-# 2. Install all tools via Homebrew
+# Install all tools via Homebrew
 bash brew-install.sh
 
-# 3. Symlink configs to home directory
+# Symlink configs to home (includes the reincodes script on $PATH)
 bash install.sh
 
-# 4. Restart your terminal
+# Install TPM — required for tmux-resurrect + tmux-continuum (session persistence)
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
 
-# 5. Open Neovim — plugins auto-install on first launch
+### 2. Configure iTerm2 so `Option+A` works as the tmux prefix
+
+macOS sends `Option+A` as `å` by default — tmux never sees the prefix. One-time fix in iTerm2:
+
+1. `⌘,` to open Settings
+2. **Profiles** → your profile → **Keys** → **General**
+3. Set **Left Option key** to `Esc+` (and Right Option too, if you use it)
+
+Verify: press `Ctrl+V` then `Option+A` in a shell. Before the fix it prints `å`; after, it prints `^[a` (Esc + a = Meta-A).
+
+### 3. Restart your terminal, then start the workspace
+
+```bash
+reincodes
+```
+
+That bootstraps the personal 7-window tmux session (see [layout](#tmux-workspace-reincodes)). Inside tmux, press `Option+A` `Shift+I` once to install the resurrect + continuum plugins. From then on, your session auto-saves every 15 min and auto-restores on next launch — re-run `reincodes` only on a fresh machine or after wiping `~/.local/share/tmux/`.
+
+### 4. Open Neovim — plugins auto-install on first launch
+
+```bash
 nvim
 ```
 
@@ -326,12 +350,4 @@ The two systems handle different jobs. Walk through this example to see how they
 
 ### tmux prefix (Option+A) does nothing
 
-macOS sends Option+A as `å` by default, not as Meta. tmux never sees the prefix.
-
-Fix in iTerm2:
-
-1. `⌘,` to open Settings
-2. **Profiles** → your profile → **Keys** → **General**
-3. Set **Left Option key** to `Esc+` (and Right Option too, if you use it)
-
-Verify: in a shell, press `Ctrl+V` then `Option+A`. Before the fix it prints `å`; after, it prints `^[a` (Esc + a = Meta-A).
+See [Quick start → step 2](#2-configure-iterm2-so-optiona-works-as-the-tmux-prefix) — iTerm2 needs **Left Option key** set to `Esc+`.
