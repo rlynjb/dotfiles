@@ -269,11 +269,52 @@ Then inside tmux press `prefix` `Shift+I` to install the plugins.
 | Recent files | `Space` `fr` |
 | Help tags | `Space` `fh` |
 
-**File tree:**
+**File explorer (nvim-tree):**
 
 | Action | Keys |
 |--------|------|
 | Toggle file explorer | `Space` `e` |
+| Open file (in current window) | `Enter` / `o` |
+| Open in vertical split | `Ctrl+v` |
+| Open in horizontal split | `Ctrl+x` |
+| Open in new tab | `Ctrl+t` |
+| Create file / directory | `a` (end name with `/` for a dir) |
+| Rename | `r` |
+| Delete | `d` |
+| Cut / copy / paste | `x` / `c` / `p` |
+| Refresh tree | `R` |
+| Show all keybinds | `g?` |
+
+**Tabs:**
+
+| Action | Keys |
+|--------|------|
+| New tab | `:tabnew` |
+| New tab editing a file | `:tabe <path>` |
+| Next / previous tab | `gt` / `gT` |
+| Jump to tab N | `<N>gt` (e.g. `2gt`) |
+| Close current tab | `:tabclose` |
+| Close all other tabs | `:tabonly` |
+
+**Buffers:**
+
+| Action | Keys |
+|--------|------|
+| Next / previous buffer | `:bn` / `:bp` |
+| Switch buffer (fuzzy) | `Space` `fb` |
+| List open buffers | `:ls` |
+| Close buffer | `:bd` |
+
+**Files & quitting:**
+
+| Action | Keys |
+|--------|------|
+| Open file | `:e <path>` |
+| Save | `:w` |
+| Save & quit | `:wq` / `:x` / `ZZ` |
+| Quit | `:q` |
+| Quit, discard changes | `:q!` |
+| Save & quit everything | `:wqa` |
 
 **LSP (in supported files):**
 
