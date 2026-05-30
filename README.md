@@ -1,20 +1,19 @@
 # dotfiles
 
-Modern developer environment for macOS — Zsh, Neovim, tmux, and a suite of fast Rust-based CLI tools.
+Modern developer environment for macOS — Zsh, Vim, tmux, and a suite of fast Rust-based CLI tools.
 
 ## Contents
 
 - [Quick start](#quick-start)
 - [What's installed](#whats-installed)
   - [Shell & CLI tools](#shell--cli-tools)
-  - [Neovim plugins](#neovim-plugins-managed-by-lazynvim)
   - [Coding agent tools](#coding-agent-tools)
 - [Commands](#commands)
   - [Tmux sessions (CLI)](#tmux-sessions-cli)
   - [Tmux prefix bindings](#tmux-prefix-optiona)
   - [Tmux extras worth knowing](#tmux--extras-worth-knowing)
   - [Tmux saved sessions (resurrect + continuum)](#tmux-saved-sessions-resurrect--continuum)
-  - [Neovim](#neovim-leader-space)
+  - [Vim](#vim)
   - [Shell aliases](#shell-aliases-zsh)
 - [Tmux workspace (`reincodes`)](#tmux-workspace-reincodes)
 - [Troubleshooting](#troubleshooting)
@@ -83,11 +82,13 @@ That bootstraps the personal 7-window tmux session (see [layout](#tmux-workspace
 /plugin install aipe@rlynjb-aipe
 ```
 
-### 6. Open Neovim — plugins auto-install on first launch
+### 6. Open Vim
 
 ```bash
-nvim
+vim
 ```
+
+Settings live in [`.vimrc`](./.vimrc). See [Vim commands](#vim) for the keybindings you'll actually use day-to-day.
 
 ## What's installed
 
@@ -99,25 +100,10 @@ Highlights:
 - **fzf** — fuzzy finder (`Ctrl+T` files, `Ctrl+R` history)
 - **zoxide** — `z <dirname>` jumps to frecent dirs
 - **atuin** — searchable shell history
-- **lazygit**, **yazi**, **neovim**, **tmux**
+- **lazygit**, **yazi**, **tmux**
 - `eza`, `bat`, `ripgrep`, `fd` — modern replacements for `ls`, `cat`, `grep`, `find`
 
 Full list lives in [`brew-install.sh`](./brew-install.sh).
-
-### Neovim plugins (managed by lazy.nvim)
-
-Highlights:
-
-- **catppuccin/nvim** — Mocha color scheme
-- **telescope.nvim** — fuzzy file/grep/buffer finder (`Space ff`, `fg`, `fb`)
-- **nvim-tree.lua** — file explorer sidebar (`Space e`)
-- **nvim-treesitter** — syntax highlighting + indent
-- **nvim-lspconfig** + **mason.nvim** — LSP setup
-- **nvim-cmp** — autocompletion
-- **gitsigns.nvim** — git diff in the gutter
-- **which-key.nvim** — keybinding hints as you type
-
-Full list in [`.config/nvim/init.lua`](./.config/nvim/init.lua).
 
 ### Coding agent tools
 
@@ -245,45 +231,37 @@ Then inside tmux press `prefix` `Shift+I` to install the plugins.
 | Save now (don't wait for the 15-min tick) | `prefix` `Ctrl+s` |
 | Restore last snapshot manually | `prefix` `Ctrl+r` |
 
-**What's restored:** sessions, windows, panes, working directories, layout, and whitelisted processes (`vim`, `nvim`, `ssh`, `node`, `python`, …). Edit `@resurrect-processes` in `.tmux.conf` to whitelist more. Snapshots live in `~/.local/share/tmux/resurrect/`.
+**What's restored:** sessions, windows, panes, working directories, layout, and whitelisted processes (`vim`, `ssh`, `node`, `python`, …). Edit `@resurrect-processes` in `.tmux.conf` to whitelist more. Snapshots live in `~/.local/share/tmux/resurrect/`.
 
-### Neovim (leader: `Space`)
+### Vim
 
-**Splits & windows:**
+All built-in Vim commands — no plugins, no leader-key setup. Settings live in [`.vimrc`](./.vimrc).
 
-| Action | Keys |
-|--------|------|
-| Move between splits | `Ctrl` `h` / `j` / `k` / `l` |
-| Resize vertical split | `Shift` `h` / `l` |
-| Resize horizontal split | `Shift` `j` / `k` |
-| Clear search highlight | `Esc` |
-| Re-select after indent | `<` / `>` (in visual mode) |
-
-**Telescope (fuzzy find):**
+**Files & quitting:**
 
 | Action | Keys |
 |--------|------|
-| Find files | `Space` `ff` |
-| Live grep | `Space` `fg` |
-| Find buffers | `Space` `fb` |
-| Recent files | `Space` `fr` |
-| Help tags | `Space` `fh` |
+| Open file | `:e <path>` |
+| Save | `:w` |
+| Save & quit | `:wq` / `:x` / `ZZ` |
+| Quit | `:q` |
+| Quit, discard changes | `:q!` |
+| Save & quit everything | `:wqa` |
 
-**File explorer (nvim-tree):**
+**File explorer (netrw, built-in):**
 
 | Action | Keys |
 |--------|------|
-| Toggle file explorer | `Space` `e` |
-| Open file (in current window) | `Enter` / `o` |
-| Open in vertical split | `Ctrl+v` |
-| Open in horizontal split | `Ctrl+x` |
-| Open in new tab | `Ctrl+t` |
-| Create file / directory | `a` (end name with `/` for a dir) |
-| Rename | `r` |
-| Delete | `d` |
-| Cut / copy / paste | `x` / `c` / `p` |
-| Refresh tree | `R` |
-| Show all keybinds | `g?` |
+| Open explorer in current window | `:Ex` |
+| Open in vertical split | `:Vex` |
+| Open in horizontal split | `:Sex` |
+| Open in new tab | `:Tex` |
+| Inside netrw — open file | `Enter` |
+| Inside netrw — create file | `%` |
+| Inside netrw — create directory | `d` |
+| Inside netrw — rename | `R` |
+| Inside netrw — delete | `D` |
+| Inside netrw — show help | `:h netrw-quickmap` |
 
 **Tabs:**
 
@@ -300,40 +278,63 @@ Then inside tmux press `prefix` `Shift+I` to install the plugins.
 
 | Action | Keys |
 |--------|------|
+| Edit file as buffer | `:e <path>` |
 | Next / previous buffer | `:bn` / `:bp` |
-| Switch buffer (fuzzy) | `Space` `fb` |
 | List open buffers | `:ls` |
+| Switch by number | `:b<N>` |
 | Close buffer | `:bd` |
 
-**Files & quitting:**
+**Splits & windows:**
 
 | Action | Keys |
 |--------|------|
-| Open file | `:e <path>` |
-| Save | `:w` |
-| Save & quit | `:wq` / `:x` / `ZZ` |
-| Quit | `:q` |
-| Quit, discard changes | `:q!` |
-| Save & quit everything | `:wqa` |
+| Horizontal split | `:split` / `:sp` |
+| Vertical split | `:vsplit` / `:vs` |
+| Move between splits | `Ctrl+w` then `h` / `j` / `k` / `l` |
+| Close current split | `Ctrl+w` then `q` (or `:q`) |
+| Make split full-screen | `Ctrl+w` then `o` |
+| Resize | `Ctrl+w` then `+` / `-` / `>` / `<` |
 
-**LSP (in supported files):**
+**Navigation:**
 
 | Action | Keys |
 |--------|------|
-| Go to definition | `gd` |
-| Find references | `gr` |
-| Hover documentation | `K` |
-| Rename symbol | `Space` `rn` |
-| Code actions | `Space` `ca` |
+| Top / bottom of file | `gg` / `G` |
+| Go to line N | `:N` or `Ngg` |
+| Word forward / back | `w` / `b` |
+| Start / end of line | `0` / `$` |
+| Jump back / forward through history | `Ctrl+o` / `Ctrl+i` |
+
+**Search & replace:**
+
+| Action | Keys |
+|--------|------|
+| Search forward | `/pattern` `Enter` |
+| Search backward | `?pattern` `Enter` |
+| Next / previous match | `n` / `N` |
+| Clear highlights | `:noh` |
+| Replace in file | `:%s/old/new/g` |
+| Replace with confirmation | `:%s/old/new/gc` |
 
 **Editing:**
 
 | Action | Keys |
 |--------|------|
-| Toggle comment | `gcc` (line) / `gc` (selection) |
-| Trigger completion | `Ctrl+Space` |
-| Confirm completion | `Enter` |
-| Cycle completions | `Tab` / `Ctrl+n` / `Ctrl+p` |
+| Insert at cursor / line start | `i` / `I` |
+| Insert after cursor / line end | `a` / `A` |
+| Open new line below / above | `o` / `O` |
+| Delete char / line | `x` / `dd` |
+| Yank line / paste | `yy` / `p` (after) / `P` (before) |
+| Undo / redo | `u` / `Ctrl+r` |
+| Visual select (char / line / block) | `v` / `V` / `Ctrl+v` |
+
+**Autocompletion (insert mode):**
+
+| Action | Keys |
+|--------|------|
+| Word completion (next / prev) | `Ctrl+n` / `Ctrl+p` |
+| File path completion | `Ctrl+x` `Ctrl+f` |
+| Language-aware (omni) | `Ctrl+x` `Ctrl+o` |
 
 ### Shell aliases (zsh)
 

@@ -44,11 +44,6 @@ echo "==> Linking .config directories..."
 
 mkdir -p "$HOME/.config"
 
-# Neovim
-if [ -d "$DOTFILES_DIR/.config/nvim" ]; then
-  link_file "$DOTFILES_DIR/.config/nvim" "$HOME/.config/nvim"
-fi
-
 # Starship
 if [ -f "$DOTFILES_DIR/.config/starship.toml" ]; then
   link_file "$DOTFILES_DIR/.config/starship.toml" "$HOME/.config/starship.toml"
@@ -83,4 +78,3 @@ echo ""
 echo "Next steps:"
 echo "  1. Run 'bash brew-install.sh' to install tools (if not done)"
 echo "  2. Restart your terminal (or run: source ~/.zshrc)"
-echo "  3. Open nvim — plugins will auto-install on first launch"

@@ -17,9 +17,6 @@ brew install starship        # Cross-shell prompt (replaces oh-my-zsh themes)
 brew install zsh-autosuggestions
 brew install zsh-syntax-highlighting
 
-# Editor
-brew install neovim          # Modern Vim replacement
-
 # Modern CLI replacements
 brew install eza             # ls replacement (colors, icons, git status)
 brew install bat             # cat replacement (syntax highlighting)
