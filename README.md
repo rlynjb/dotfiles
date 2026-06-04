@@ -39,14 +39,23 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ### 2. Configure iTerm2
 
-In `⌘, → Profiles → your profile → Keys`:
+Open `⌘, → Profiles → your profile → Keys`, then apply both of these one-time changes:
 
-- **General tab:** set **Left Option key** (and Right, if used) to `Esc+`. Required so `Option+A` reaches tmux as the prefix instead of being eaten by macOS as `å`.
-- **Key Mappings tab → Presets…:** apply **Natural Text Editing**. Adds macOS-style word/line motion in the shell: `Option+←/→`, `Cmd+←/→`, `Option+Backspace`, etc.
+#### a. Set Left Option key to `Esc+`
 
-Verify the Option key fix: in a shell press `Ctrl+V` then `Option+A`. Before the fix it prints `å`; after, `^[a` (Esc + a = Meta-A).
+- **Tab:** General
+- **Field:** Left Option key (and Right, if you use it)
+- **Set to:** `Esc+`
+- **Why:** so `Option+A` reaches tmux as the prefix instead of being eaten by macOS as `å`
+- **Verify:** in a shell, press `Ctrl+V` then `Option+A` — should print `^[a` (not `å`)
 
-The tmux prefix itself (`set -g prefix M-a`) is already in [`.tmux.conf`](./.tmux.conf) and gets symlinked by `install.sh` — no extra step.
+#### b. Apply the Natural Text Editing preset
+
+- **Tab:** Key Mappings
+- **Action:** click **Presets…** → select **Natural Text Editing**
+- **What it adds:** macOS-style word/line motion in the shell — `Option+←/→` (jump word), `Cmd+←/→` (jump to line start/end), `Option+Backspace` (delete word), etc.
+
+> The tmux prefix itself (`set -g prefix M-a`) is already in [`.tmux.conf`](./.tmux.conf) and gets symlinked by `install.sh` — no extra step.
 
 ### 3. Restart your terminal, then start the workspace
 
