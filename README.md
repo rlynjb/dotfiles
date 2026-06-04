@@ -8,7 +8,6 @@ Modern developer environment for macOS — Zsh, Vim, tmux, and a suite of fast R
 - [Commands](#commands)
   - [Tmux sessions (CLI)](#tmux-sessions-cli)
   - [Tmux prefix bindings](#tmux-prefix-optiona)
-  - [Tmux extras worth knowing](#tmux--extras-worth-knowing)
   - [Tmux saved sessions (resurrect + continuum)](#tmux-saved-sessions-resurrect--continuum)
   - [Vim](#vim)
   - [Shell aliases](#shell-aliases-zsh)
@@ -99,52 +98,8 @@ Settings live in [`.vimrc`](./.vimrc). See [Vim commands](#vim) for the keybindi
 | Copy selection → system clipboard | `y` |
 | Paste buffer | `prefix` `p` |
 | Toggle pane zoom | `prefix` `z` |
-
-### Tmux — extras worth knowing
-
-**Rebound defaults** — `d`, `s`, `w`, `p` no longer do their stock thing:
-
-| Lost default | What it did | Workaround |
-|---|---|---|
-| `prefix d` | Detach session | `prefix :detach` |
-| `prefix s` | Interactive session picker | `prefix :choose-tree -s` |
-| `prefix w` | Interactive window picker | `prefix :choose-tree -w` |
-
-**Still-active defaults:**
-
-| Keys | Action |
-|------|--------|
-| `prefix ,` | Rename current window |
-| `prefix $` | Rename session |
-| `prefix q` | Show pane numbers (press a number to jump) |
-| `prefix Space` | Cycle preset pane layouts |
-| `prefix {` / `prefix }` | Swap pane with previous / next |
-| `prefix !` | Break current pane into its own window |
-| `prefix .` | Move current window to a different index |
-| `prefix :` | Open the tmux command prompt (escape hatch) |
-
-**Useful one-offs:**
-
-```bash
-tmux new -A -s <name>                          # create-or-attach in one command
-tmux source ~/.tmux.conf                       # reload config without restart
-tmux send-keys -t <session>:<win>.<pane> "cmd" Enter   # script a pane from outside
-tmux capture-pane -t <session>:<win>.<pane> -p          # dump pane contents to stdout
-```
-
-**Sync typing across panes** (broadcast to every pane):
-
-```
-prefix :setw synchronize-panes on
-prefix :setw synchronize-panes off
-```
-
-**Keep manual window names sticky** — tmux otherwise overwrites them with the running command. Add to `.tmux.conf`:
-
-```tmux
-set -g allow-rename off
-setw -g automatic-rename off
-```
+| Rename current window | `prefix` `,` |
+| Show pane numbers (press a number to jump) | `prefix` `q` |
 
 ### Tmux saved sessions (resurrect + continuum)
 
