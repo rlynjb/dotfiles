@@ -5,8 +5,6 @@ Modern developer environment for macOS — Zsh, Vim, tmux, and a suite of fast R
 ## Contents
 
 - [Quick start](#quick-start)
-- [What's installed](#whats-installed)
-  - [Shell & CLI tools](#shell--cli-tools)
 - [Commands](#commands)
   - [Tmux sessions (CLI)](#tmux-sessions-cli)
   - [Tmux prefix bindings](#tmux-prefix-optiona)
@@ -69,21 +67,6 @@ vim
 ```
 
 Settings live in [`.vimrc`](./.vimrc). See [Vim commands](#vim) for the keybindings you'll actually use day-to-day.
-
-## What's installed
-
-### Shell & CLI tools
-
-Highlights:
-
-- **starship** — prompt with git/language/duration info
-- **fzf** — fuzzy finder (`Ctrl+T` files, `Ctrl+R` history)
-- **zoxide** — `z <dirname>` jumps to frecent dirs
-- **atuin** — searchable shell history
-- **lazygit**, **yazi**, **tmux**
-- `eza`, `bat`, `ripgrep`, `fd` — modern replacements for `ls`, `cat`, `grep`, `find`
-
-Full list lives in [`brew-install.sh`](./brew-install.sh).
 
 ## Commands
 
