@@ -112,7 +112,7 @@ tmux -CC new -s <name>      # new session in native mode
 tmux -CC a  -t <name>       # attach existing session in native mode
 ```
 
-> Note: this config rebinds `prefix d` to "split right", so the default `prefix d` detach no longer works. Use `prefix :detach` (or just close the iTerm2 window in `-CC` mode — the session keeps running).
+> `prefix d` is rebound to split-right — use `prefix :detach` (or close the iTerm2 window in `-CC` mode).
 
 ### Tmux (prefix: `Option+A`)
 
@@ -136,7 +136,7 @@ tmux -CC a  -t <name>       # attach existing session in native mode
 
 ### Tmux — extras worth knowing
 
-**Defaults this config overrides** — `d`, `s`, `w`, `p` are rebound, so reach for these workarounds:
+**Rebound defaults** — `d`, `s`, `w`, `p` no longer do their stock thing:
 
 | Lost default | What it did | Workaround |
 |---|---|---|
@@ -144,7 +144,7 @@ tmux -CC a  -t <name>       # attach existing session in native mode
 | `prefix s` | Interactive session picker | `prefix :choose-tree -s` |
 | `prefix w` | Interactive window picker | `prefix :choose-tree -w` |
 
-**Still-active tmux defaults worth remembering:**
+**Still-active defaults:**
 
 | Keys | Action |
 |------|--------|
@@ -166,14 +166,14 @@ tmux send-keys -t <session>:<win>.<pane> "cmd" Enter   # script a pane from outs
 tmux capture-pane -t <session>:<win>.<pane> -p          # dump pane contents to stdout
 ```
 
-**Sync typing across panes** (broadcast a command to every pane in the window):
+**Sync typing across panes** (broadcast to every pane):
 
 ```
 prefix :setw synchronize-panes on
 prefix :setw synchronize-panes off
 ```
 
-**Stop tmux from auto-renaming windows** — by default, tmux overwrites your window name with whatever command is running. To keep your manual names sticky, add to `.tmux.conf`:
+**Keep manual window names sticky** — tmux otherwise overwrites them with the running command. Add to `.tmux.conf`:
 
 ```tmux
 set -g allow-rename off
@@ -182,7 +182,7 @@ setw -g automatic-rename off
 
 ### Tmux saved sessions (resurrect + continuum)
 
-Sessions, windows, panes, working dirs, and pane layouts are persisted via `tmux-resurrect` + `tmux-continuum`. Continuum auto-saves every 15 minutes and auto-restores on tmux start, so after a reboot or kill you get your workspace back.
+`tmux-resurrect` + `tmux-continuum` auto-save every 15 minutes and auto-restore on tmux start — your workspace survives reboots and kills.
 
 **One-time setup** (run once after cloning this repo):
 
@@ -203,11 +203,11 @@ Then inside tmux press `prefix` `Shift+I` to install the plugins.
 | Save now (don't wait for the 15-min tick) | `prefix` `Ctrl+s` |
 | Restore last snapshot manually | `prefix` `Ctrl+r` |
 
-**What's restored:** sessions, windows, panes, working directories, layout, and whitelisted processes (`vim`, `ssh`, `node`, `python`, …). Edit `@resurrect-processes` in `.tmux.conf` to whitelist more. Snapshots live in `~/.local/share/tmux/resurrect/`.
+**Restored:** sessions, windows, panes, dirs, layout, and whitelisted processes (`vim`, `ssh`, `node`, `python`, …). Snapshots live in `~/.local/share/tmux/resurrect/`; edit `@resurrect-processes` in `.tmux.conf` to whitelist more.
 
 ### Vim
 
-All built-in Vim commands — no plugins, no leader-key setup. Settings live in [`.vimrc`](./.vimrc).
+Built-in Vim commands only — no plugins. Settings live in [`.vimrc`](./.vimrc).
 
 **Files & quitting:**
 
