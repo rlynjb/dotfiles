@@ -81,14 +81,7 @@ Settings live in [`.vimrc`](./.vimrc). See [Vim commands](#vim) for the keybindi
 | Kill the reincodes session | `tmux kill-session -t reincodes` |
 | Kill all tmux (nuke + restart) | `tmux kill-server` |
 
-**iTerm2 native mode** — opens tmux panes as iTerm2 splits with real ⌘ shortcuts:
-
-```bash
-tmux -CC new -s <name>      # new session in native mode
-tmux -CC a  -t <name>       # attach existing session in native mode
-```
-
-> `prefix d` is rebound to split-right — use `prefix :detach` (or close the iTerm2 window in `-CC` mode).
+> `prefix d` is rebound to split-right — use `prefix :detach`.
 
 ### Tmux (prefix: `Option+A`)
 
