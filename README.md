@@ -49,7 +49,7 @@ Open `⌘, → Profiles → your profile → Keys`, then apply both of these one
 - **Why:** so `Option+A` reaches tmux as the prefix instead of being eaten by macOS as `å`
 - **Verify:** in a shell, press `Ctrl+V` then `Option+A` — should print `^[a` (not `å`)
 
-#### b. Apply the Natural Text Editing preset
+#### b. Enable macOS-style word/line motion in the shell
 
 - **Tab:** Key Mappings
 - **Action:** click **Presets…** → select **Natural Text Editing**
