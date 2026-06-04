@@ -7,7 +7,6 @@ Modern developer environment for macOS — Zsh, Vim, tmux, and a suite of fast R
 - [Quick start](#quick-start)
 - [What's installed](#whats-installed)
   - [Shell & CLI tools](#shell--cli-tools)
-  - [Coding agent tools](#coding-agent-tools)
 - [Commands](#commands)
   - [Tmux sessions (CLI)](#tmux-sessions-cli)
   - [Tmux prefix bindings](#tmux-prefix-optiona)
@@ -65,17 +64,7 @@ reincodes
 
 That bootstraps the personal 7-window tmux session (see [layout](#tmux-workspace-reincodes)). Inside tmux, press `Option+A` `Shift+I` once to install the resurrect + continuum plugins. From then on, your session auto-saves every 15 min and auto-restores on next launch — re-run `reincodes` only on a fresh machine or after wiping `~/.local/share/tmux/`.
 
-### 4. Install Claude Code plugins
-
-`install.sh` already symlinks `~/.claude/settings.json` (which knows which plugins should be enabled and which marketplaces to trust). But Claude Code does **not** auto-install plugins from `settings.json` — the plugin code still needs to be fetched on each new machine. One-time, inside `claude`:
-
-```
-/plugin marketplace add rlynjb/aipe
-/plugin install superpowers@claude-plugins-official
-/plugin install aipe@rlynjb-aipe
-```
-
-### 5. Open Vim
+### 4. Open Vim
 
 ```bash
 vim
@@ -97,16 +86,6 @@ Highlights:
 - `eza`, `bat`, `ripgrep`, `fd` — modern replacements for `ls`, `cat`, `grep`, `find`
 
 Full list lives in [`brew-install.sh`](./brew-install.sh).
-
-### Coding agent tools
-
-Plugins tracked under [`.claude/`](./.claude/) so the same set follows the dotfiles to any machine running a compatible CLI agent (Claude Code, Codex, etc.):
-
-- **[superpowers](https://github.com/obra/superpowers)** — Workflow scaffolding for multi-step agent work: brainstorming, plan writing/executing, TDD, systematic debugging, parallel subagent dispatch, code review request/receive, git worktree isolation.
-- **[aipe](https://github.com/rlynjb/aipe)** — Engineering task templates: features, refactors, migrations, debugging, tests, performance, integrations, audits, planning, study guides, user-story rewrites.
-- **[claude-skills](https://github.com/alirezarezvani/claude-skills)** *(not yet installed)* — 268+ skills spanning engineering, product, marketing, compliance, and executive advisory; portable across most coding-agent CLIs.
-
-Marketplaces + enabled plugins live in [`.claude/settings.json`](./.claude/settings.json). Install commands for a new machine: [Quick start → step 4](#4-install-claude-code-plugins).
 
 ## Commands
 
