@@ -10,7 +10,6 @@ Modern developer environment for macOS — Zsh, Vim, tmux, and a suite of fast R
   - [Tmux prefix bindings](#tmux-prefix-optiona)
   - [Tmux saved sessions (resurrect + continuum)](#tmux-saved-sessions-resurrect--continuum)
   - [Vim](#vim)
-  - [Shell aliases](#shell-aliases-zsh)
 
 ## Quick start
 
@@ -218,15 +217,4 @@ Built-in Vim commands only — no plugins. Settings live in [`.vimrc`](./.vimrc)
 | Word completion (next / prev) | `Ctrl+n` / `Ctrl+p` |
 | File path completion | `Ctrl+x` `Ctrl+f` |
 | Language-aware (omni) | `Ctrl+x` `Ctrl+o` |
-
-### Shell aliases (zsh)
-
-| Alias | Runs |
-|-------|------|
-| `ls` | `eza --icons` |
-| `ll` | `eza -la --icons --git` |
-| `lt` | `eza -la --icons --tree --level=2` |
-| `cat` | `bat --style=auto` |
-
-Plus `Ctrl+T` (fzf files), `Ctrl+R` (atuin/fzf history), `z <dir>` (zoxide jump).
 
