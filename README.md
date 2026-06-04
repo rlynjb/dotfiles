@@ -41,7 +41,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 Open `⌘, → Profiles → your profile → Keys`, then apply both of these one-time changes:
 
-#### a. Set Left Option key to `Esc+`
+#### a. Enable `Option+A` as the tmux prefix
 
 - **Tab:** General
 - **Field:** Left Option key (and Right, if you use it)
