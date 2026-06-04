@@ -119,102 +119,54 @@ Then inside tmux press `prefix` `Shift+I` to install the plugins.
 
 Built-in Vim commands only — no plugins. Settings live in [`.vimrc`](./.vimrc).
 
-**Files & quitting:**
-
-| Action | Keys |
-|--------|------|
-| Open file | `:e <path>` |
-| Save | `:w` |
-| Save & quit | `:wq` / `:x` / `ZZ` |
-| Quit | `:q` |
-| Quit, discard changes | `:q!` |
-| Save & quit everything | `:wqa` |
-
-**File explorer (netrw, built-in):**
-
-| Action | Keys |
-|--------|------|
-| Open explorer in current window | `:Ex` |
-| Open in vertical split | `:Vex` |
-| Open in horizontal split | `:Sex` |
-| Open in new tab | `:Tex` |
-| Inside netrw — open file | `Enter` |
-| Inside netrw — create file | `%` |
-| Inside netrw — create directory | `d` |
-| Inside netrw — rename | `R` |
-| Inside netrw — delete | `D` |
-| Inside netrw — show help | `:h netrw-quickmap` |
-
-**Tabs:**
-
-| Action | Keys |
-|--------|------|
-| New tab | `:tabnew` |
-| New tab editing a file | `:tabe <path>` |
-| Next / previous tab | `gt` / `gT` |
-| Jump to tab N | `<N>gt` (e.g. `2gt`) |
-| Close current tab | `:tabclose` |
-| Close all other tabs | `:tabonly` |
-
-**Buffers:**
-
-| Action | Keys |
-|--------|------|
-| Edit file as buffer | `:e <path>` |
-| Next / previous buffer | `:bn` / `:bp` |
-| List open buffers | `:ls` |
-| Switch by number | `:b<N>` |
-| Close buffer | `:bd` |
-
-**Splits & windows:**
-
-| Action | Keys |
-|--------|------|
-| Horizontal split | `:split` / `:sp` |
-| Vertical split | `:vsplit` / `:vs` |
-| Move between splits | `Ctrl+w` then `h` / `j` / `k` / `l` |
-| Close current split | `Ctrl+w` then `q` (or `:q`) |
-| Make split full-screen | `Ctrl+w` then `o` |
-| Resize | `Ctrl+w` then `+` / `-` / `>` / `<` |
-
-**Navigation:**
-
-| Action | Keys |
-|--------|------|
-| Top / bottom of file | `gg` / `G` |
-| Go to line N | `:N` or `Ngg` |
-| Word forward / back | `w` / `b` |
-| Start / end of line | `0` / `$` |
-| Jump back / forward through history | `Ctrl+o` / `Ctrl+i` |
-
-**Search & replace:**
-
-| Action | Keys |
-|--------|------|
-| Search forward | `/pattern` `Enter` |
-| Search backward | `?pattern` `Enter` |
-| Next / previous match | `n` / `N` |
-| Clear highlights | `:noh` |
-| Replace in file | `:%s/old/new/g` |
-| Replace with confirmation | `:%s/old/new/gc` |
-
-**Editing:**
-
-| Action | Keys |
-|--------|------|
-| Insert at cursor / line start | `i` / `I` |
-| Insert after cursor / line end | `a` / `A` |
-| Open new line below / above | `o` / `O` |
-| Delete char / line | `x` / `dd` |
-| Yank line / paste | `yy` / `p` (after) / `P` (before) |
-| Undo / redo | `u` / `Ctrl+r` |
-| Visual select (char / line / block) | `v` / `V` / `Ctrl+v` |
-
-**Autocompletion (insert mode):**
-
-| Action | Keys |
-|--------|------|
-| Word completion (next / prev) | `Ctrl+n` / `Ctrl+p` |
-| File path completion | `Ctrl+x` `Ctrl+f` |
-| Language-aware (omni) | `Ctrl+x` `Ctrl+o` |
+| Category | Action | Keys |
+|---|---|---|
+| Files | Open file | `:e <path>` |
+| Files | Save | `:w` |
+| Files | Save & quit | `:wq` / `:x` / `ZZ` |
+| Files | Quit | `:q` |
+| Files | Quit, discard changes | `:q!` |
+| Files | Save & quit everything | `:wqa` |
+| Explorer | Open netrw in current window | `:Ex` |
+| Explorer | Open in vertical / horizontal split | `:Vex` / `:Sex` |
+| Explorer | Open in new tab | `:Tex` |
+| Explorer | Inside netrw — open file | `Enter` |
+| Explorer | Inside netrw — create file / dir | `%` / `d` |
+| Explorer | Inside netrw — rename / delete | `R` / `D` |
+| Explorer | Inside netrw — show help | `:h netrw-quickmap` |
+| Tabs | New tab | `:tabnew` |
+| Tabs | New tab editing a file | `:tabe <path>` |
+| Tabs | Next / previous tab | `gt` / `gT` |
+| Tabs | Jump to tab N | `<N>gt` (e.g. `2gt`) |
+| Tabs | Close current / others | `:tabclose` / `:tabonly` |
+| Buffers | Edit file as buffer | `:e <path>` |
+| Buffers | Next / previous buffer | `:bn` / `:bp` |
+| Buffers | List open buffers | `:ls` |
+| Buffers | Switch by number | `:b<N>` |
+| Buffers | Close buffer | `:bd` |
+| Splits | Horizontal / vertical split | `:split` / `:vsplit` |
+| Splits | Move between splits | `Ctrl+w` then `h` / `j` / `k` / `l` |
+| Splits | Close current | `Ctrl+w` then `q` (or `:q`) |
+| Splits | Make full-screen | `Ctrl+w` then `o` |
+| Splits | Resize | `Ctrl+w` then `+` / `-` / `>` / `<` |
+| Navigation | Top / bottom of file | `gg` / `G` |
+| Navigation | Go to line N | `:N` or `Ngg` |
+| Navigation | Word forward / back | `w` / `b` |
+| Navigation | Start / end of line | `0` / `$` |
+| Navigation | Jump back / forward through history | `Ctrl+o` / `Ctrl+i` |
+| Search | Search forward / backward | `/pattern` / `?pattern` |
+| Search | Next / previous match | `n` / `N` |
+| Search | Clear highlights | `:noh` |
+| Search | Replace in file | `:%s/old/new/g` |
+| Search | Replace with confirmation | `:%s/old/new/gc` |
+| Editing | Insert at cursor / line start | `i` / `I` |
+| Editing | Insert after cursor / line end | `a` / `A` |
+| Editing | New line below / above | `o` / `O` |
+| Editing | Delete char / line | `x` / `dd` |
+| Editing | Yank line / paste after / before | `yy` / `p` / `P` |
+| Editing | Undo / redo | `u` / `Ctrl+r` |
+| Editing | Visual select (char / line / block) | `v` / `V` / `Ctrl+v` |
+| Autocomplete | Word (next / prev) | `Ctrl+n` / `Ctrl+p` |
+| Autocomplete | File path | `Ctrl+x` `Ctrl+f` |
+| Autocomplete | Language-aware (omni) | `Ctrl+x` `Ctrl+o` |
 
