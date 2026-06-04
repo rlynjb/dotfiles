@@ -15,7 +15,6 @@ Modern developer environment for macOS — Zsh, Vim, tmux, and a suite of fast R
   - [Vim](#vim)
   - [Shell aliases](#shell-aliases-zsh)
 - [Tmux workspace (`reincodes`)](#tmux-workspace-reincodes)
-- [Troubleshooting](#troubleshooting)
 
 ## Quick start
 
@@ -62,7 +61,7 @@ Open `⌘, → Profiles → your profile → Keys`, then apply both of these one
 reincodes
 ```
 
-That bootstraps the personal 7-window tmux session (see [layout](#tmux-workspace-reincodes)). Inside tmux, press `Option+A` `Shift+I` once to install the resurrect + continuum plugins. From then on, your session auto-saves every 15 min and auto-restores on next launch — re-run `reincodes` only on a fresh machine or after wiping `~/.local/share/tmux/`.
+That bootstraps the personal 7-window tmux session. Inside tmux, press `Option+A` `Shift+I` once to install the resurrect + continuum plugins. From then on, your session auto-saves every 15 min and auto-restores on next launch — re-run `reincodes` only on a fresh machine or after wiping `~/.local/share/tmux/`.
 
 ### 4. Open Vim
 
@@ -347,40 +346,3 @@ That's it. The script creates the session if it's missing, or attaches to it if 
 | Force a snapshot save right now | `prefix` `Ctrl+s` (or `~/.tmux/plugins/tmux-resurrect/scripts/save.sh`) |
 | Wipe state and start over from the script | `tmux kill-server && rm -rf ~/.local/share/tmux/resurrect && reincodes` |
 
-### Layout
-
-| Window | Path | Panes |
-|--------|------|-------|
-| `home` | `~` | 1 |
-| `unshippd` | `~/Public/unshippd` | 2 (64% / 36% horizontal split) |
-| `dotfiles` | `~/Public/dotfiles` | 2 |
-| `aipe` | `~/Public/aipe` | 2 |
-| `contrl` | `~/Public/contrl` | 2 |
-| `loopd` | `~/Public/loopd` | 2 |
-| `reincodes` | `~/Public/reincodes` | 2 |
-
-### Adding or removing a window
-
-The script is **static by design** — it's the curated baseline, not a mirror of your live state. To change it:
-
-1. Edit the `projects` array in [`reincodes`](./reincodes) — one line per `"name|path"`.
-2. Commit the change so it follows you to new machines.
-
-Day-to-day ad-hoc windows (a temporary scratch session, a one-off repo) don't need to be in the script — resurrect captures them automatically. Only edit `reincodes` when you've decided a window is part of your *permanent* setup.
-
-### How `reincodes` and resurrect work together
-
-The two systems handle different jobs. Walk through this example to see how they hand off:
-
-1. **Day 0** — fresh Mac, you clone the dotfiles and run `reincodes`. You get the 7 baseline windows (`home`, `unshippd`, `dotfiles`, `aipe`, `contrl`, `loopd`, `reincodes`).
-2. **Day 1** — you add an 8th window for a new project: `~/Public/newproject`. Continuum picks it up within 15 min and writes it to `~/.local/share/tmux/resurrect/`.
-3. **Day 2** — Mac reboots. You run `tmux`. Continuum auto-restores all **8** windows, including `newproject`. ✅ You never re-ran `reincodes`.
-4. **Day 30** — you wipe the laptop and clone the dotfiles on a brand-new Mac. No resurrect snapshot exists yet. You run `reincodes`.  You get the original **7** windows. ❌ `newproject` is gone — it was only in the snapshot, not in the script.
-
-**Takeaway:** if a project becomes part of your permanent setup, add it to the `reincodes` script and commit. Everything else lives happily in resurrect snapshots without bloating the repo.
-
-## Troubleshooting
-
-### tmux prefix (Option+A) does nothing
-
-See [Quick start → step 2](#2-configure-iterm2) — iTerm2 needs **Left Option key** set to `Esc+`.
