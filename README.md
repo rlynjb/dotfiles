@@ -114,16 +114,6 @@ tmux source ~/.tmux.conf
 
 Then inside tmux press `prefix` `Shift+I` to install the plugins.
 
-**Daily use:**
-
-| Action | Command |
-|--------|---------|
-| Start a fresh session | `tmux new -s <name>` |
-| Open the last saved session (auto-restore) | `tmux` — continuum restores the snapshot |
-| Attach to a running session | `tmux a -t <name>` |
-| Save now (don't wait for the 15-min tick) | `prefix` `Ctrl+s` |
-| Restore last snapshot manually | `prefix` `Ctrl+r` |
-
 **Restored:** sessions, windows, panes, dirs, layout, and whitelisted processes (`vim`, `ssh`, `node`, `python`, …). Snapshots live in `~/.local/share/tmux/resurrect/`; edit `@resurrect-processes` in `.tmux.conf` to whitelist more.
 
 ### Vim
