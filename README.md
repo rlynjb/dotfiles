@@ -72,19 +72,14 @@ Settings live in [`.vimrc`](./.vimrc). See [Vim commands](#vim) for the keybindi
 
 ### Tmux sessions (CLI)
 
+`reincodes` handles start-or-attach for the day-to-day workspace. The few CLI commands you'll still reach for:
+
 | Action | Command |
 |--------|---------|
-| Start a new unnamed session | `tmux` |
-| Start a new named session | `tmux new -s <name>` |
-| Start detached (in background) | `tmux new -s <name> -d` |
+| Detach from current session | `prefix :detach` |
 | List running sessions | `tmux ls` |
-| Attach to last session | `tmux a` |
-| Attach to a specific session | `tmux a -t <name>` |
-| Detach from inside a session | `prefix` `:detach` |
-| Kill a specific session | `tmux kill-session -t <name>` |
-| Kill the tmux server (all sessions) | `tmux kill-server` |
-| Rename a window (from a shell inside tmux) | `tmux rename-window <name>` |
-| Rename a session | `tmux rename-session -t <old> <new>` |
+| Kill the reincodes session | `tmux kill-session -t reincodes` |
+| Kill all tmux (nuke + restart) | `tmux kill-server` |
 
 **iTerm2 native mode** — opens tmux panes as iTerm2 splits with real ⌘ shortcuts:
 
