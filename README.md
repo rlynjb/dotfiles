@@ -7,7 +7,6 @@ Modern developer environment for macOS — Zsh, Vim, tmux, and a suite of fast R
 - [Quick start](#quick-start)
 - [Commands](#commands)
   - [Tmux](#tmux)
-  - [Tmux saved sessions (resurrect + continuum)](#tmux-saved-sessions-resurrect--continuum)
   - [Vim](#vim)
 
 ## Quick start
@@ -49,13 +48,15 @@ Open `⌘, → Profiles → your profile → Keys`, then apply both of these one
 
 > The tmux prefix itself (`set -g prefix M-a`) is already in [`.tmux.conf`](./.tmux.conf) and gets symlinked by `install.sh` — no extra step.
 
-### 3. Restart your terminal, then start the workspace
+### 3. Start the tmux workspace (with session persistence)
 
 ```bash
 reincodes
 ```
 
-Bootstraps the 7-window tmux session. Once inside, press `Option+A` `Shift+I` to install resurrect + continuum — from then on, sessions auto-save every 15 min and restore on next launch.
+Bootstraps the 7-window tmux session. Once inside, press `Option+A` `Shift+I` to install `tmux-resurrect` + `tmux-continuum` — from then on, sessions auto-save every 15 minutes and auto-restore on tmux start, so your workspace survives reboots and kills.
+
+**Restored:** sessions, windows, panes, dirs, layout, and whitelisted processes (`vim`, `ssh`, `node`, `python`, …). Snapshots live in `~/.local/share/tmux/resurrect/`; edit `@resurrect-processes` in `.tmux.conf` to whitelist more.
 
 ### 4. Open Vim
 
@@ -92,21 +93,6 @@ Prefix is `Option+A`. `reincodes` handles start-or-attach for the day-to-day wor
 | Copy | Begin selection (in copy mode) | `v` |
 | Copy | Copy selection → system clipboard | `y` |
 | Copy | Paste buffer | `prefix p` |
-
-### Tmux saved sessions (resurrect + continuum)
-
-`tmux-resurrect` + `tmux-continuum` auto-save every 15 minutes and auto-restore on tmux start — your workspace survives reboots and kills.
-
-**One-time setup** (run once after cloning this repo):
-
-```bash
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-tmux source ~/.tmux.conf
-```
-
-Then inside tmux press `prefix` `Shift+I` to install the plugins.
-
-**Restored:** sessions, windows, panes, dirs, layout, and whitelisted processes (`vim`, `ssh`, `node`, `python`, …). Snapshots live in `~/.local/share/tmux/resurrect/`; edit `@resurrect-processes` in `.tmux.conf` to whitelist more.
 
 ### Vim
 
