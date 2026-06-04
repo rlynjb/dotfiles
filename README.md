@@ -58,7 +58,7 @@ Open `⌘, → Profiles → your profile → Keys`, then apply both of these one
 reincodes
 ```
 
-That bootstraps the personal 7-window tmux session. Inside tmux, press `Option+A` `Shift+I` once to install the resurrect + continuum plugins. From then on, your session auto-saves every 15 min and auto-restores on next launch — re-run `reincodes` only on a fresh machine or after wiping `~/.local/share/tmux/`.
+Bootstraps the 7-window tmux session. Once inside, press `Option+A` `Shift+I` to install resurrect + continuum — from then on, sessions auto-save every 15 min and restore on next launch.
 
 ### 4. Open Vim
 
