@@ -81,13 +81,10 @@ Settings live in [`.vimrc`](./.vimrc). See [Vim commands](#vim) for the keybindi
 | Kill the reincodes session | `tmux kill-session -t reincodes` |
 | Kill all tmux (nuke + restart) | `tmux kill-server` |
 
-> `prefix d` is rebound to split-right — use `prefix :detach`.
-
 ### Tmux (prefix: `Option+A`)
 
 | Action | Keys |
 |--------|------|
-| Send prefix | `prefix` `Option+A` |
 | Split right (keep cwd) | `prefix` `d` |
 | Split below (keep cwd) | `prefix` `s` |
 | New window (keep cwd) | `prefix` `t` |
