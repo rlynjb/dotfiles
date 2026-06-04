@@ -6,8 +6,7 @@ Modern developer environment for macOS — Zsh, Vim, tmux, and a suite of fast R
 
 - [Quick start](#quick-start)
 - [Commands](#commands)
-  - [Tmux sessions (CLI)](#tmux-sessions-cli)
-  - [Tmux prefix bindings](#tmux-prefix-optiona)
+  - [Tmux](#tmux)
   - [Tmux saved sessions (resurrect + continuum)](#tmux-saved-sessions-resurrect--continuum)
   - [Vim](#vim)
 
@@ -68,37 +67,31 @@ Settings live in [`.vimrc`](./.vimrc). See [Vim commands](#vim) for the keybindi
 
 ## Commands
 
-### Tmux sessions (CLI)
+### Tmux
 
-`reincodes` handles start-or-attach for the day-to-day workspace. The few CLI commands you'll still reach for:
+Prefix is `Option+A`. `reincodes` handles start-or-attach for the day-to-day workspace.
 
-| Action | Command |
-|--------|---------|
-| Detach from current session | `prefix :detach` |
-| List running sessions | `tmux ls` |
-| Kill the reincodes session | `tmux kill-session -t reincodes` |
-| Kill all tmux (nuke + restart) | `tmux kill-server` |
-
-### Tmux (prefix: `Option+A`)
-
-| Action | Keys |
-|--------|------|
-| Split right (keep cwd) | `prefix` `d` |
-| Split below (keep cwd) | `prefix` `s` |
-| New window (keep cwd) | `prefix` `t` |
-| Next window | `prefix` `]` |
-| Previous window | `prefix` `[` |
-| Kill pane | `prefix` `e` |
-| Kill window | `prefix` `w` |
-| Resize pane left/down/up/right | `prefix` `h` / `j` / `k` / `l` |
-| Switch pane (no prefix) | `Ctrl` `h` / `j` / `k` / `l` |
-| Enter copy mode | `prefix` `Escape` |
-| Begin selection (copy mode) | `v` |
-| Copy selection → system clipboard | `y` |
-| Paste buffer | `prefix` `p` |
-| Toggle pane zoom | `prefix` `z` |
-| Rename current window | `prefix` `,` |
-| Show pane numbers (press a number to jump) | `prefix` `q` |
+| Category | Action | Keys / Command |
+|---|---|---|
+| Session | Detach from current session | `prefix :detach` |
+| Session | List running sessions | `tmux ls` |
+| Session | Kill the reincodes session | `tmux kill-session -t reincodes` |
+| Session | Kill all tmux (nuke + restart) | `tmux kill-server` |
+| Panes | Split right (keep cwd) | `prefix d` |
+| Panes | Split below (keep cwd) | `prefix s` |
+| Panes | Switch pane (no prefix) | `Ctrl h` / `j` / `k` / `l` |
+| Panes | Resize pane left/down/up/right | `prefix h` / `j` / `k` / `l` |
+| Panes | Kill pane | `prefix e` |
+| Panes | Toggle pane zoom | `prefix z` |
+| Panes | Show pane numbers (jump by number) | `prefix q` |
+| Windows | New window (keep cwd) | `prefix t` |
+| Windows | Next / previous window | `prefix ]` / `[` |
+| Windows | Kill window | `prefix w` |
+| Windows | Rename current window | `prefix ,` |
+| Copy | Enter copy mode | `prefix Escape` |
+| Copy | Begin selection (in copy mode) | `v` |
+| Copy | Copy selection → system clipboard | `y` |
+| Copy | Paste buffer | `prefix p` |
 
 ### Tmux saved sessions (resurrect + continuum)
 
