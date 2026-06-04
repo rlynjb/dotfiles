@@ -14,7 +14,6 @@ Modern developer environment for macOS — Zsh, Vim, tmux, and a suite of fast R
   - [Tmux saved sessions (resurrect + continuum)](#tmux-saved-sessions-resurrect--continuum)
   - [Vim](#vim)
   - [Shell aliases](#shell-aliases-zsh)
-- [Tmux workspace (`reincodes`)](#tmux-workspace-reincodes)
 
 ## Quick start
 
@@ -317,32 +316,4 @@ Built-in Vim commands only — no plugins. Settings live in [`.vimrc`](./.vimrc)
 | `cat` | `bat --style=auto` |
 
 Plus `Ctrl+T` (fzf files), `Ctrl+R` (atuin/fzf history), `z <dir>` (zoxide jump).
-
-## Tmux workspace (`reincodes`)
-
-The [`reincodes`](./reincodes) script bootstraps the personal tmux workspace. It's the **one-time seed** — useful on a fresh machine, or after wiping resurrect state. Once the workspace is running, [resurrect + continuum](#tmux-saved-sessions-resurrect--continuum) take over and auto-restore it on every tmux start.
-
-### Getting started
-
-On a freshly-cloned machine (after `bash install.sh`):
-
-```bash
-reincodes
-```
-
-That's it. The script creates the session if it's missing, or attaches to it if it already exists. From this point on:
-
-- Continuum auto-saves the session every 15 min.
-- After a reboot, just run `tmux` (or `tmux a -t reincodes`) — your windows come back without re-running `reincodes`.
-- Re-run `reincodes` only if the resurrect snapshot is gone (wiped `~/.local/share/tmux/`, brand-new machine, etc.).
-
-### Commands
-
-| Action | Command |
-|--------|---------|
-| Start (or attach to) the workspace | `reincodes` |
-| Attach if you know it's already running | `tmux a -t reincodes` |
-| Edit the window/project list | `$EDITOR ~/Public/dotfiles/reincodes` (then commit) |
-| Force a snapshot save right now | `prefix` `Ctrl+s` (or `~/.tmux/plugins/tmux-resurrect/scripts/save.sh`) |
-| Wipe state and start over from the script | `tmux kill-server && rm -rf ~/.local/share/tmux/resurrect && reincodes` |
 
