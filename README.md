@@ -144,10 +144,15 @@ Built-in Vim commands only — no plugins. Settings live in [`.vimrc`](./.vimrc)
 | Editing | Insert at cursor / line start | `i` / `I` |
 | Editing | Insert after cursor / line end | `a` / `A` |
 | Editing | New line below / above | `o` / `O` |
-| Editing | Delete char / line | `x` / `dd` |
-| Editing | Yank line / paste after / before | `yy` / `p` / `P` |
-| Editing | Undo / redo | `u` / `Ctrl+r` |
 | Editing | Visual select (char / line / block) | `v` / `V` / `Ctrl+v` |
+| Editing | Yank (copy) line / word | `yy` / `yiw` |
+| Editing | Cut line / word (delete & yank) | `dd` / `daw` |
+| Editing | Delete char (no yank) | `x` |
+| Editing | Yank / cut selection (in visual mode) | `y` / `d` |
+| Editing | Paste after / before | `p` / `P` |
+| Editing | Copy selection to system clipboard (visual mode) | `"+y` |
+| Editing | Paste from system clipboard | `"+p` |
+| Editing | Undo / redo | `u` / `Ctrl+r` |
 | Autocomplete | Word (next / prev) | `Ctrl+n` / `Ctrl+p` |
 | Autocomplete | File path | `Ctrl+x` `Ctrl+f` |
 | Autocomplete | Language-aware (omni) | `Ctrl+x` `Ctrl+o` |
