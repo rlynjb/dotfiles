@@ -89,9 +89,8 @@ Prefix is `Option+A`. `reincodes` handles start-or-attach for the day-to-day wor
 | Windows | Next / previous window | `prefix ]` / `[` |
 | Windows | Kill window | `prefix w` |
 | Windows | Rename current window | `prefix ,` |
-| Windows | Move current window to index N | `prefix .` (then type N) |
-| Windows | Swap with previous / next window (no prefix) | `Shift+←` / `Shift+→` |
-| Windows | Swap windows by index | `prefix :swap-window -s <N> -t <M>` |
+| Windows | Move window left | `prefix :swap-window -t -1` |
+| Windows | Move window right | `prefix :swap-window -t +1` |
 | Copy | Enter copy mode | `prefix Escape` |
 | Copy | Begin selection (in copy mode) | `v` |
 | Copy | Copy selection → system clipboard | `y` |
