@@ -60,6 +60,13 @@ link_file "$DOTFILES_DIR/reincodes" "$HOME/.local/bin/reincodes"
 chmod +x "$HOME/.local/bin/reincodes"
 
 # ------------------------------------
+# Vim plugins (native packages)
+# ------------------------------------
+echo ""
+echo "==> Installing Vim plugins..."
+bash "$DOTFILES_DIR/install-vim-plugins.sh"
+
+# ------------------------------------
 # Done
 # ------------------------------------
 echo ""

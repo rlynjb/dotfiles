@@ -54,6 +54,59 @@ autocmd BufNewFile,BufRead *.twig set ft=html
 
 " ===========================================
 " ===========================================
+" Tabline
+" -------------------------------------------
+" always show the tab bar, even with a single tab
+set showtabline=2
+
+" custom tabline: <num> <filename> [+ if modified], active tab highlighted
+function! MyTabLine() abort
+  let s = ''
+  for i in range(tabpagenr('$'))
+    let tab = i + 1
+    let winnr = tabpagewinnr(tab)
+    let bufnr = tabpagebuflist(tab)[winnr - 1]
+    let name = bufname(bufnr)
+    " highlight group for the active vs inactive tab
+    let s .= (tab == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
+    " mark this region so mouse clicks switch to the tab
+    let s .= '%' . tab . 'T'
+    let s .= ' ' . tab . ' '
+    let s .= (name !=# '' ? fnamemodify(name, ':t') : '[No Name]')
+    let s .= (getbufvar(bufnr, '&modified') ? ' + ' : ' ')
+  endfor
+  " fill the remainder and close the last tab region
+  let s .= '%#TabLineFill#%T'
+  return s
+endfunction
+set tabline=%!MyTabLine()
+
+" force visible tab colors regardless of colorscheme
+hi TabLineSel  cterm=bold ctermfg=232 ctermbg=250
+hi TabLine     cterm=none ctermfg=250 ctermbg=236
+hi TabLineFill cterm=none ctermbg=236
+
+" tab management: open, close, next/prev
+nnoremap <silent> <C-t> :tabnew<CR>
+nnoremap <silent> <C-w><C-t> :tabclose<CR>
+" gt / gT still switch tabs by default
+
+
+" ===========================================
+" ===========================================
+" Sticky Scroll (context.vim)
+" -------------------------------------------
+" Pins the enclosing scope (function / block / object header) at the top
+" of the window as you scroll, like VS Code's Sticky Scroll.
+" Plugin: https://github.com/wellle/context.vim
+" Installed as a Vim 8+ native package at:
+"   ~/.vim/pack/plugins/start/context.vim
+" enabled on startup; toggle at runtime with :ContextToggle
+let g:context_enabled = 1
+
+
+" ===========================================
+" ===========================================
 " Smoother Navigation on Vim
 " -------------------------------------------
 " easier split navigation, instead of ctrl-w, just use ctrl-hjkl

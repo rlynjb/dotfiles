@@ -22,6 +22,7 @@ cd ~/dotfiles
 bash brew-install.sh
 
 # Symlink configs to home (includes the reincodes script on $PATH)
+# and install Vim plugins as native packages
 bash install.sh
 
 # Install TPM — required for tmux-resurrect + tmux-continuum (session persistence)
@@ -98,7 +99,7 @@ Prefix is `Option+A`. `reincodes` handles start-or-attach for the day-to-day wor
 
 ### Vim
 
-Built-in Vim commands only — no plugins. Settings live in [`.vimrc`](./.vimrc).
+Mostly built-in Vim. Settings live in [`.vimrc`](./.vimrc). One plugin — [context.vim](https://github.com/wellle/context.vim) for VS Code-style sticky scroll — is installed as a Vim 8+ native package by [`install-vim-plugins.sh`](./install-vim-plugins.sh) (run automatically by `install.sh`). Add more plugins by appending to the `PLUGINS` list in that script.
 
 | Category | Action | Keys |
 |---|---|---|
