@@ -39,6 +39,9 @@ set autochdir
 " needed for syntax highlighting
 syntax on
 " filetype plugin indent on
+" stop highlighting past column 300 on very long lines (keeps redraws fast and
+" avoids "redrawtime exceeded" disabling syntax on files with long lines)
+set synmaxcol=300
 set nu " set number guide on left
 let g:indentLine_color_term = 239
 " let g:indentLine_char = '┆'
@@ -90,19 +93,6 @@ hi TabLineFill cterm=none ctermbg=236
 nnoremap <silent> <C-t> :tabnew<CR>
 nnoremap <silent> <C-w><C-t> :tabclose<CR>
 " gt / gT still switch tabs by default
-
-
-" ===========================================
-" ===========================================
-" Sticky Scroll (context.vim)
-" -------------------------------------------
-" Pins the enclosing scope (function / block / object header) at the top
-" of the window as you scroll, like VS Code's Sticky Scroll.
-" Plugin: https://github.com/wellle/context.vim
-" Installed as a Vim 8+ native package at:
-"   ~/.vim/pack/plugins/start/context.vim
-" enabled on startup; toggle at runtime with :ContextToggle
-let g:context_enabled = 1
 
 
 " ===========================================

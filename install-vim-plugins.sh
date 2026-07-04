@@ -8,9 +8,8 @@ set -e
 
 PACK_DIR="$HOME/.vim/pack/plugins/start"
 
-# plugin list: "name  git-url"
+# plugin list: "name  git-url"  (add entries here to install more)
 PLUGINS=(
-  "context.vim  https://github.com/wellle/context.vim"   # VS Code-style sticky scroll
 )
 
 echo "==> Installing Vim plugins into $PACK_DIR"
