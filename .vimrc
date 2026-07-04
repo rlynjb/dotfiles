@@ -42,6 +42,12 @@ syntax on
 " stop highlighting past column 300 on very long lines (keeps redraws fast and
 " avoids "redrawtime exceeded" disabling syntax on files with long lines)
 set synmaxcol=300
+" fix syntax colors vanishing when scrolling inside tmux/screen: disable
+" Background Color Erase so scroll redraws don't drop cell attributes
+if &term =~ '256color' || &term =~ 'screen' || &term =~ 'tmux'
+  set t_ut=
+endif
+set ttyfast
 set nu " set number guide on left
 let g:indentLine_color_term = 239
 " let g:indentLine_char = '┆'
