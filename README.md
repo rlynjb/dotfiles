@@ -85,6 +85,10 @@ Prefix is `Option+A`. `reincodes` handles start-or-attach for the day-to-day wor
 | Panes | Kill pane | `prefix e` |
 | Panes | Toggle pane zoom | `prefix z` |
 | Panes | Show pane numbers (jump by number) | `prefix q` |
+| Panes | Swap pane left / up | `prefix {` |
+| Panes | Swap pane right / down | `prefix }` |
+| Panes | Rotate panes clockwise | `prefix Ctrl+o` |
+| Panes | Rotate panes counter-clockwise | `prefix Alt+o` |
 | Windows | New window (keep cwd) | `prefix t` |
 | Windows | Next / previous window | `prefix ]` / `[` |
 | Windows | Kill window | `prefix w` |
