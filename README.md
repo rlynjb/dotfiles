@@ -102,7 +102,7 @@ Prefix is `Option+A`. `reincodes` handles start-or-attach for the day-to-day wor
 
 ### Vim
 
-Built-in Vim commands only — no plugins. Settings live in [`.vimrc`](./.vimrc). To add a plugin later, append it to the `PLUGINS` list in [`install-vim-plugins.sh`](./install-vim-plugins.sh) (installs as a Vim 8+ native package; run automatically by `install.sh`).
+Mostly built-in Vim commands, plus a dark-mode Markdown browser preview plugin. Settings live in [`.vimrc`](./.vimrc). To add a plugin later, append it to the `PLUGINS` list in [`install-vim-plugins.sh`](./install-vim-plugins.sh) (installs as a Vim 8+ native package; run automatically by `install.sh`).
 
 | Category | Action | Keys |
 |---|---|---|
@@ -144,6 +144,9 @@ Built-in Vim commands only — no plugins. Settings live in [`.vimrc`](./.vimrc)
 | Search | Clear highlights | `:noh` |
 | Search | Replace in file | `:%s/old/new/g` |
 | Search | Replace with confirmation | `:%s/old/new/gc` |
+| Markdown | Start browser preview manually | `:InstantMarkdownPreview` / `Space p` / `\im` / `\mp` |
+| Markdown | Preview selected netrw file | `Space p` / `\im` / `\mp` |
+| Markdown | Stop browser preview | `:InstantMarkdownStop` |
 | Editing | Insert at cursor / line start | `i` / `I` |
 | Editing | Insert after cursor / line end | `a` / `A` |
 | Editing | New line below / above | `o` / `O` |
@@ -159,4 +162,3 @@ Built-in Vim commands only — no plugins. Settings live in [`.vimrc`](./.vimrc)
 | Autocomplete | Word (next / prev) | `Ctrl+n` / `Ctrl+p` |
 | Autocomplete | File path | `Ctrl+x` `Ctrl+f` |
 | Autocomplete | Language-aware (omni) | `Ctrl+x` `Ctrl+o` |
-

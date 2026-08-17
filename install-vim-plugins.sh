@@ -10,6 +10,7 @@ PACK_DIR="$HOME/.vim/pack/plugins/start"
 
 # plugin list: "name  git-url"  (add entries here to install more)
 PLUGINS=(
+  "vim-instant-markdown https://github.com/instant-markdown/vim-instant-markdown.git"
 )
 
 echo "==> Installing Vim plugins into $PACK_DIR"

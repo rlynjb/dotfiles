@@ -38,7 +38,9 @@ set autochdir
 " -------------------------------------------
 " needed for syntax highlighting
 syntax on
-" filetype plugin indent on
+filetype plugin indent on
+let g:instant_markdown_autostart = 0
+let g:instant_markdown_theme = 'dark'
 " stop highlighting past column 300 on very long lines (keeps redraws fast and
 " avoids "redrawtime exceeded" disabling syntax on files with long lines)
 set synmaxcol=300
@@ -59,6 +61,26 @@ autocmd BufNewFile,BufRead *.slim set ft=emblem
 autocmd BufNewFile,BufRead *.hbs set ft=html
 autocmd BufNewFile,BufRead *.volt set ft=html
 autocmd BufNewFile,BufRead *.twig set ft=html
+
+
+" ===========================================
+" ===========================================
+" Markdown Preview
+" -------------------------------------------
+" Browser preview is manual so opening Markdown files stays inside Vim.
+function! InstantMarkdownPreviewSmart() abort
+  if &filetype ==# 'netrw'
+    call feedkeys("\<CR>:InstantMarkdownPreview\<CR>", 'm')
+    return
+  endif
+
+  InstantMarkdownPreview
+endfunction
+command! InstantMarkdownPreviewSmart call InstantMarkdownPreviewSmart()
+nnoremap <silent> <leader>im :InstantMarkdownPreviewSmart<CR>
+nnoremap <silent> <leader>mp :InstantMarkdownPreviewSmart<CR>
+nnoremap <silent> <F5> :InstantMarkdownPreviewSmart<CR>
+nnoremap <silent> <Space>p :InstantMarkdownPreviewSmart<CR>
 
 
 " ===========================================
