@@ -67,6 +67,13 @@ echo "==> Installing Vim plugins..."
 bash "$DOTFILES_DIR/install-vim-plugins.sh"
 
 # ------------------------------------
+# Instant Markdown preview theme
+# ------------------------------------
+echo ""
+echo "==> Installing Instant Markdown preview theme..."
+bash "$DOTFILES_DIR/install-instant-markdown-theme.sh"
+
+# ------------------------------------
 # Done
 # ------------------------------------
 echo ""

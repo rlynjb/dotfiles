@@ -102,7 +102,7 @@ Prefix is `Option+A`. `reincodes` handles start-or-attach for the day-to-day wor
 
 ### Vim
 
-Mostly built-in Vim commands, plus a dark-mode Markdown browser preview plugin. Settings live in [`.vimrc`](./.vimrc). To add a plugin later, append it to the `PLUGINS` list in [`install-vim-plugins.sh`](./install-vim-plugins.sh) (installs as a Vim 8+ native package; run automatically by `install.sh`).
+Mostly built-in Vim commands, plus a custom dark Markdown browser preview plugin. Settings live in [`.vimrc`](./.vimrc). To add a plugin later, append it to the `PLUGINS` list in [`install-vim-plugins.sh`](./install-vim-plugins.sh) (installs as a Vim 8+ native package; run automatically by `install.sh`).
 
 | Category | Action | Keys |
 |---|---|---|

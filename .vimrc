@@ -40,7 +40,7 @@ set autochdir
 syntax on
 filetype plugin indent on
 let g:instant_markdown_autostart = 0
-let g:instant_markdown_theme = 'dark'
+let g:instant_markdown_theme = 'reincodes'
 " stop highlighting past column 300 on very long lines (keeps redraws fast and
 " avoids "redrawtime exceeded" disabling syntax on files with long lines)
 set synmaxcol=300
