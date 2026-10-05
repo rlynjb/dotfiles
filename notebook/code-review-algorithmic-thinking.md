@@ -1,63 +1,63 @@
 # Algorithmic Thinking Code-Review Prompt Library
 
-Quick-reference for reviewing code with an AI coding agent using principles from
-*Algorithmic Thinking* by Daniel Zingaro.
-
-The goal is not just to ask whether the code works.
+Quick-reference for reviewing a change with an AI coding agent, using principles from *Algorithmic Thinking* by Daniel Zingaro to judge whether the problem is understood correctly, the algorithm fits the constraints, the implementation is correct, and the complexity is justified.
 
 A normal review asks:
 
+```text
 Does this code work?
 Are there bugs?
 Are there tests?
+```
 
 An Algorithmic Thinking review also asks:
 
+```text
 What problem is this code actually solving?
-What are the input constraints?
-What information matters and what can be ignored?
-Is the chosen algorithm appropriate?
-Is there a simpler representation or data structure?
+What are the constraints?
+What information matters?
+Which algorithmic pattern fits the problem?
+Is the chosen data structure appropriate?
 Why is the algorithm correct?
 What happens at the boundaries?
-How does runtime and memory grow with input size?
+How do runtime and memory grow with input size?
+```
 
-Use this review primarily for algorithms, functions, data-processing logic,
-DSA-heavy code, transformations, search, traversal, optimization, and
-performance-sensitive logic.
-
-It complements architecture-level reviews such as DDIA and System Design.
+Algorithmic Thinking should **complement, not replace** reviews for ordinary correctness, software design, security, maintainability, and system architecture.
 
 ---
 
 ## Index
 
-| # | Prompt | Use it for |
-|---|---|---|
-| ★ | Compact daily | Normal algorithmic code review |
-| 0 | Master review | Larger or higher-risk changes |
-| 1 | Understand the problem | Before reviewing implementation |
-| 2 | Correctness | Bugs and counterexamples |
-| 3 | Algorithm choice | Is the approach appropriate? |
-| 4 | Data structures | Representation and operations |
-| 5 | Complexity | Time and space analysis |
-| 6 | Invariants | Why does the algorithm work? |
-| 7 | Edge cases | Boundaries and unusual input |
-| 8 | Pattern recognition | Identify reusable problem patterns |
-| 9 | Tests | Evidence that the algorithm is correct |
-| A | AI-generated solution | Detect plausible-looking but wrong solutions |
+| # | Prompt | What it does | Reach for it when |
+|---|---|---|---|
+| ★ | [**Compact daily**](#compact-daily-code-review-prompt) | 10-point algorithmic review in one pass | Default for algorithmic changes |
+| 0 | [**Master**](#0-master-algorithmic-thinking-code-review-prompt) | Full problem → algorithm → correctness → complexity review | Bigger or higher-risk logic |
+| 1 | [**Understand the problem**](#1-understand-the-problem-first) | Reconstructs inputs, outputs, constraints, and requirements | First — before judging the solution |
+| 2 | [**Correctness**](#2-review-algorithmic-correctness) | Finds bugs using concrete counterexamples | Always |
+| 3 | [**Algorithm choice**](#3-review-the-algorithm-choice) | Checks whether the strategy fits the problem | Multiple approaches are possible |
+| 4 | [**Data structures**](#4-review-data-structure-choice) | Matches structures to required operations | Collections or representation matter |
+| 5 | [**Complexity**](#5-review-time-and-space-complexity) | Analyzes runtime and memory growth | Performance-sensitive logic |
+| 6 | [**Invariants**](#6-review-the-algorithms-invariants) | Explains why the algorithm remains correct | Loops, traversal, DP, windows, heaps |
+| 7 | [**Edge cases**](#7-review-edge-cases-and-boundaries) | Generates adversarial boundary inputs | Before accepting correctness |
+| 8 | [**Pattern recognition**](#8-identify-the-problem-solving-pattern) | Extracts reusable DSA clues and patterns | Learning from a solved problem |
+| 9 | [**Tests**](#9-review-tests-as-algorithmic-evidence) | Checks whether tests actually support correctness | Reviewing test coverage |
+| A | [**AI-generated solution**](#a-reviewing-an-ai-generated-algorithmic-solution) | Skeptical pass for plausible-looking AI mistakes | Code came from an agent |
 
 ---
 
-## ★ Compact daily code-review prompt
+## Compact daily code-review prompt
 
+**What it does:** Runs the most useful Algorithmic Thinking checks in one pass. Use this as the default prompt for normal DSA or algorithm-heavy code.
+
+```text
 Review this diff using principles from Algorithmic Thinking.
 
 Focus on:
 
-1. What problem the code is solving
-2. Input, output, and constraints
-3. Behavioral correctness
+1. What problem the code is actually solving
+2. Inputs, outputs, assumptions, and constraints
+3. Behavioral and algorithmic correctness
 4. Algorithm choice
 5. Data-structure choice
 6. Important invariants
@@ -66,77 +66,94 @@ Focus on:
 9. Space complexity
 10. Test quality
 
-For every finding provide:
+For every finding, provide:
 
 - Evidence from the code
 - Concrete consequence
 - Severity
-- A specific input or scenario demonstrating the problem
+- A specific input or scenario demonstrating the issue
 - Smallest reasonable improvement
 
-Separate:
+Separate findings into:
 
 - Correctness issues
 - Performance issues
 - Maintainability issues
 - Optional improvements
 
-Do not recommend a more complicated algorithm unless the input constraints or
-performance requirements justify it.
+Do not recommend a more complicated algorithm unless the input constraints,
+performance requirements, or correctness requirements justify it.
 
 Do not claim an optimization is necessary without explaining the workload at
 which the current approach becomes a problem.
+```
 
 ---
 
 ## 0. Master Algorithmic Thinking code-review prompt
 
+**What it does:** Performs the full review from problem definition through correctness, representation, complexity, and testing.
+
+```text
 Review this change using principles from Algorithmic Thinking.
 
 First understand the problem before criticizing the implementation.
 
 Evaluate:
 
-1. What problem is being solved?
-2. What are the expected inputs and outputs?
-3. What assumptions are made about the input?
-4. What constraints affect the solution?
-5. What is the simplest correct solution?
-6. What algorithmic approach does the implementation use?
-7. Why should that algorithm produce the correct result?
-8. What data structures are used and why?
-9. Are the data structures appropriate for the operations performed?
-10. What invariants must remain true during execution?
-11. What boundary cases or unusual inputs could break the implementation?
-12. What is the time complexity?
-13. What is the space complexity?
-14. Where are repeated or unnecessary operations performed?
-15. Do the tests prove correctness across important input classes?
+1. What problem is being solved.
+2. What the expected inputs and outputs are.
+3. What assumptions are made about the input.
+4. What constraints affect the solution.
+5. What the simplest correct solution would look like.
+6. What algorithmic approach the implementation uses.
+7. Why that algorithm should produce the correct result.
+8. What data structures are used and why.
+9. Whether those data structures fit the operations performed.
+10. What invariants must remain true during execution.
+11. What boundary cases or unusual inputs could break the implementation.
+12. What the time complexity is.
+13. What the space complexity is.
+14. Where repeated or unnecessary work occurs.
+15. Whether tests verify the important input classes and invariants.
+
+Separate findings into:
+
+- Problem-understanding issues
+- Correctness issues
+- Algorithm and data-structure issues
+- Complexity issues
+- Testing gaps
+- Optional improvements
 
 For every finding:
 
 - Cite the file and symbol
-- Explain the algorithmic issue
-- Give a concrete input that demonstrates it
-- Explain the expected and actual behavior
+- Explain the concrete consequence
+- Give a specific input or execution that demonstrates the issue
+- Explain expected versus actual behavior
 - Suggest the smallest reasonable improvement
-- Mark it blocking, important, or optional
+- Mark it as blocking, important, or optional
 
 Clearly separate:
 
-- Proven behavior
+- Behavior proven by the implementation
 - Assumptions
 - Complexity analysis
-- Potential optimization
-
-Do not optimize code purely because a theoretically faster algorithm exists.
+- Potential optimizations
 
 Prefer the simplest solution that satisfies the actual constraints.
+
+Do not optimize merely because a theoretically faster algorithm exists.
+```
 
 ---
 
 ## 1. Understand the problem first
 
+**What it does:** Forces the agent to reconstruct the actual problem before pattern-matching to an algorithm.
+
+```text
 Before reviewing the implementation, reconstruct the problem it is trying to
 solve.
 
@@ -155,16 +172,28 @@ Identify:
 - Expected data size
 - Important invariants
 
-Then summarize the problem in plain English.
+Summarize the problem in plain English.
 
-Separate what is confirmed by the code or tests from what you inferred.
+Then identify:
 
-Do not review algorithm choice until the problem and constraints are clear.
+- What information from the input actually matters
+- What information can be ignored
+- Which operations dominate the problem
+- Which constraints are likely to influence algorithm choice
+
+Separate what is confirmed by the code, tests, or requirements from what you
+inferred.
+
+Do not evaluate algorithm choice until the problem and constraints are clear.
+```
 
 ---
 
 ## 2. Review algorithmic correctness
 
+**What it does:** Searches for concrete counterexamples instead of simply declaring that the algorithm looks correct.
+
+```text
 Review this implementation for algorithmic correctness.
 
 Look for:
@@ -174,35 +203,44 @@ Look for:
 - Off-by-one errors
 - Incorrect loop boundaries
 - Incorrect termination conditions
-- State that is not updated correctly
+- Incorrect state updates
 - Incorrect comparisons
-- Duplicate handling
+- Duplicate-handling errors
 - Incorrect ordering assumptions
 - Empty collections
 - Single-element inputs
 - Minimum and maximum values
-- Cycles
+- Cycles where relevant
 - Repeated values
 - Negative values where relevant
 - Overflow or precision problems
 - Mutation that affects later computation
+- Incorrect recursion base cases
+- Incorrect memoization or cache keys
 
 For each issue, give the smallest concrete input that demonstrates the failure.
 
-Show:
+Use this format:
 
-Input
-Expected result
-Actual or likely result
-Reason the algorithm fails
+Input:
+Expected result:
+Actual or likely result:
+Why it fails:
+Smallest fix:
+
+Do not report a correctness issue without a concrete failing scenario.
+```
 
 ---
 
 ## 3. Review the algorithm choice
 
-Identify the algorithmic strategy used by this code.
+**What it does:** Identifies the underlying strategy and checks whether it is appropriate for the actual constraints.
 
-Examples may include:
+```text
+Identify the algorithmic strategy used by this implementation.
+
+Possible patterns may include:
 
 - Brute force
 - Sorting
@@ -224,29 +262,40 @@ Examples may include:
 Then evaluate:
 
 - Why this approach fits the problem
-- What assumptions make it valid
+- Which constraints make it valid
 - Whether a simpler approach would work
-- Whether performance requirements justify the complexity
-- Whether another pattern would substantially improve clarity or performance
+- Whether the implementation matches the intended pattern correctly
+- Whether another approach would meaningfully improve correctness,
+  readability, or performance
 
-Compare alternatives only when meaningful.
+When comparing alternatives, provide:
 
-For each alternative provide:
+Current approach:
+Current time complexity:
+Current space complexity:
 
-Current complexity
-Alternative complexity
-Trade-off
-Input size where the difference starts to matter
+Alternative:
+Alternative time complexity:
+Alternative space complexity:
+
+Trade-off:
+When the difference actually matters:
 
 Do not recommend cleverness for its own sake.
+
+Prefer a simple correct algorithm when it satisfies the real constraints.
+```
 
 ---
 
 ## 4. Review data-structure choice
 
-Review the data structures used by this implementation.
+**What it does:** Checks whether the representation matches the operations the algorithm needs to perform.
 
-For each important structure identify:
+```text
+Review the important data structures used by this implementation.
+
+For each one identify:
 
 - What information it represents
 - Operations performed on it
@@ -257,9 +306,9 @@ For each important structure identify:
 - Duplicate requirements
 - Memory cost
 
-Evaluate whether the structure matches those operations.
+Evaluate whether the structure fits those operations.
 
-Consider:
+Consider where relevant:
 
 - Array / list
 - Set
@@ -272,131 +321,190 @@ Consider:
 - Graph
 - Linked structure
 
-Look for cases where the code repeatedly performs an expensive operation that
-a different representation could make cheap.
+Look for cases where the implementation repeatedly performs an expensive
+operation that a different representation could make cheaper or clearer.
 
-Do not suggest replacing a simple structure unless there is a meaningful
-correctness, clarity, or performance benefit.
+For every suggested replacement explain:
+
+- Current operation cost
+- Proposed operation cost
+- Additional complexity introduced
+- Why the trade-off is worthwhile
+
+Do not replace a simple structure unless there is a meaningful correctness,
+clarity, or performance benefit.
+```
 
 ---
 
 ## 5. Review time and space complexity
 
-Analyze the important execution paths.
+**What it does:** Goes beyond simply printing Big-O and identifies what actually dominates runtime and memory.
+
+```text
+Analyze the important execution paths in this implementation.
 
 For each one provide:
 
-Time complexity
-Space complexity
-Dominant operation
-Relevant input variable
+- Time complexity
+- Space complexity
+- Dominant operation
+- Relevant input variable
+- Best case if meaningful
+- Worst case if meaningful
 
-Do not stop at Big-O notation.
-
-Also identify:
+Look for:
 
 - Nested loops
 - Repeated scans
 - Repeated sorting
 - Repeated allocation
-- Hidden library complexity
+- Hidden library-operation complexity
 - Recursive depth
 - Expensive work inside loops
-- Repeated database or network operations if relevant
+- Duplicate computation
+- Repeated conversions or copying
 
-Then answer:
+Then evaluate:
 
-What happens at 10× input size?
-What happens at 100× input size?
+- What happens at 10× input size?
+- What happens at 100× input size?
+- What resource becomes the bottleneck first?
+- Is the concern theoretical or realistically important?
 
-Distinguish theoretical complexity from a realistic performance concern.
+If you recommend an optimization, explain the input size or workload at which
+the current implementation becomes a meaningful problem.
+
+Do not treat a better Big-O value as automatically better engineering.
+```
 
 ---
 
-## 6. Identify the algorithm's invariants
+## 6. Review the algorithm's invariants
 
-Determine what must remain true while this algorithm executes.
+**What it does:** Makes the reasoning behind correctness explicit.
 
-Examples:
+```text
+Identify the important invariants maintained by this algorithm.
+
+Examples include:
 
 - Everything before index i has already been processed
-- The queue contains exactly the nodes discovered but not visited
-- The current window satisfies a particular constraint
+- The queue contains discovered but unvisited nodes
+- The current window satisfies a defined constraint
 - The heap contains the best k candidates seen so far
-- dp[i] represents the optimal answer for a defined subproblem
+- dp[i] represents the answer to a defined subproblem
+- The left and right partitions satisfy a particular ordering property
 
 For every important invariant:
 
-- State it clearly
-- Show where it is established
-- Show where it is preserved
-- Show how it leads to the final result
+1. State it clearly.
+2. Show where it is established.
+3. Show how each iteration or recursive step preserves it.
+4. Show how it contributes to termination.
+5. Show how it leads to the final result.
 
-Flag any code path that can violate the invariant.
+Flag any execution path that can violate the invariant.
 
-Use this to explain why the algorithm is correct, not merely that the tests pass.
+If the algorithm is correct but the invariant is difficult to understand from
+the implementation, suggest the smallest change that would make the reasoning
+more obvious.
+```
 
 ---
 
 ## 7. Review edge cases and boundaries
 
-Generate adversarial inputs for this implementation.
+**What it does:** Generates targeted adversarial inputs based on the actual algorithm.
 
-Include relevant cases such as:
+```text
+Generate edge cases and adversarial inputs for this implementation.
+
+Consider where relevant:
 
 - Empty input
 - One element
 - Two elements
 - All values equal
-- Already sorted
-- Reverse sorted
-- Maximum size
+- Already sorted input
+- Reverse-sorted input
+- Maximum-size input
 - Minimum values
 - Maximum values
 - Duplicate values
 - Missing values
 - Negative values
+- Zero values
 - Cyclic input
 - Disconnected structures
 - Deep recursion
 - Highly skewed input
+- Multiple equally valid answers
 
-For each meaningful case state whether the implementation handles it correctly.
+For every meaningful case provide:
 
-Prioritize cases that exercise different branches or invalidate assumptions.
+Input:
+What behavior it exercises:
+Expected result:
+Whether the implementation handles it correctly:
+
+Prioritize cases that:
+
+- Exercise a different branch
+- Challenge an assumption
+- Test an invariant
+- Hit a boundary
+- Distinguish two competing algorithmic approaches
+
+Do not produce edge cases that are irrelevant to this problem.
+```
 
 ---
 
 ## 8. Identify the problem-solving pattern
 
-Analyze this code as a learning exercise.
+**What it does:** Turns a code review into a reusable learning exercise for future DSA problems.
+
+```text
+Analyze this code as a problem-solving exercise.
 
 Identify:
 
-Problem type
-Important clues
-Relevant constraints
-Algorithmic pattern
-Data structure
-Invariant
-Complexity
+Problem type:
+Important clues:
+Relevant constraints:
+Algorithmic pattern:
+Data structure:
+Key invariant:
+Time complexity:
+Space complexity:
 
 Then explain:
 
-What clues should make an engineer recognize this pattern in a future problem?
+1. Which clues should make me consider this pattern in a future problem?
+2. What question should I ask myself when I encounter a similar problem?
+3. Which data or constraint made this pattern useful?
+4. What similar-looking problem would require a different pattern?
+5. What common wrong approach might someone try first?
+6. How can I recognize that the wrong approach will not scale or will fail?
 
-What similar-looking problems would NOT use this pattern?
+End with:
 
-What question should I ask myself next time when I see this type of problem?
+Recognition rule:
+"When I see ______ and the constraint is ______, consider ______."
 
-Keep the explanation practical rather than turning it into a list of algorithms
-to memorize.
+Keep the explanation focused on reasoning and recognition rather than
+memorizing a list of algorithms.
+```
 
 ---
 
 ## 9. Review tests as algorithmic evidence
 
-Review the tests for this implementation.
+**What it does:** Checks whether the test suite actually supports the correctness claim.
+
+```text
+Review the tests for this algorithm.
 
 Determine whether they cover:
 
@@ -404,25 +512,38 @@ Determine whether they cover:
 - Empty input
 - Smallest valid input
 - Boundary conditions
-- Duplicates
+- Duplicate values
 - Ordering differences
 - Maximum or large input
 - Important algorithm branches
 - Previously failing cases
-- Invariants
+- Important invariants
 - Performance-sensitive input
 
-Identify cases where tests pass but the algorithm could still be incorrect.
+Then identify:
 
-Recommend the smallest set of additional tests that gives meaningful confidence.
+- Important equivalence classes that are missing
+- Cases where tests pass but the algorithm could still be incorrect
+- Cases where one test could cover several redundant tests
+- Property-based tests that would be useful
+- Complexity or performance behavior worth testing
+
+Recommend the smallest set of additional tests that would meaningfully increase
+confidence in correctness.
+
+For each suggested test explain what specific bug or invariant it protects.
+```
 
 ---
 
-## A. Review an AI-generated algorithmic solution
+## A. Reviewing an AI-generated algorithmic solution
 
-Review this AI-generated implementation skeptically.
+**What it does:** Applies extra skepticism to AI-generated solutions that may look convincing without actually being correct.
 
-Do not assume that because the code looks plausible it is correct.
+```text
+Review this AI-generated algorithmic solution skeptically.
+
+Do not assume that plausible-looking code is correct.
 
 Check specifically for:
 
@@ -434,12 +555,28 @@ Check specifically for:
 - Missing edge cases
 - Incorrect mutation
 - Incorrect recursion base cases
+- Incorrect memoization
 - Data structures chosen because they are common rather than necessary
-- Optimization before correctness
-- Tests that only cover examples from the prompt
+- Premature optimization
+- Overcomplicated solutions
+- Tests that only reproduce examples from the prompt
 
-Require a concrete correctness argument and counterexample search before
-accepting the solution.
+Before accepting the solution:
 
-If the current simple solution is already sufficient, do not recommend a more
-complex one.
+1. Restate the problem and constraints.
+2. Identify the algorithmic pattern.
+3. State the core invariant.
+4. Explain why the algorithm should be correct.
+5. Search for the smallest counterexample.
+6. Verify time and space complexity.
+7. Compare it with the simplest reasonable alternative.
+
+Clearly separate:
+
+- What the code proves
+- What the agent assumed
+- What still requires verification
+
+If the current simple solution already satisfies the constraints, do not
+recommend a more complicated one.
+```
