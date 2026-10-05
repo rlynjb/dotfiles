@@ -2,21 +2,21 @@
 
 ## Quick Jump
 
-| # | Topic | Jump |
+| # | Topic | Recruiter Question |
 |---|---|---|
-| 1 | Background | [Go to section](#1-tell-me-about-your-background) |
-| 2 | Strongest coding language | [Go to section](#2-whats-your-strongest-coding-language) |
-| 3 | Best domain fit | [Go to section](#3-which-domain-fits-you-best) |
-| 4 | Mobile / Embedded | [Go to section](#4-what-about-mobile-or-embedded) |
-| 5 | Current work / systems | [Go to section](#5-tell-me-more-about-what-you-work-on) |
-| 6 | Cloud experience | [Go to section](#6-what-cloud-experience-do-you-have) |
-| 7 | Roles you're interested in | [Go to section](#7-what-kinds-of-roles-are-you-interested-in) |
-| 8 | Relocation | [Go to section](#8-are-you-open-to-relocating) |
-| 9 | Start date | [Go to section](#9-when-could-you-start) |
-| 10 | Google Cloud interests | [Go to section](#10-what-interests-you-about-google-cloud) |
-| 11 | Anything else you're looking for | [Go to section](#11-anything-else-youre-looking-for) |
-| 12 | Questions for recruiter | [Go to section](#12-questions-to-ask-the-recruiter) |
-| ★ | Quick cheat sheet | [Go to section](#quick-cheat-sheet) |
+| 1 | [**Background**](#1-tell-me-about-your-background) | “Could you walk me through your background?” |
+| 2 | [**Strongest coding language**](#2-whats-your-strongest-coding-language) | “What’s your strongest programming language?” |
+| 3 | [**Best domain fit**](#3-which-domain-fits-you-best) | “Would you place yourself in general software engineering, embedded, front end, ML, or mobile?” |
+| 4 | [**Mobile / Embedded**](#4-what-about-mobile-or-embedded) | “Are you interested in mobile or embedded?” |
+| 5 | [**Current work / systems**](#5-tell-me-more-about-what-you-work-on) | “Can you tell me more about the systems you work with?” |
+| 6 | [**Cloud experience**](#6-what-cloud-experience-do-you-have) | “Have you worked with any cloud providers or infrastructure?” |
+| 7 | [**Role interests**](#7-what-kinds-of-roles-are-you-interested-in) | “What types of roles are you looking for?” |
+| 8 | [**Relocation**](#8-are-you-open-to-relocating) | “What are your location preferences?” |
+| 9 | [**Start date**](#9-when-could-you-start) | “When would you be available to start?” |
+| 10 | [**Google Cloud interests**](#10-what-interests-you-about-google-cloud) | “I primarily support Cloud. Are there any areas of Google Cloud you’re interested in?” |
+| 11 | [**Anything else you're looking for**](#11-anything-else-youre-looking-for) | “Is there anything else you’d like me to know about what you’re looking for?” |
+| 12 | [**Questions for recruiter**](#12-questions-to-ask-the-recruiter) | “What questions do you have for me?” |
+| ★ | [**Quick cheat sheet**](#quick-cheat-sheet) | Fast reference during the call |
 
 ---
 
