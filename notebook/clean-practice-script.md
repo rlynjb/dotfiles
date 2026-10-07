@@ -5,16 +5,17 @@
 | # | Topic | Recruiter Question |
 |---|---|---|
 | 1 | [**Background + current work**](#1-tell-me-about-your-background-and-current-work) | “Could you walk me through your background?” / “Can you tell me more about the systems you work with?” |
-| 2 | [**Strongest coding language**](#2-whats-your-strongest-coding-language) | “What’s your strongest programming language?” |
-| 3 | [**Best domain fit**](#3-which-domain-fits-you-best) | “Would you place yourself in general software engineering, embedded, front end, ML, or mobile?” |
-| 4 | [**Mobile / Embedded**](#4-what-about-mobile-or-embedded) | “Are you interested in mobile or embedded?” |
-| 5 | [**Cloud experience**](#5-what-cloud-experience-do-you-have) | “Have you worked with any cloud providers or infrastructure?” |
-| 6 | [**Role interests**](#6-what-kinds-of-roles-are-you-interested-in) | “What types of roles are you looking for?” |
-| 7 | [**Relocation**](#7-are-you-open-to-relocating) | “What are your location preferences?” |
-| 8 | [**Start date**](#8-when-could-you-start) | “When would you be available to start?” |
-| 9 | [**Google Cloud interests**](#9-what-interests-you-about-google-cloud) | “I primarily support Cloud. Are there any areas of Google Cloud you’re interested in?” |
-| 10 | [**Anything else you're looking for**](#10-anything-else-youre-looking-for) | “Is there anything else you’d like me to know about what you’re looking for?” |
-| 11 | [**Questions for recruiter**](#11-questions-to-ask-the-recruiter) | “What questions do you have for me?” |
+| 2 | [**Work you're proud of**](#2-what-work-are-you-most-proud-of) | “What project are you most proud of?” / “Tell me about something you’re proud of at work.” |
+| 3 | [**Strongest coding language**](#3-whats-your-strongest-coding-language) | “What’s your strongest programming language?” |
+| 4 | [**Best domain fit**](#4-which-domain-fits-you-best) | “Would you place yourself in general software engineering, embedded, front end, ML, or mobile?” |
+| 5 | [**Mobile / Embedded**](#5-what-about-mobile-or-embedded) | “Are you interested in mobile or embedded?” |
+| 6 | [**Cloud experience**](#6-what-cloud-experience-do-you-have) | “Have you worked with any cloud providers or infrastructure?” |
+| 7 | [**Role interests**](#7-what-kinds-of-roles-are-you-interested-in) | “What types of roles are you looking for?” |
+| 8 | [**Relocation**](#8-are-you-open-to-relocating) | “What are your location preferences?” |
+| 9 | [**Start date**](#9-when-could-you-start) | “When would you be available to start?” |
+| 10 | [**Google Cloud interests**](#10-what-interests-you-about-google-cloud) | “I primarily support Cloud. Are there any areas of Google Cloud you’re interested in?” |
+| 11 | [**Anything else you're looking for**](#11-anything-else-youre-looking-for) | “Is there anything else you’d like me to know about what you’re looking for?” |
+| 12 | [**Questions for recruiter**](#12-questions-to-ask-the-recruiter) | “What questions do you have for me?” |
 | ★ | [**Quick cheat sheet**](#quick-cheat-sheet) | Fast reference during the call |
 
 ---
@@ -43,7 +44,29 @@ Long term, I want to grow into an AI product engineer with strong general softwa
 
 ---
 
-## 2. What’s your strongest coding language?
+## 2. What work are you most proud of?
+
+**Recruiter:**  
+“What project are you most proud of?”
+
+or
+
+“Tell me about something you’re proud of at work.”
+
+**You:**  
+“What I’m most proud of at work isn’t necessarily one specific project. Over time, our work has become much more full stack, so I’ve gotten to work across the frontend, APIs, backend services, and the data flowing through the system.
+
+I really enjoy that end-to-end part — understanding where the data comes from, how it moves through the system, and how it eventually gets presented to the user.
+
+I’d also say one of my strengths is taking something beyond the initial proof of concept and really focusing on the details — making sure the implementation is solid, edge cases are handled, and the overall flow makes sense.
+
+That’s where I feel like I get to apply a lot of the fundamentals I’ve been strengthening, and that’s probably the part of my work I’m most proud of.”
+
+[↑ Back to Quick Jump](#quick-jump)
+
+---
+
+## 3. What’s your strongest coding language?
 
 **Recruiter:**  
 “What’s your strongest programming language?”
@@ -57,7 +80,7 @@ I’ve also been using Python more for AI-related projects, but JavaScript is st
 
 ---
 
-## 3. Which domain fits you best?
+## 4. Which domain fits you best?
 
 **Recruiter:**  
 “Would you place yourself in general software engineering, embedded, front end, ML, or mobile?”
@@ -71,7 +94,7 @@ My current work leans full stack, but I’m interested in roles around backend, 
 
 ---
 
-## 4. What about mobile or embedded?
+## 5. What about mobile or embedded?
 
 **Recruiter:**  
 “Are you interested in mobile or embedded?”
@@ -85,7 +108,7 @@ Embedded is interesting, but I don’t have professional experience there, so ge
 
 ---
 
-## 5. What cloud experience do you have?
+## 6. What cloud experience do you have?
 
 **Recruiter:**  
 “Have you worked with any cloud providers or infrastructure?”
@@ -101,7 +124,7 @@ So I wouldn’t call myself a cloud specialist yet, but I already work around a 
 
 ---
 
-## 6. What kinds of roles are you interested in?
+## 7. What kinds of roles are you interested in?
 
 **Recruiter:**  
 “What types of roles are you looking for?”
@@ -115,7 +138,7 @@ I’m mainly looking for something that builds on my full-stack background and g
 
 ---
 
-## 7. Are you open to relocating?
+## 8. Are you open to relocating?
 
 **Recruiter:**  
 “What are your location preferences?”
@@ -127,7 +150,7 @@ I’m mainly looking for something that builds on my full-stack background and g
 
 ---
 
-## 8. When could you start?
+## 9. When could you start?
 
 **Recruiter:**  
 “When would you be available to start?”
@@ -139,7 +162,7 @@ I’m mainly looking for something that builds on my full-stack background and g
 
 ---
 
-## 9. What interests you about Google Cloud?
+## 10. What interests you about Google Cloud?
 
 **Recruiter:**  
 “I primarily support Cloud. Are there any areas of Google Cloud you’re interested in?”
@@ -153,7 +176,7 @@ Since I already work in a data-center environment, Cloud feels like a natural di
 
 ---
 
-## 10. Anything else you’re looking for?
+## 11. Anything else you’re looking for?
 
 **Recruiter:**  
 “Is there anything else you’d like me to know about what you’re looking for?”
@@ -165,7 +188,7 @@ Since I already work in a data-center environment, Cloud feels like a natural di
 
 ---
 
-## 11. Questions to ask the recruiter
+## 12. Questions to ask the recruiter
 
 You really only need one or two.
 
@@ -209,6 +232,15 @@ AI-assisted development at work
 → self-study  
 → DDIA  
 → orchestration / evaluation / MCP
+
+### Work I’m proud of
+
+Full-stack work  
+→ understand the end-to-end data flow  
+→ frontend / APIs / backend services  
+→ take work beyond the POC stage  
+→ focus on implementation details / edge cases / solid delivery  
+→ apply engineering fundamentals
 
 ### Strongest language
 
