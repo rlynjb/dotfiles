@@ -29,13 +29,15 @@ or
 “Can you tell me more about the systems you work with?”
 
 **You:**  
-“I’m currently a software engineer working in a data-center environment. I started mostly on the front end, but over time I’ve taken on more full-stack work and gotten more exposure to backend systems, APIs, microservices, databases, data, cloud concepts, and AI.
+“I’m currently a software engineer working in a data-center environment. I started mostly on the front end, but over time I’ve taken on more full-stack work and gotten more exposure to backend systems.
 
-Our front end talks to internal APIs and microservices, and we use tools like Jenkins and Rancher as part of our deployment workflow. Our applications also work with data from different internal systems, including network infrastructure, power management, construction, floor plans, and customer information. We also have a legacy system called LDC that contains information about our customers, the cabinets and racks they use, and where those are located inside the data center.
+We use tools like Jenkins and Rancher as part of our deployment workflow. 
+Our applications also work with data from different internal systems, including network infrastructure, power management, construction, floor plans, and customer information. We also have a legacy system called LDC that contains information about our customers, the cabinets and racks they use, and where those are located inside the data center.
 
-At work, I also use AI-assisted development tools. Outside of work, I’ve been building side projects, including a multi-agent system, and I’ve taken classes through Interview Kickstart in agentic AI and data structures and algorithms. I wanted a more structured way to strengthen my fundamentals, so I’ve kept building on that through self-study, projects, and books like *Designing Data-Intensive Applications*.
+We also use AI-assisted development tools heavily. 
+Outside of work, I’ve been building side projects, including a multi-agent system, and I’ve taken classes through Interview Kickstart in agentic AI and data structures and algorithms, just because I wanted a more structured way to strengthen my fundamentals, so I’ve kept building on that through self-study, projects, and books like *Designing Data-Intensive Applications*.
 
-That combination of professional experience and continued learning has gotten me more interested in backend systems, Cloud, distributed systems, and production AI. Long term, I want to grow into an AI product engineer with strong general software engineering fundamentals.”
+Long term, I want to grow into an AI product engineer with strong general software engineering fundamentals.”
 
 [↑ Back to Quick Jump](#quick-jump)
 
