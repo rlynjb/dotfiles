@@ -8,9 +8,13 @@ You are helping me understand code that a coding agent implemented.
 Your goal is not just to summarize the diff. Your goal is to teach me the mechanisms behind the implementation using:
 
 - Fundamentals of Data Engineering: data engineering lifecycle
-- Designing Data-Intensive Applications, 2nd Edition: reliable, scalable, maintainable data-system mechanisms
+- Designing Data-Intensive Applications (DDIA), 2nd Edition: reliable, scalable, maintainable data-system mechanisms
+- System Design Interview by Alex Xu: requirements, architecture, capacity, component choices, bottlenecks, and tradeoffs
+- Algorithmic Thinking by Daniel Zingaro, 2nd Edition: problem decomposition, pattern recognition, algorithm selection, correctness, and complexity
 
-Assume I am a developer trying to build vocabulary and intuition.
+Assume I am a developer trying to build vocabulary and intuition. Connect what the coding agent built to the underlying ideas from these four resources, without forcing an irrelevant concept into the explanation.
+
+Teach me to reason from problem -> requirements -> algorithm/data flow -> system design -> implemented code -> failure modes. Distinguish code-backed facts from proposed design alternatives.
 
 ## Inputs
 
@@ -192,7 +196,71 @@ For each:
 - Whether the implementation supports it well
 - Risk or missing mechanism
 
-## 7. Read Path And Write Path
+## 7. System Design View (Alex Xu)
+
+Explain the implementation as a small system-design case study, using Alex Xu's requirements-first and tradeoff-oriented approach.
+
+### Requirements And Constraints
+
+- What problem is the design solving, and for whom?
+- Which functional and nonfunctional requirements from Sections 5 and 6 drive the design?
+- What assumptions or constraints are visible in the code (existing infrastructure, APIs, scale, dependencies)?
+- What traffic, data volume, read/write ratio, latency, or availability targets are actually known? If not known, say "not specified" rather than inventing numbers.
+
+### Architecture And Design Decisions
+
+- Identify the main components and their responsibilities.
+- Show how requests and data move between components; connect to the Section 3 diagram.
+- Explain why the observed design may use a database, cache, index, queue, worker, API, or other building block.
+- Identify likely bottlenecks, single points of failure, and scaling limits only where supported by evidence.
+- Explain relevant alternatives (for example: synchronous vs asynchronous, cache vs direct query, SQL vs NoSQL, push vs pull) and why a team might choose each.
+
+For each significant decision, use:
+
+Design decision:
+Evidence in code:
+Requirement it addresses:
+Tradeoff (benefit and cost):
+When this design might stop working well:
+Alternative worth considering:
+What I would ask in a system-design interview or review:
+
+Finish with a concise high-level design walkthrough. Do not pretend this feature is a large distributed system if it is not.
+
+## 8. Algorithmic Thinking View (Daniel Zingaro)
+
+Explain the problem-solving logic behind the implementation, not just which functions were written.
+
+### Problem Decomposition And Pattern Recognition
+
+- State the computational problem in terms of inputs, outputs, constraints, and edge cases.
+- Break the implementation into smaller subproblems and explain their dependencies.
+- Identify the relevant data structures and why they fit the operations performed.
+- Look for recognizable patterns such as hash lookup, counting, grouping, sorting, two pointers, binary search, traversal, recursion, greedy choice, dynamic programming, or graph search **only when the code warrants them**.
+- If there is no notable textbook algorithm, explain the practical control-flow, lookup, or data-transformation pattern instead.
+
+### Correctness And Efficiency
+
+For each meaningful algorithm or transformation, provide:
+
+Problem being solved:
+Code location:
+Approach / pattern:
+Step-by-step reasoning or short pseudocode:
+Correctness argument / key invariant:
+Time complexity (define input size n and any other variables):
+Space complexity:
+Important edge cases:
+Potentially simpler or more efficient alternative:
+How to recognize this pattern next time:
+
+- Explain complexity in terms of actual operations; do not assume a database call or network request is O(1) in end-to-end latency.
+- Distinguish measured performance from theoretical complexity.
+- Point out tests that validate the invariant, boundary cases, or algorithmic assumptions.
+
+Finish with one transferable problem-solving heuristic I can reuse in future code reviews or DSA problems.
+
+## 9. Read Path And Write Path
 
 Explain the read path and write path separately.
 
@@ -221,7 +289,7 @@ Describe:
 - What happens when data is missing?
 - What does the caller receive?
 
-## 8. Failure And Concurrency Walkthrough
+## 10. Failure And Concurrency Walkthrough
 
 Teach me what can go wrong.
 
@@ -246,9 +314,9 @@ Mechanism that handles it:
 Missing mechanism, if any:
 Risk level:
 
-## 9. Concept Glossary
+## 11. Concept Glossary
 
-Create a glossary of the most important FODE and DDIA terms that appear in this implementation.
+Create a glossary of the most important FODE, DDIA, system-design, and algorithmic-thinking terms that appear in this implementation.
 
 For each term:
 
@@ -256,11 +324,11 @@ For each term:
 - Plain-English meaning
 - Where it appears in this implementation
 - Why it matters
-- Related DDIA/FODE topic
+- Related DDIA / FODE / Alex Xu / Zingaro topic
 
-Prefer terms that help me think like a data-systems engineer.
+Prefer terms that help me think like a software engineer who can reason about algorithms, system design, and data systems.
 
-## 10. Learning Summary
+## 12. Learning Summary
 
 Finish with:
 
@@ -270,7 +338,10 @@ Finish with:
 4. The weakest or least-proven guarantee
 5. The FODE lifecycle stages this touched
 6. The DDIA concepts I should study next
-7. Three questions I should ask in code review
+7. The Alex Xu system-design decision or tradeoff I should remember
+8. The Zingaro algorithmic pattern, invariant, or complexity lesson I should remember
+9. Three questions I should ask in code review (covering design, correctness, and failure modes)
+10. One small hands-on exercise to reinforce the most relevant concept
 
 Keep the tone educational, precise, and developer-friendly.
 ```
