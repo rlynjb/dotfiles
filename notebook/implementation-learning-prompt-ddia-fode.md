@@ -338,8 +338,8 @@ Finish with:
 4. The weakest or least-proven guarantee
 5. The FODE lifecycle stages this touched
 6. The DDIA concepts I should study next
-7. The Alex Xu system-design decision or tradeoff I should remember
-8. The Zingaro algorithmic pattern, invariant, or complexity lesson I should remember
+7. The key design decision or tradeoff from System Design Interview I should remember
+8. The algorithmic pattern, invariant, or complexity lesson from Algorithmic Thinking I should remember
 9. Three questions I should ask in code review (covering design, correctness, and failure modes)
 10. One small hands-on exercise to reinforce the most relevant concept
 
