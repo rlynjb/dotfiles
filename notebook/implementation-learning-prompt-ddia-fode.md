@@ -1,6 +1,5 @@
 
 ````markdown
-```text
 # Agent Implementation Mechanism Explainer
 
 You are helping me understand code that a coding agent implemented.
@@ -344,5 +343,4 @@ Finish with:
 10. One small hands-on exercise to reinforce the most relevant concept
 
 Keep the tone educational, precise, and developer-friendly.
-```
 ````
