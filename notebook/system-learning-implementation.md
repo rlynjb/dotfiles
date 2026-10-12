@@ -1,5 +1,34 @@
+# System Learning Implementation Prompt Library
 
-````markdown
+Quick-reference for understanding a specific implementation with an AI coding agent. Use the diff, changed files, tests, and surrounding code to learn how the change works and how it fits into the system.
+
+The prompts connect relevant evidence to **DDIA (2nd edition)**, **Fundamentals of Data Engineering (FODE)**, **System Design Interview** by Alex Xu, and **Algorithmic Thinking (2nd edition)** by Daniel Zingaro.
+
+Use the **master** for the full explanation, **compact** for a first pass, and a **focused prompt** when you want to understand one part more deeply. For whole-repo onboarding, use [System Learning Repo](system-learning-repo.md).
+
+---
+
+## Index
+
+| # | Prompt | What it does | Reach for it when |
+| --- | --- | --- | --- |
+| 0 | [**Master**](#0-master-implementation-learning-prompt) | Full explanation using all four book lenses | You want a thorough understanding of a change |
+| ★ | [**Compact**](#compact-implementation-learning-prompt) | Short overview of behavior, flow, mechanisms, and trade-offs | First pass or a small change |
+| 1 | [**Trace one flow**](#1-trace-one-execution-and-data-flow) | Connects a concrete input to calls, state changes, and output | You understand individual functions but not how they fit together |
+| 2 | [**Mechanism deep dive**](#2-understand-one-mechanism) | Explains one mechanism, guarantee, or algorithm step by step | A concept or code path still feels unclear |
+| 3 | [**Design decisions**](#3-understand-design-decisions-and-trade-offs) | Relates the design to requirements, constraints, and alternatives | You understand what was built and want to understand the choices |
+| 4 | [**Failure walkthrough**](#4-walk-through-failure-and-concurrency) | Follows a concrete failure or concurrent execution | You want to understand correctness and recovery |
+| 5 | [**Teach-back**](#5-teach-back-self-test) | Tests understanding one open-ended question at a time | After an explanation, to check what you can explain yourself |
+
+---
+
+## 0. Master implementation learning prompt
+
+**What it does:** Explains the implementation through behavior, data lifecycle, mechanisms, requirements, system design, algorithms, read/write paths, failures, vocabulary, and a learning summary.
+
+**How to use:** Run it with access to the relevant request or ticket, diff, changed files, tests, and surrounding code. The original prompt below is preserved unchanged; the other prompts are optional companions.
+
+```text
 # Agent Implementation Mechanism Explainer
 
 You are helping me understand code that a coding agent implemented.
@@ -343,4 +372,176 @@ Finish with:
 10. One small hands-on exercise to reinforce the most relevant concept
 
 Keep the tone educational, precise, and developer-friendly.
-````
+```
+
+---
+
+## Compact implementation learning prompt
+
+**What it does:** Gives a short first pass before deciding which area deserves a deeper explanation.
+
+```text
+Help me understand this implementation as a junior developer. Inspect the
+request, diff, changed files, relevant tests, and surrounding code available to you.
+
+Explain concisely:
+1. What behavior changed and what problem it solves.
+2. The important files and their responsibilities.
+3. One representative execution/data flow, from input to output.
+4. The main mechanism or algorithm and why it works.
+5. One important guarantee, its limits, and a relevant failure scenario.
+6. One design trade-off and the constraints that make it matter.
+7. Which concepts from DDIA (2nd edition), FODE, System Design Interview
+   (Alex Xu), and Algorithmic Thinking (2nd edition, Daniel Zingaro) are relevant.
+
+Cite files and symbols. Separate observed behavior, inferred rationale, and
+unknowns. Define unfamiliar terms, skip irrelevant book concepts, and do not
+invent scale targets or guarantees. Explain the existing implementation without
+making code changes.
+
+End with three files to read next, each with a question it answers, and one
+small read-only exercise.
+```
+
+---
+
+## 1. Trace one execution and data flow
+
+**What it does:** Makes the connections between components concrete by following one real input through the implementation.
+
+```text
+Teach me how one representative flow in this implementation works end to end.
+Inspect the changed code and the existing code paths it depends on. Choose a
+flow relevant to the change, or use the flow I specify.
+
+Start with a small concrete input. Trace:
+- The entry point and important calls, citing files and symbols.
+- Validation, authorization, and component boundaries where present.
+- How data changes shape and where state is read or written.
+- Synchronous/asynchronous boundaries and downstream effects where present.
+- The final output and one relevant error path.
+
+Use a concise Mermaid diagram where it helps, followed by the step-by-step
+walkthrough. Distinguish changed behavior from existing behavior.
+
+Connect the flow to FODE's lifecycle and DDIA's source-of-truth/derived-state
+concepts only where relevant. Explain terms plainly, separate code evidence from
+inference, and identify any step that cannot be verified.
+
+Keep this read-only. End by asking me to predict the output or state change for
+one nearby input; wait for my answer before explaining it.
+```
+
+---
+
+## 2. Understand one mechanism
+
+**What it does:** Turns an unfamiliar mechanism or algorithm into a concrete example you can reason about.
+
+```text
+Help me understand one mechanism in this implementation:
+[mechanism, algorithm, function, or concept; if omitted, choose a central one].
+
+Inspect its code, callers, and relevant tests. Explain:
+1. The problem it solves, its inputs/outputs, and why it is needed here.
+2. A plain-English mental model, followed by a tiny concrete example.
+3. The execution steps and state changes, with file/symbol citations.
+4. The key invariant or guarantee, how the code supports it, and its limits.
+5. A relevant edge case or failure and the actual handling.
+6. A simpler alternative and the conditions under which it would fit.
+
+Connect it to the relevant lens: DDIA, FODE, System Design Interview (Alex Xu),
+or Algorithmic Thinking (2nd edition, Daniel Zingaro). Do not force all four into
+the explanation.
+
+For algorithms, define input sizes and assumptions before analyzing time/space
+complexity. Separate in-memory cost from database/network behavior. For other
+mechanisms, explain the operational costs that are actually supported by evidence.
+
+Separate facts from inference. Keep this read-only and finish with one
+recognition rule I can reuse when I encounter a similar problem.
+```
+
+---
+
+## 3. Understand design decisions and trade-offs
+
+**What it does:** Explains how requirements and constraints relate to the observed design without inventing the team's rationale.
+
+```text
+Teach me the important design decisions in this implementation. Inspect the
+request, code, tests, configuration, and design documentation available to you.
+
+Choose up to three decisions. For each, explain:
+- The observed design and its code evidence.
+- The requirement or constraint it appears to address.
+- The benefit, cost, and assumptions.
+- A plausible alternative and when it would be appropriate.
+- What evidence would help determine whether the current choice is working.
+
+Use System Design Interview (Alex Xu) for requirements and component trade-offs,
+DDIA for data guarantees, FODE for lifecycle/operational concerns, and Algorithmic
+Thinking for computational choices only when relevant.
+
+Distinguish documented intent from your inferred explanation. Say "not specified"
+for unknown workloads or targets. Do not assert a bottleneck without evidence;
+label hypothetical scenarios and estimates.
+
+Explain the existing implementation without changing or redesigning it.
+End with three questions I could ask the author to resolve important unknowns.
+```
+
+---
+
+## 4. Walk through failure and concurrency
+
+**What it does:** Shows what happens when execution is interrupted, repeated, or interleaved with another operation.
+
+```text
+Help me understand failure and concurrency in this implementation. Inspect the
+relevant code, dependencies, and tests before selecting scenarios.
+
+Choose up to three applicable scenarios, such as invalid input, a timeout,
+a retry, duplicate processing, concurrent updates, stale state, or partial failure.
+Do not assume queues, caches, transactions, or distributed components exist.
+
+For each scenario:
+1. State the starting state and triggering event.
+2. Walk through the calls and state changes in order, citing files/symbols.
+3. Explain the visible result and any lasting side effects.
+4. Identify the mechanism that prevents, detects, or recovers from the problem.
+5. Explain the guarantee's limits and what remains unknown.
+6. Point to relevant tests and distinguish tested behavior from assumptions.
+
+Connect relevant correctness/recovery concepts to DDIA, lifecycle effects to
+FODE, component boundaries to System Design Interview, and invariants to
+Algorithmic Thinking. Explain only the lenses that help this scenario.
+
+Keep this read-only. Finish with one investigation path: the files, logs, or
+state I would inspect first to distinguish the most plausible causes.
+```
+
+---
+
+## 5. Teach-back self-test
+
+**What it does:** Checks whether you can explain the implementation yourself and identifies the next area to revisit.
+
+```text
+Interview me about this implementation one open-ended question at a time.
+
+Use the inspected code and tests to ground your questions. Start with the
+problem and behavior, then move through execution/data flow, mechanisms,
+design trade-offs, correctness, and relevant algorithms.
+
+Wait for my answer before giving feedback. If my answer is incomplete, ask a
+targeted follow-up or give a small hint before explaining the missing part.
+Cite the relevant file and symbol in your feedback.
+
+Connect explanations to DDIA, FODE, System Design Interview (Alex Xu), or
+Algorithmic Thinking (2nd edition, Daniel Zingaro) where relevant. Do not ask
+about infrastructure or algorithms absent from this implementation.
+
+After five questions, summarize what I can explain, what needs another pass,
+and the next file or flow to revisit. Keep this read-only.
+```
