@@ -21,9 +21,11 @@
 
 ## 1. Tell me about yourself and your background.
 
-I'm a software engineer with over eight years of experience at Switch, where I've mainly worked on front-end applications for enterprise customers. Over time, I've taken on more responsibility in application architecture, working with backend teams, and understanding systems beyond the UI.
+I'm a software engineer with over eight years of experience at Switch, a data-center company. I started primarily in front-end development, building enterprise applications, but over time I've been taking on more full-stack work.
 
-More recently, I've been expanding into full-stack development through my work on our Facility Management application and through personal projects. I've also been exploring AI engineering in my own time, especially how to build applications around AI agents and tools.
+Right now, I'm working on LDC Evo, where we're modernizing our legacy applications. Along with building the UI, I've been getting more involved with APIs and backend services, understanding where the data comes from and how it flows through the system. We also use AI-assisted development tools in our day-to-day engineering work.
+
+Outside of work, I've been exploring AI through self-study and personal projects like Buffr and LoomiConnect. I'm looking to keep growing as a full-stack engineer while building more experience with data and AI-powered products.
 
 [↑ Back to Quick Jump](#quick-jump)
 
