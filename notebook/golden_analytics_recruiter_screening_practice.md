@@ -43,9 +43,11 @@ I've been at Switch since 2017 and was part of the original team that built some
 
 ## 3. Why are you interested in Golden Analytics?
 
-What interests me is the combination of full-stack product development and AI. I've spent most of my career building enterprise applications, and I want to keep growing into work where I can contribute across more of the stack.
+Lately I've become more interested in how data flows through a system, especially in AI applications.
 
-The small engineering team also appeals to me because I'd have the chance to take ownership, learn quickly, and work closely with other engineers. I'm particularly interested in how the team uses AI tools in its development process.
+During the LoomiConnect hackathon, I worked on a multi-agent application that used real analytics data. It was interesting to see how the data moved through stages—monitoring, investigating, and recommending—until the system could produce a useful recommendation.
+
+That's what caught my attention about Golden Analytics. I like the idea of building a product that connects to different data sources and helps people turn that data into insights. It's the kind of work I'd like to gain more experience in, while continuing to grow as a full-stack engineer.
 
 [↑ Back to Quick Jump](#quick-jump)
 
