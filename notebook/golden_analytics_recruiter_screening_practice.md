@@ -11,9 +11,11 @@ More recently, I've been expanding into full-stack development through my work o
 
 ## 2. What are you currently working on at Switch?
 
-I'm currently working on modernizing our legacy Facility Management application. We're transitioning functionality from the existing system into a newer application.
+I'm currently working across both newer and legacy applications at Switch. One of our main initiatives is LDC Evo, a monorepo that modernizes functionality from older applications like LDC 1.0 and Customer Portal. I'm developing features for Facility Management, one of the applications within LDC Evo. That's also where I've been expanding my understanding of backend services and how data flows through the system end to end.
 
-I'm involved in developing features and working with the team to understand how the front end connects to APIs, backend services, and the data sources behind them. It's been a good opportunity to broaden my understanding of the application end to end, rather than focusing only on the UI.
+I also maintain existing applications, including Customer Portal and Security Audit Access, which our security team uses for quarterly badge access audits.
+
+I've been at Switch since 2017 and was part of the original team that built some of these older applications. Because of that, I have a lot of historical context about how they work and why certain decisions were made. Newer developers and other teammates often come to me when they need help understanding those systems.
 
 ## 3. Why are you interested in Golden Analytics?
 
