@@ -10,11 +10,10 @@
 | 1 | [**Background**](#1-tell-me-about-yourself-and-your-background) | “Tell me about yourself and your background.” |
 | 2 | [**Current work at Switch**](#2-what-are-you-currently-working-on-at-switch) | “What are you currently working on at Switch?” |
 | 3 | [**Interest in Golden Analytics**](#3-why-are-you-interested-in-golden-analytics) | “Why are you interested in Golden Analytics?” |
-| 4 | [**Full-stack and AI career direction**](#4-what-interests-you-about-moving-into-full-stack-and-ai-engineering) | “What interests you about moving into full-stack and AI engineering?” |
-| 5 | [**AI / LLM experience**](#5-have-you-worked-with-ai-or-llms-professionally) | “Have you worked with AI or LLMs professionally?” |
-| 6 | [**Coding vs. collaboration**](#6-how-much-of-your-day-to-day-work-is-coding-versus-collaboration-and-planning) | “How much of your day-to-day work is coding versus collaboration and planning?” |
-| 7 | [**Startup and Bellevue office**](#7-are-you-comfortable-with-a-small-startup-and-four-days-a-week-in-bellevue) | “Are you comfortable with a small startup and four days a week in Bellevue?” |
-| 8 | [**Salary expectations**](#8-what-are-your-salary-expectations) | “What are your salary expectations?” |
+| 4 | [**AI / LLM experience**](#4-have-you-worked-with-ai-or-llms-professionally) | “Have you worked with AI or LLMs professionally?” |
+| 5 | [**Coding vs. collaboration**](#5-how-much-of-your-day-to-day-work-is-coding-versus-collaboration-and-planning) | “How much of your day-to-day work is coding versus collaboration and planning?” |
+| 6 | [**Startup and Bellevue office**](#6-are-you-comfortable-with-a-small-startup-and-four-days-a-week-in-bellevue) | “Are you comfortable with a small startup and four days a week in Bellevue?” |
+| 7 | [**Salary expectations**](#7-what-are-your-salary-expectations) | “What are your salary expectations?” |
 | ★ | [**Quick reminders**](#quick-reminders-for-the-call) | Fast reference before the call |
 
 ---
@@ -25,7 +24,7 @@ I'm a software engineer with over eight years of experience at Switch, a data-ce
 
 Right now, I'm working on LDC Evo, where we're modernizing our legacy applications. Along with building the UI, I've been getting more involved with APIs and backend services, understanding where the data comes from and how it flows through the system. We also use AI-assisted development tools in our day-to-day engineering work.
 
-Outside of work, I've been exploring AI through self-study and personal projects like Buffr and LoomiConnect. I'm looking to keep growing as a full-stack engineer while building more experience with data and AI-powered products.
+Outside of work, I've been strengthening my software engineering fundamentals through books and self-study, while exploring AI through projects like Buffr and LoomiConnect. I'd like to keep growing as a full-stack engineer and build more experience with data and AI-powered products.
 
 [↑ Back to Quick Jump](#quick-jump)
 
@@ -55,17 +54,7 @@ That's what caught my attention about Golden Analytics. I like the idea of build
 
 ---
 
-## 4. What interests you about moving into full-stack and AI engineering?
-
-After working primarily on the front end for years, I've become more curious about what happens beyond the UI—how services work, how data moves through a system, and how everything fits together.
-
-That led me to explore backend development and then AI through self-study and projects like Buffr. I'm not trying to switch careers overnight; I'm building on my software engineering background and gradually expanding what I can design and build.
-
-[↑ Back to Quick Jump](#quick-jump)
-
----
-
-## 5. Have you worked with AI or LLMs professionally?
+## 4. Have you worked with AI or LLMs professionally?
 
 Not in my professional role so far. My AI experience has mainly come from self-study, personal projects, and a hackathon.
 
@@ -75,7 +64,7 @@ For example, I've been building Buffr, a project where I broke a research-and-re
 
 ---
 
-## 6. How much of your day-to-day work is coding versus collaboration and planning?
+## 5. How much of your day-to-day work is coding versus collaboration and planning?
 
 My current role involves more than writing code. A lot of my time goes into understanding requirements, collaborating with engineers and stakeholders, discussing technical approaches, reviewing work, and coordinating how features fit together.
 
@@ -87,7 +76,7 @@ The balance varies depending on the project and phase. I still stay close to imp
 
 ---
 
-## 7. Are you comfortable with a small startup and four days a week in Bellevue?
+## 6. Are you comfortable with a small startup and four days a week in Bellevue?
 
 I'm based in Seattle, so the Bellevue location is in the area I'm considering. I'm interested in a smaller team because I like the idea of having more ownership and understanding how different parts of a product fit together.
 
@@ -99,7 +88,7 @@ I understand the role is in office four days a week, and I'd be interested in le
 
 ---
 
-## 8. What are your salary expectations?
+## 7. What are your salary expectations?
 
 I saw the posted base salary range of **$150,000 to $250,000**, plus equity. I'm interested in understanding the level, responsibilities, and overall compensation package before settling on a specific number. I'm open to discussing a competitive offer within the posted range.
 
