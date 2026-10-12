@@ -85,11 +85,11 @@ The balance varies depending on the project and phase. I still stay close to imp
 
 ## 7. Are you comfortable with a small startup and four days a week in Bellevue?
 
-I'm based in Seattle, so the Bellevue location is in the area I'm considering. I'm interested in a smaller team because I like the idea of having more ownership and understanding how different parts of a product fit together.
+Yes, I'm comfortable working four days a week in Bellevue.
 
-I understand the role is in office four days a week, and I'd be interested in learning more about the team's working style and expectations.
+I also have experience working at a startup. The first company I worked for was Galavantier, a travel company in Las Vegas. We built a website selling experiences, tours, and nightlife and daylife packages around Vegas.
 
-**Review note:** Add a direct **yes** only if you're genuinely comfortable with the four-day in-office schedule. If not, say what arrangement you could commit to rather than implying agreement.
+So a startup environment isn't completely new to me. I'm comfortable being part of a smaller team where you have to be flexible and take ownership.
 
 [↑ Back to Quick Jump](#quick-jump)
 
