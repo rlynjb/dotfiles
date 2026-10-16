@@ -134,8 +134,16 @@ Label:
 - read paths
 - write paths
 - sync vs async boundaries
+- contract/module seams, field-level transformations, and their owning functions
+- source-of-truth versus derived data where relevant
 
-After the diagram, explain the flow step by step.
+After the diagram, explain the flow step by step. For one representative field,
+trace its value across the relevant boundaries from origin to consumer: show
+where it is validated, renamed, mapped, combined, or modified, with file/symbol
+evidence. Distinguish joins or other read-time composition from persistently
+stored derived/denormalized copies; for stored copies, explain the observable
+sync or refresh mechanism (or say if it is unknown). Do not assume either
+approach is present unless the code supports it.
 
 ## 4. DDIA Mechanism Explanation
 
@@ -418,6 +426,12 @@ Start with a small concrete input. Trace:
 - The entry point and important calls, citing files and symbols.
 - Validation, authorization, and component boundaries where present.
 - How data changes shape and where state is read or written.
+- For one representative field: its source, consumers, contract/module seams,
+  and exact validation, renaming, mapping, or transformation points; cite the
+  functions responsible.
+- Whether related data is assembled at read time or stored redundantly. If a
+  derived copy exists, identify the source of truth and how updates propagate
+  (or mark the synchronization behavior unknown).
 - Synchronous/asynchronous boundaries and downstream effects where present.
 - The final output and one relevant error path.
 
