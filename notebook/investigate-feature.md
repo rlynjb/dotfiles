@@ -17,7 +17,24 @@ This is an investigation of **feature provenance and prerequisites**, not a code
 | 1 | [Find the source of an asset](#1-find-the-source-of-an-asset) | You cannot tell whether a graphic, map, file, or model is generated, fetched, or supplied |
 | 2 | [Reconstruct the original setup](#2-reconstruct-the-original-setup) | You want to know what previous developers likely had to obtain or configure |
 | 3 | [Compare an existing feature with a new instance](#3-compare-an-existing-feature-with-a-new-instance) | You are adding another facility, tenant, customer, integration, or similar resource |
+| — | [Five book lenses](#five-book-lenses-for-feature-investigation) | Use your five reading lenses to explain evidence without turning this into a code review |
 | — | [How this differs from existing prompts](#how-this-differs-from-existing-prompts) | You need to choose the correct prompt for the task |
+
+---
+
+## Five book lenses for feature investigation
+
+Apply the same five lenses as [Master Code Review](code-review-master.md), but **use them to learn how an existing feature came to be**, not to score code quality or recommend refactors. **Investigate the actual feature and its resource origins first; only then apply lenses where evidence supports them.**
+
+| Lens | Full book title | What to investigate in an existing feature |
+| --- | --- | --- |
+| **APOSD** | *A Philosophy of Software Design* | Which module owns the feature? Where are details about asset preparation, configuration, and external resources hidden behind interfaces? What knowledge must a developer possess to add another instance? |
+| **AT** | *Algorithmic Thinking* | Does code create or transform geometry, coordinates, SVG paths, layers, or spatial mappings? Which algorithms and data structures are involved, and what inputs do they require? If the floor plan is supplied unchanged, don't invent an algorithm. |
+| **DDIA** | *Designing Data-Intensive Applications* | Which system or asset is authoritative? How are IDs, versions, mappings, updates, caches, and stored state kept correct? What happens when the asset and its metadata disagree or a dependency fails? |
+| **FODE** | *Fundamentals of Data Engineering* | What is the upstream source of the data or asset? How is it acquired, exported, converted, validated, stored, and delivered? What are its lineage, owner, and operational handoffs? |
+| **SDI** | *System Design Interview* | Which components, teams, APIs, storage services, or third-party systems participate? Where are the integration boundaries and setup dependencies? Which requirements or constraints might explain this arrangement? |
+
+**Lens policy:** Define abbreviations on first use. Cite the repo or historical evidence for each meaningful observation. Distinguish historical fact from your own engineering interpretation. Mark a lens **not applicable** with a short reason when the feature doesn't engage it. Synthesize overlapping observations rather than producing five repetitive summaries. In particular, FODE traces *where a resource comes from*; DDIA examines *what guarantees keep it correct*; SDI shows *how components and external systems fit together*; AT explains *relevant computation*; APOSD examines *responsibility and hidden complexity*.
 
 ---
 
@@ -267,25 +284,62 @@ If another facility, customer, or similar instance is the goal:
 Do not propose rewriting the feature when reproducing the established
 workflow would suffice.
 
-## 8. Explain the choices and relevant learning concepts
+## 8. Understand the feature through the five book lenses
 
-Explain why the observed arrangement may make sense, separating
-verified rationale from engineering interpretation.
+After establishing the runtime flow, upstream provenance, external
+prerequisites, and historical evidence, explain the observed feature
+using these five lenses from my Master Code-Review Prompt Library.
 
-Use relevant lenses only if they help explain this feature:
-- FODE — source systems, data/asset lifecycle, lineage, quality,
-  transformations, ownership, and operational handoffs.
-- DDIA — source of truth, data contracts, consistency, correctness,
-  versions, and failure behavior.
-- System Design Interview — system boundaries, integration choices,
-  responsibilities, and trade-offs.
-- Algorithmic Thinking — geometry, parsing, mapping, rendering,
-  data structures, or complexity where actually relevant.
-- A Philosophy of Software Design — module responsibilities,
-  interfaces, and where setup complexity is hidden.
+This is for UNDERSTANDING AND RECONSTRUCTION, not auditing code quality.
+For each applicable lens: give a concrete observation, the supporting
+file/symbol/commit/asset or other evidence, why it matters for
+reproducing the feature, and any unresolved question.
 
-Do not force every book into every investigation. This is an
-investigation and learning aid, not a five-part code review.
+- APOSD — A Philosophy of Software Design:
+  Identify the module or interface that owns the feature and where
+  asset-specific or integration-specific complexity is encapsulated.
+  What must a developer know beyond simply calling the component?
+  What are the boundaries between reusable code and per-instance setup?
+
+- AT — Algorithmic Thinking:
+  If code actually builds or transforms the feature, trace the relevant
+  parsing, geometric calculations, coordinate mapping, SVG/canvas
+  rendering, data structures, and input assumptions. Explain why the
+  computation works using a concrete example. If an SVG or other
+  supplied asset is rendered without a relevant algorithm, mark this
+  lens not applicable instead of fabricating one.
+
+- DDIA — Designing Data-Intensive Applications:
+  Determine the source of truth and any persisted identifiers, asset
+  versions, database mappings, caches, consistency assumptions, or
+  failure/recovery behavior. If an SVG changes independently of room
+  metadata, what currently keeps them aligned? Distinguish guarantees
+  observed in the repo from potential risks.
+
+- FODE — Fundamentals of Data Engineering:
+  Trace the asset/data lifecycle from the ORIGINAL source, person,
+  application, or vendor through export, conversion, ingestion,
+  validation, storage, updates, and final consumption. Identify
+  lineage, required quality checks, ownership, and manual handoffs.
+  Make inaccessible upstream steps explicit.
+
+- SDI — System Design Interview:
+  Map feature requirements, system boundaries, API/storage/service
+  responsibilities, external design or authoring dependencies, and
+  operational constraints. Explain which observed design choices
+  support reuse across facilities or other instances.
+
+For each lens state: APPLICABLE or NOT APPLICABLE (and why).
+Cite evidence for findings. Separate verified original rationale from
+your interpretation of possible trade-offs. If multiple lenses lead
+to the same insight, synthesize it once rather than repeating it.
+
+End with a short cross-lens synthesis:
+- What do the five perspectives collectively clarify about how
+  the feature was originally assembled and currently operates?
+- Which essential dependencies are outside the codebase?
+- What is the next best evidence-based question before adding a new
+  instance of the feature?
 
 ## 9. Determine what is needed to reproduce the feature
 
@@ -333,10 +387,14 @@ Return this structure, in order:
    implementation, and what cannot be recovered.
 8. **Reusable vs instance-specific**: Relevant differences and
    contracts for building another instance.
-9. **Unknowns and discriminating checks**: Prioritized by impact.
-10. **Reproduction readiness**: Already available / must obtain /
+9. **Five-book lens synthesis**: Brief evidence-backed APOSD, AT, DDIA,
+   FODE, and SDI observations; mark inapplicable lenses explicitly.
+   Emphasize what each reveals about inputs, architecture, origin,
+   correctness, or prerequisites rather than code-review findings.
+10. **Unknowns and discriminating checks**: Prioritized by impact.
+11. **Reproduction readiness**: Already available / must obtain /
     must verify / people to ask / classification A-D.
-11. **Recommended investigation path**: Up to five concrete searches,
+12. **Recommended investigation path**: Up to five concrete searches,
     files, historical records, or non-destructive checks to perform next.
 
 Keep the narrative concise and specific. Prioritize finding the true
@@ -367,12 +425,18 @@ Work read-only. Start from one working example and trace:
    access, configuration, or team handoff needed before code can use it.
 6. What is reusable and what must change for another instance.
 7. What is known, inferred, possible, and still unknown.
+8. Where the five book lenses help explain the evidence:
+   APOSD (module ownership), AT (any real computation), DDIA (source
+   of truth and guarantees), FODE (asset/data lineage), and SDI
+   (system boundaries and external dependencies). Mark irrelevant
+   lenses not applicable rather than forcing them.
 
 Give me:
 - One-sentence answer to "where does it come from?"
 - Runtime path: input -> source -> transformation -> UI
 - Upstream path: original source/tool -> asset/data -> app
 - Required inputs and external dependencies
+- Compact evidence-backed five-lens synthesis, only where relevant
 - Evidence with exact file/symbol/commit references
 - Up to five specific next checks or questions
 - Readiness: reuse as-is / obtain external resource / code changes /
@@ -482,6 +546,9 @@ Return:
 7. Classification: reuse / new asset or data / code change / unknown.
 
 Do not implement yet. Treat hypotheses as hypotheses.
+Use APOSD, AT, DDIA, FODE, and SDI as optional learning lenses;
+briefly explain only those that materially clarify the existing
+workflow, its contracts, or reproduction prerequisites.
 ~~~
 
 ---
@@ -502,6 +569,8 @@ A useful answer must distinguish possibilities such as:
 | Export from external design tool | Exported asset plus evidence in docs, scripts, or ticket | Source design file or approved export and import process |
 
 **Important:** These are investigation branches, **not claims** about how any particular floor plan was implemented. An SVG file alone does not establish whether it came from Figma, Illustrator, CAD software, a manual editor, or a generator.
+
+For this example, **FODE** would examine where the floor plan originates and how it is exported or imported; **DDIA** would examine which version and room mappings are authoritative; **SDI** would map the UI, asset storage, API, and any upstream provider; **AT** would explain coordinate or geometry processing *if present*; and **APOSD** would explain which interfaces separate the reusable viewer from facility-specific setup. Those are questions to investigate, not assumptions about the implementation.
 
 ---
 
