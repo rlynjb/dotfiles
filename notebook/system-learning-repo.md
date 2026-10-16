@@ -127,6 +127,15 @@ Stage 2 — Connect execution, data, and algorithms
      pipeline run, configuration load, or build/install process.
    - For each flow, trace the entry point, important calls, boundaries, data/state
      changes, output, and error path. Cite actual files and symbols at each step.
+   - Follow one representative data field across relevant interfaces and seams
+     (such as an API contract, adapter, shared package, or module boundary).
+     Show its source, producers/consumers, and where it is validated, renamed,
+     mapped, combined, or otherwise transformed; identify the responsible
+     function and whether the original value is preserved or replaced.
+   - Distinguish data assembled on read (for example, with a join) from stored
+     derived or denormalized data. Where stored copies exist, identify the source
+     of truth and the observed refresh/synchronization path, or mark it unknown.
+     Do not presume every flow uses a database or needs data duplication.
    - Walk through a small concrete input and resulting output without exposing
      private data. Explain how a developer would locate and observe each step.
    - List major areas these examples do not cover and where to explore them next.
