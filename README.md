@@ -87,6 +87,7 @@ Prefix is `Option+A`. `reincodes` handles start-or-attach for the day-to-day wor
 | Panes | Display pane numbers and select a pane | `prefix q`, then press its number |
 | Panes | Swap current pane with previous pane | `prefix {` (`Shift+[`) |
 | Panes | Swap current pane with next pane | `prefix }` (`Shift+]`) |
+| Panes | Swap two panes by number (source and target) | `prefix :swap-pane -s :1 -t :2` |
 | Panes | Rotate panes clockwise | `prefix Ctrl+o` |
 | Panes | Rotate panes counter-clockwise | `prefix Alt+o` |
 | Windows | New window (keep cwd) | `prefix t` |
