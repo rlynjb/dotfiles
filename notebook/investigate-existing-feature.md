@@ -4,7 +4,7 @@ A reusable, **read-only feature investigation** prompt for an AI coding agent. U
 
 **Core question:** What would I need to find, obtain, configure, or reproduce to build another instance of this existing feature?
 
-This is an investigation of **feature provenance and prerequisites**, not a code review, a feature design spec, or an implementation request. It complements [Ticket Investigation](investigate-ticket.md), [System Learning Implementation](system-learning-implementation.md), and [System Learning Repo](system-learning-repo.md).
+This is an investigation of **feature provenance and prerequisites**, not a code review, a feature design spec, or an implementation request. For deeper explanations of a specific implementation, see [System Learning Implementation](system-learning-implementation.md); for whole-repository context, see [System Learning Repo](system-learning-repo.md).
 
 ---
 
@@ -578,14 +578,12 @@ For this example, **FODE** would examine where the floor plan originates and how
 
 | Prompt | Main question |
 | --- | --- |
-| [Ticket Investigation](investigate-ticket.md) | What work does the ticket ask for and is it ready? |
 | **Existing Feature Investigation** (this file) | Where did this existing feature and its required resources come from, and what would it take to reproduce it? |
+| [New Feature Discovery](investigate-new-feature.md) | What do users need from a new feature, and what requirements and options should we explore? |
 | [System Learning Implementation](system-learning-implementation.md) | How does the implementation execute, and why do its mechanisms work? |
 | [System Learning Repo](system-learning-repo.md) | How is the whole codebase organized? |
-| [Reusable Design-Spec](reusable-design-spec-prompt.md) | What should a proposed change look like? |
-| [Reusable Implementation Plan](reusable-implementation-plan-prompt.md) | What steps should implement an agreed design? |
 | [Master Code Review](code-review-master.md) | Is a specific implementation or change correct and maintainable? |
 
-**Suggested order for a new feature based on an old one:** Investigate the ticket (if there is one) -> investigate the existing feature and its provenance -> understand a tricky mechanism (if needed) -> write a design spec -> write an implementation plan -> implement and review.
+**Suggested order for a new feature based on an old one:** Clarify the request or ticket (if there is one) -> investigate the existing feature and its provenance -> understand a tricky mechanism (if needed) -> confirm requirements -> design the change -> plan implementation -> implement and review.
 
 Do not automatically run all prompts for every task. Use the shortest investigation that resolves the actual uncertainty.
