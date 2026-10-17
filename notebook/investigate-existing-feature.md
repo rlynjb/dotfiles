@@ -24,7 +24,7 @@ This is an investigation of **feature provenance and prerequisites**, not a code
 
 ## Five book lenses for feature investigation
 
-Apply the same five lenses as [Master Code Review](code-review-master.md), but **use them to learn how an existing feature came to be**, not to score code quality or recommend refactors. **Investigate the actual feature and its resource origins first; only then apply lenses where evidence supports them.**
+Apply the same five lenses as [Code Review](code-review.md), but **use them to learn how an existing feature came to be**, not to score code quality or recommend refactors. **Investigate the actual feature and its resource origins first; only then apply lenses where evidence supports them.**
 
 | Lens | Full book title | What to investigate in an existing feature |
 | --- | --- | --- |
@@ -288,7 +288,7 @@ workflow would suffice.
 
 After establishing the runtime flow, upstream provenance, external
 prerequisites, and historical evidence, explain the observed feature
-using these five lenses from my Master Code-Review Prompt Library.
+using these five lenses from my Code Review Prompt Library.
 
 This is for UNDERSTANDING AND RECONSTRUCTION, not auditing code quality.
 For each applicable lens: give a concrete observation, the supporting
@@ -582,7 +582,7 @@ For this example, **FODE** would examine where the floor plan originates and how
 | [New Feature Discovery](investigate-new-feature.md) | What do users need from a new feature, and what requirements and options should we explore? |
 | [System Learning Implementation](system-learning-implementation.md) | How does the implementation execute, and why do its mechanisms work? |
 | [System Learning Repo](system-learning-repo.md) | How is the whole codebase organized? |
-| [Master Code Review](code-review-master.md) | Is a specific implementation or change correct and maintainable? |
+| [Code Review](code-review.md) | Is a specific implementation or change correct and maintainable? |
 
 **Suggested order for a new feature based on an old one:** Clarify the request or ticket (if there is one) -> investigate the existing feature and its provenance -> understand a tricky mechanism (if needed) -> confirm requirements -> design the change -> plan implementation -> implement and review.
 
