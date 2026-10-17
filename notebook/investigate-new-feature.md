@@ -4,7 +4,7 @@ A reusable, **pre-design feature discovery** prompt for any AI coding agent. Use
 
 **Core question:** What must this feature enable users to do, under what conditions, with what guarantees, and what viable approaches should we evaluate?
 
-This complements [Existing Feature Investigation](investigate-feature.md) (reconstruct a feature that already exists), [Ticket Investigation](investigate-ticket.md) (interpret assigned requirements), [Reusable Design Spec](reusable-design-spec-prompt.md) (define the chosen technical design), and [Reusable Implementation Plan](reusable-implementation-plan-prompt.md) (sequence implementation work).
+This complements [Existing Feature Investigation](investigate-existing-feature.md) (reconstruct a feature that already exists), [Ticket Investigation](investigate-ticket.md) (interpret assigned requirements), [Reusable Design Spec](reusable-design-spec-prompt.md) (define the chosen technical design), and [Reusable Implementation Plan](reusable-implementation-plan-prompt.md) (sequence implementation work).
 
 **Scope:** Discovery and requirements analysis, not a proposal to start coding. The feature can be a new product, a greenfield feature, or an enhancement where repository context is unavailable. If code or documentation exists, it may inform the investigation, but it is **not a prerequisite**.
 
@@ -638,7 +638,7 @@ These are strategic options. Technologies such as browser storage, service worke
 | Stage | Prompt | What it establishes |
 | --- | --- | --- |
 | **New idea with no code or spec** | **New Feature Discovery** (this file) | User scenarios, FRs, NFRs, constraints, options, unknowns, provisional MVP |
-| Existing feature or a working example | [Existing Feature Investigation](investigate-feature.md) | Runtime behavior, provenance, original assets/tools, external setup |
+| Existing feature or a working example | [Existing Feature Investigation](investigate-existing-feature.md) | Runtime behavior, provenance, original assets/tools, external setup |
 | An assigned ticket with criteria and related issues | [Ticket Investigation](investigate-ticket.md) | Ticket interpretation, dependencies, implementation readiness |
 | Chosen approach and validated requirements | [Reusable Design Spec](reusable-design-spec-prompt.md) | Detailed architecture, contracts, boundaries, and design decisions |
 | Agreed design to execute | [Reusable Implementation Plan](reusable-implementation-plan-prompt.md) | Sequenced implementation tasks and verification |
