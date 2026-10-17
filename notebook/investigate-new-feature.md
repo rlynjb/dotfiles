@@ -4,7 +4,7 @@ A reusable, **pre-design feature discovery** prompt for any AI coding agent. Use
 
 **Core question:** What must this feature enable users to do, under what conditions, with what guarantees, and what viable approaches should we evaluate?
 
-This complements [Existing Feature Investigation](investigate-existing-feature.md), which reconstructs how an already-built feature works and where its resources came from. For reviewing implemented changes, see [Master Code Review](code-review-master.md).
+This complements [Existing Feature Investigation](investigate-existing-feature.md), which reconstructs how an already-built feature works and where its resources came from. For reviewing implemented changes, see [Code Review](code-review.md).
 
 **Scope:** Discovery and requirements analysis, not a proposal to start coding. The feature can be a new product, a greenfield feature, or an enhancement where repository context is unavailable. If code or documentation exists, it may inform the investigation, but it is **not a prerequisite**.
 
@@ -28,7 +28,7 @@ This complements [Existing Feature Investigation](investigate-existing-feature.m
 
 ## Five book lenses for new-feature discovery
 
-These are the same five reading lenses used by [Master Code Review](code-review-master.md), but here they help **ask better questions before an implementation exists**. They do **not** imply that a specific architecture, algorithm, database, or external service is required.
+These are the same five reading lenses used by [Code Review](code-review.md), but here they help **ask better questions before an implementation exists**. They do **not** imply that a specific architecture, algorithm, database, or external service is required.
 
 | Lens | Full book title | Discovery questions |
 | --- | --- | --- |
@@ -298,7 +298,7 @@ differentiate a choice, and choices that remain reversible.
 
 ## 8. Use the five books as learning lenses
 
-Use the five lenses from my Master Code-Review Prompt Library.
+Use the five lenses from my Code Review Prompt Library.
 They are ways to THINK, not mandatory design patterns.
 
 For each relevant lens, provide one to three grounded insights
@@ -641,7 +641,7 @@ These are strategic options. Technologies such as browser storage, service worke
 | Existing feature or a working example | [Existing Feature Investigation](investigate-existing-feature.md) | Runtime behavior, provenance, original assets/tools, external setup |
 | Deeper understanding of an implementation | [System Learning Implementation](system-learning-implementation.md) | Execution flow, mechanisms, data changes, and design reasoning |
 | Onboarding to an unfamiliar codebase | [System Learning Repo](system-learning-repo.md) | Whole-repository structure, responsibilities, and representative data flows |
-| Implemented changes to assess | [Master Code Review](code-review-master.md) | Correctness, maintainability, and engineering trade-offs |
+| Implemented changes to assess | [Code Review](code-review.md) | Correctness, maintainability, and engineering trade-offs |
 
 **Suggested workflow:** Idea -> discover real user journeys -> distinguish FRs / NFRs / constraints -> compare options -> validate consequential unknowns -> only then design, plan, implement, and review.
 
