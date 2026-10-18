@@ -171,6 +171,33 @@ Cover only the mechanisms that are actually relevant:
 - Observability
 - Maintainability and evolvability
 
+If this implementation uses relational data or SQL, also investigate the
+data-model and query-performance trade-offs (DDIA, 2nd edition):
+- Identify the relevant entities/tables, primary and foreign keys, cardinality,
+  and which facts are stored once versus duplicated or derived. Explain what
+  is normalized or denormalized in THIS code, not what it ought to be.
+- Follow the actual query shape: joins and join keys, filters, selected columns,
+  sorting, limits, aggregation, and any ORM-generated queries or repeated
+  per-item lookups (N+1). Show how the result maps into the API or caller.
+- Explain what each join accomplishes, what relationship it represents,
+  and how row counts, selectivity, indexes, query count, and returned data
+  volume could affect cost under a stated workload.
+- If indexes, query plans, EXPLAIN output, timings, or tests are available,
+  use them to distinguish observed behavior from potential bottlenecks.
+  Explain relevant plan operations in plain language. Never invent query
+  plans or latency; do not run production queries or EXPLAIN ANALYZE.
+- Compare the existing approach with a plausible alternative only when
+  useful: read-time joins versus stored denormalized columns, a materialized
+  view, or other derived data. Discuss read latency/query complexity,
+  write/update cost, additional storage, consistency/freshness, and the
+  refresh or invalidation mechanism. Identify the source of truth.
+- State when normalization helps avoid update anomalies and when
+  denormalization might help a demonstrated read-heavy access pattern.
+  Neither approach is automatically faster or more correct for every workload.
+
+Keep this section evidence-based and read-only. If there is no relevant
+relational model or query, mark it not applicable rather than inventing one.
+
 For each relevant mechanism, use this format:
 
 Mechanism:
@@ -320,6 +347,8 @@ Describe:
 - What starts the read?
 - What store is queried?
 - What indexes or filters matter?
+- If joins are involved, what tables/keys and query shape produce the result,
+  and what plan or measurements (if available) support performance claims?
 - Is the data fresh or possibly stale?
 - Is derived data involved?
 - What happens when data is missing?
@@ -398,7 +427,8 @@ Explain concisely:
 3. One representative execution/data flow, from input to output.
 4. The main mechanism or algorithm and why it works.
 5. One important guarantee, its limits, and a relevant failure scenario.
-6. One design trade-off and the constraints that make it matter.
+6. One design trade-off and the constraints that make it matter; if relevant,
+   include join/query cost versus denormalized reads and update complexity.
 7. Which concepts from DDIA (2nd edition), FODE, System Design Interview
    (Alex Xu), and Algorithmic Thinking (2nd edition, Daniel Zingaro) are relevant.
 
@@ -492,6 +522,12 @@ Choose up to three decisions. For each, explain:
 - The benefit, cost, and assumptions.
 - A plausible alternative and when it would be appropriate.
 - What evidence would help determine whether the current choice is working.
+
+For a relational data-model decision, compare normalized tables and read-time
+joins with any relevant denormalized/derived alternative. Explain the observed
+join keys, indexes, query shape, and likely read/write, storage, and freshness
+costs. Use execution plans or measurements only if available; do not infer a
+performance problem from the presence of a join.
 
 Use System Design Interview (Alex Xu) for requirements and component trade-offs,
 DDIA for data guarantees, FODE for lifecycle/operational concerns, and Algorithmic
