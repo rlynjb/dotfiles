@@ -80,8 +80,9 @@ Evaluate only the lenses that apply:
    responsibility/state ownership, temporal coupling, and change amplification.
 3. AT: problem constraints, algorithm and data-structure choices, invariants,
    boundary inputs, and time/space complexity.
-4. DDIA: authoritative data, read/write paths, transactions, consistency,
-   ordering, retries, idempotency, schema evolution, and recovery.
+4. DDIA: authoritative data, read/write paths, relevant normalization/
+   denormalization and join/query trade-offs, indexes, transactions,
+   consistency, ordering, retries, idempotency, schema evolution, and recovery.
 5. FODE: source/consumer contracts, ingestion, transformation, lineage,
    quality, governance, orchestration, cost, and operational readiness.
 6. SDI: requirements, request/data flow, APIs, storage, bottlenecks,
@@ -158,6 +159,10 @@ AT — ALGORITHMIC THINKING
 DDIA — DATA AND DISTRIBUTED GUARANTEES
 17. Identify entities, identifiers, models, schemas, authoritative stores,
     read/write paths, and access patterns. Are indexes and queries suitable?
+    For relevant relational changes, examine normalization vs. denormalization,
+    join keys/cardinality, N+1 queries, indexes, and query-plan evidence.
+    Compare read/query costs against duplicated storage, write/update cost,
+    freshness, and consistency. Do not assume joins are inherently slow.
 18. Review atomicity, isolation, concurrency anomalies, consistency,
     ordering, retry safety, duplicate effects, and idempotency.
 19. Review caches, events, queues, projections, schema/encoding evolution,
@@ -305,6 +310,11 @@ Review the affected data paths through Designing Data-Intensive Applications.
 For every relevant value, operation, or event:
 - Which store is authoritative? Which copies are derived or cached?
 - What are the read/write paths, transactions, isolation level, and indexes?
+- If relational queries matter, how do join keys/cardinality, indexes, query
+  counts, and available plans/timings affect performance at the real workload?
+- Would normalized read-time joins or stored denormalized/derived data better
+  meet those needs, considering write overhead, duplication, consistency,
+  freshness, and refresh/invalidation responsibilities?
 - What happens under two concurrent operations or a partial write?
 - What happens after timeout, crash, retry, redelivery, or replay?
 - Which effects are idempotent? What key or constraint enforces that?
@@ -314,6 +324,8 @@ For every relevant value, operation, or event:
 - Which tests or infrastructure settings prove these guarantees?
 
 Use one explicit event sequence or concurrency interleaving per risk.
+Treat performance as measured only when plans/benchmarks support it;
+otherwise identify what to measure and label estimates as hypothetical.
 Distinguish documented expectation from implemented guarantee.
 Do not claim exactly once, atomicity, durability, or strong consistency
 without supporting evidence.
