@@ -155,6 +155,18 @@ Stage 2 — Connect execution, data, and algorithms
 6. Data behavior and guarantees — DDIA
    - Explain the repo's data models, access patterns, schemas, indexes, and
      serialization/versioning where present.
+   - Where relational queries exist, map table relationships, join keys,
+     cardinality, filters, projections, and relevant indexes to a real read path.
+     Account for ORM-generated queries and N+1 lookups when observable.
+   - Evaluate query performance with available plans, timings, tests, or query
+     counts; distinguish measured findings from hypothetical costs of joins,
+     row counts, selectivity, indexes, and data returned. Never invent timings
+     or execute production queries or EXPLAIN ANALYZE.
+   - Compare normalized relationships and read-time joins with any observed
+     denormalized or stored-derived alternative: effects on read cost, writes,
+     storage, update anomalies, source-of-truth ownership, freshness, and
+     refresh/sync complexity. Discuss when an alternative might make sense,
+     not an unsupported verdict that one data model is always faster.
    - Identify the source of truth and derived state, including client state,
      caches, materialized outputs, or replicated copies.
    - Trace actual transaction boundaries, concurrent updates, cache invalidation,
@@ -201,6 +213,9 @@ Stage 3 — Learn to investigate and explain the repo
 9. Design trade-offs and learning summary
    - Select up to three important existing decisions. Explain the observed design,
      its benefits/costs, and a plausible alternative. Label inferred rationale.
+   - Where a relational data-model choice is material, include the trade-off
+     between read-time joins and stored derived/denormalized data, with actual
+     query evidence or clearly labeled performance questions.
    - Connect the four book lenses without repeating four versions of the guide.
    - Finish with this learning table:
      Book | Relevant concept | Repo evidence | What I should now understand |
