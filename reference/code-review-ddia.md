@@ -107,7 +107,9 @@ Evaluate:
 2. Whether the implementation matches the intended behavior.
 3. Which data entities, schemas, stores, and data flows are affected.
 4. Which store is authoritative for each important value.
-5. Whether the read and write access patterns match the storage and indexes.
+5. Whether the read and write access patterns match the storage and indexes;
+   where relevant, compare normalized joins with denormalized/derived reads,
+   including performance evidence, update cost, and freshness trade-offs.
 6. Whether transaction boundaries preserve all important invariants.
 7. Whether concurrent operations can produce anomalies.
 8. What consistency and ordering guarantees the feature provides.
@@ -240,8 +242,16 @@ Look for:
 - Unbounded collections
 - Arrays or documents that can grow indefinitely
 - Denormalized values without an update strategy
+- Duplicated data whose writers, refresh path, or consistency rules are unclear
 - Timestamps being used as unreliable ordering guarantees
 - Soft deletion that queries may forget to honor
+
+For relational changes, distinguish normalized facts and relationships from
+persisted denormalized/derived copies. Explain the trade-off using this
+implementation: read-time joins versus cheaper or simpler reads from copies,
+balanced against extra storage, write amplification, update anomalies,
+freshness, and consistency. Identify the system of record and how copies
+are kept in sync. Do not claim either model is automatically superior.
 
 Explain whether the data model makes valid states easy to represent and invalid
 states difficult to create.
@@ -298,7 +308,7 @@ For each query, identify:
 - Store
 - Table, collection, or index
 - Filter conditions
-- Join conditions
+- Join conditions and join keys, including relationship cardinality
 - Sort order
 - Pagination approach
 - Expected result size
@@ -307,6 +317,7 @@ For each query, identify:
 - Whether the index covers the query
 - Locking behavior
 - Query count per user request
+- Projection/selected columns and any ORM-generated queries
 
 Look for:
 
@@ -323,6 +334,19 @@ Look for:
 - Accidental cross-tenant reads
 - Read amplification
 - Write amplification caused by new indexes
+
+For relational queries, explain what each join contributes to the result and
+whether join fan-out, row counts, filter selectivity, indexes, data returned,
+or N+1 lookups materially affect the read path. Trace the result to its
+consumer using the existing data-flow evidence, without inventing another
+flow. Where available, interpret query plans (e.g., EXPLAIN), timing,
+query-count, or workload evidence; distinguish measured bottlenecks from
+hypotheses and do not run production queries or EXPLAIN ANALYZE.
+
+If useful, compare a read-time join with a stored derived/denormalized
+representation and state the read latency, write/update work, storage,
+freshness, and consistency trade-offs. Identify what evidence would justify
+the alternative; do not prescribe denormalization merely because joins exist.
 
 For each performance finding, describe the workload or data size at which it
 becomes significant.
@@ -883,7 +907,8 @@ Identify:
 - Data written
 - System of record
 - Query plan or access pattern
-- Indexes
+- Joins, join keys/cardinality, query counts, and selected columns if relevant
+- Indexes (and available plan/timing evidence, not invented measurements)
 - Transaction boundary
 - Isolation assumptions
 - Concurrent writers
@@ -900,10 +925,14 @@ Then answer:
 2. Are all invariants protected under concurrency?
 3. Can retry repeat a side effect?
 4. Can readers observe stale or partial data?
-5. Is the access pattern efficient at expected scale?
-6. What happens if the process crashes at each step?
-7. Can the operation be safely replayed?
-8. Which guarantee is proven and which is assumed?
+5. Is the access pattern efficient at expected scale? What query/plan or
+   workload evidence supports that judgment versus what needs measurement?
+6. If relational reads are involved, what are the normalization versus
+   denormalization trade-offs for joins, update work, duplicated storage,
+   freshness, and consistency? Avoid assuming one approach is always faster.
+7. What happens if the process crashes at each step?
+8. Can the operation be safely replayed?
+9. Which guarantee is proven and which is assumed?
 ```
 
 ---
