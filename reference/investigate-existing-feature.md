@@ -580,6 +580,7 @@ For this example, **FODE** would examine where the floor plan originates and how
 | --- | --- |
 | **Existing Feature Investigation** (this file) | Where did this existing feature and its required resources come from, and what would it take to reproduce it? |
 | [New Feature Discovery](investigate-new-feature.md) | What do users need from a new feature, and what requirements and options should we explore? |
+| [Refine Feature Requirements](refine-feature-requirements.md) | Which requirements are ready, what needs stakeholder confirmation, and what can Superpowers design next? |
 | [System Learning Implementation](system-learning-implementation.md) | How does the implementation execute, and why do its mechanisms work? |
 | [System Learning Repo](system-learning-repo.md) | How is the whole codebase organized? |
 | [Code Review](code-review.md) | Is a specific implementation or change correct and maintainable? |
