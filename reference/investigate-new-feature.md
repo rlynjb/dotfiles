@@ -639,6 +639,7 @@ These are strategic options. Technologies such as browser storage, service worke
 | --- | --- | --- |
 | **New idea with no code or spec** | **New Feature Discovery** (this file) | User scenarios, FRs, NFRs, constraints, options, unknowns, provisional MVP |
 | Existing feature or a working example | [Existing Feature Investigation](investigate-existing-feature.md) | Runtime behavior, provenance, original assets/tools, external setup |
+| **After investigation / before Superpowers** | [Refine Feature Requirements](refine-feature-requirements.md) | Confirm FRs/NFRs, identify stakeholder questions, make the design-readiness decision |
 | Deeper understanding of an implementation | [System Learning Implementation](system-learning-implementation.md) | Execution flow, mechanisms, data changes, and design reasoning |
 | Onboarding to an unfamiliar codebase | [System Learning Repo](system-learning-repo.md) | Whole-repository structure, responsibilities, and representative data flows |
 | Implemented changes to assess | [Code Review](code-review.md) | Correctness, maintainability, and engineering trade-offs |
