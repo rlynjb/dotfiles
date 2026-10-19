@@ -1,12 +1,14 @@
 # Feature Requirements Refinement & Superpowers Handoff
 
-A reusable **post-investigation, pre-design** prompt. Use it after [New Feature Discovery](investigate-new-feature.md), [Existing Feature Investigation](investigate-existing-feature.md), or reviewing a ticket/spec with an AI agent. Its job is to **clarify product requirements, identify stakeholder decisions, and decide whether requirements are ready for Superpowers** to design and plan implementation.
+A **standalone, pre-design feature investigation and requirements-refinement prompt** for both **new features** and **changes to existing features**. Start with an assigned ticket, product request, or feature idea; inspect the relevant codebase and supporting evidence when available; check whether the requested behavior matches what already exists; then clarify functional requirements, non-functional requirements, and unanswered questions **before** Superpowers designs and plans the implementation.
 
-**Core question:** Do we agree on what the feature must do, how well it must work, what is in or out of scope, and which unanswered questions could change the solution?
+You do **not** need to run a separate "investigate new feature" or "investigate existing feature" prompt first.
 
-**Workflow:** Investigate the feature → refine and validate requirements (this prompt) → obtain stakeholder answers if needed → give the agreed requirements to Superpowers for brainstorming/design, implementation planning, and execution → [Code Review](code-review.md).
+**Core questions:** What is the ticket really asking for? What already exists or is known? Where do the request and existing behavior agree, differ, or leave gaps? Which decisions or historical details must be clarified with stakeholders or developers before handing the requirements to Superpowers?
 
-**Boundary:** This is a requirements-quality gate, **not** another feature investigation, technical design, system architecture review, implementation plan, or code review. Reuse investigation findings instead of repeating the investigation.
+**Workflow:** Ticket / idea + relevant repo evidence → **investigate alignment and refine requirements (this prompt)** → ask stakeholders/developers the necessary questions → pass the agreed requirements to **Superpowers** for design, implementation planning, and execution → [Code Review](code-review.md).
+
+**Boundary:** Investigate **just enough existing behavior and history to validate requirements**. This is not a deep technical walkthrough, code review, architecture design, technology selection, or implementation plan. Superpowers owns those later steps.
 
 ---
 
@@ -14,244 +16,317 @@ A reusable **post-investigation, pre-design** prompt. Use it after [New Feature 
 
 | Prompt | Use it when |
 | --- | --- |
-| [Master requirements refinement](#0-master-requirements-refinement-prompt) | You need a full requirements review and stakeholder-question list before Superpowers |
-| [Compact readiness check](#compact-requirements-readiness-check) | You need a quick pass after a small investigation |
-| [Five-book lens guide](#five-book-lens-guide) | You want to understand what each book contributes without getting technical |
+| [Master feature requirements investigation](#0-master-feature-requirements-investigation-prompt) | You have an assigned ticket or idea and want codebase alignment, refined requirements, and questions for stakeholders or developers |
+| [Compact ticket readiness check](#compact-ticket-readiness-check) | You need a fast requirements check before invoking Superpowers |
+| [Five-book lens guide](#five-book-lens-guide) | You want the books to reveal requirement gaps without turning this into technical design |
 
 ---
 
 ## Five-book lens guide
 
-Apply the lenses **lightly**, only to reveal missing user/business requirements or important quality expectations. They are question generators, not mandatory architecture sections.
+Use the lenses **lightly** to identify missing business rules, observable behavior, or quality expectations. They are question generators, not mandatory technical analyses.
 
 | Lens | Requirements-focused question (not a design task) |
 | --- | --- |
-| **APOSD — A Philosophy of Software Design** | Are the user-visible concepts, responsibilities, boundaries, and rules simple and unambiguous? Which variation must the product support without exposing unnecessary complexity to users? |
-| **AT — Algorithmic Thinking** | If the feature must search, rank, match, sort, calculate, or reconcile, what observable result counts as correct? What input limits, ties, edge cases, or business rules need clarification? |
-| **DDIA — Designing Data-Intensive Applications, 2nd edition** | What does the user expect when data changes, is duplicated, stale, unavailable, edited concurrently, or recovered? Which data is authoritative and what must not be lost? |
-| **FODE — Fundamentals of Data Engineering** | Where must business data or assets come from, who owns their quality and meaning, how fresh must they be, and which downstream consumers rely on them? |
-| **SDI — System Design Interview** | Who uses this feature, what are its functional and non-functional needs, expected scale, integration constraints, and acceptable product-level trade-offs? |
+| **APOSD — A Philosophy of Software Design** | Are user-visible concepts, responsibilities, boundaries, and rules clear? Is an important variation or exception missing from the ticket? |
+| **AT — Algorithmic Thinking** | If the feature involves searching, ranking, matching, sorting, calculating, or reconciling, what observable output is correct? What ties, input limits, edge cases, or business rules need clarification? |
+| **DDIA — Designing Data-Intensive Applications, 2nd edition** | What must users expect when data changes, is duplicated, stale, unavailable, edited concurrently, or recovered? Which information is authoritative, and what cannot be lost? |
+| **FODE — Fundamentals of Data Engineering** | Where does required business data or an asset originate? Who owns its meaning and quality? How fresh must it be, and who consumes it? |
+| **SDI — System Design Interview** | Who uses this feature? What functional and non-functional expectations, dependencies, scale assumptions, and product-level trade-offs matter? |
 
-Mark irrelevant lenses **not applicable**. Combine overlapping questions; do not generate five separate technical reports. Never assert a book requires a specific design.
+Mark irrelevant lenses **not applicable**. Combine overlapping insights; do not generate five separate technical reports or imply a book mandates any particular technology or architecture.
 
 ---
 
-## 0. Master requirements refinement prompt
+## 0. Master feature requirements investigation prompt
 
-**What it does:** Converts an investigation or rough requirement set into a clear, evidence-labeled, stakeholder-ready requirements baseline and a handoff for Superpowers. The most important output is **what still requires a decision**, by whom, and whether it blocks design.
+**What it does:** Starts from a **ticket or feature idea** (with or without existing code), checks relevant implementation evidence where it exists, refines what is expected, separates stakeholder decisions from developer/history questions, and creates a requirements handoff for Superpowers.
 
 ~~~text
-Act as a requirements refinement partner preparing a feature for the
-Superpowers design and implementation-planning workflow.
+Act as a feature requirements investigator and refinement partner.
+Prepare the assigned ticket or feature idea for the Superpowers
+design and implementation-planning workflow.
 
-I have already investigated this feature, or I am providing the best
-information currently available. Your job is NOT to investigate the
-implementation all over again. Read the information I provide first.
+This is a STANDALONE prompt. Do not require a prior new-feature
+or existing-feature investigation report. Use one if I supply it,
+but begin from the ticket and available evidence otherwise.
 
-INPUTS
-- Feature or ticket: [PASTE REQUEST / LINK / DESCRIPTION]
-- Investigation findings: [PASTE INVESTIGATION REPORT OR FILES]
-- Existing behavior / examples: [IF RELEVANT]
-- Stakeholder statements and agreed decisions: [IF AVAILABLE]
-- Constraints, deadlines, policies, dependencies: [IF KNOWN]
-- Questions already answered: [IF ANY]
+INPUTS (use what is available; missing inputs are not blockers by
+themselves)
+- Feature / assigned ticket / product idea: [PASTE TEXT OR LINK]
+- Repository / codebase / branch: [IF AVAILABLE]
+- Product specs, designs, related tickets, previous implementations:
+  [IF AVAILABLE]
+- Known stakeholder decisions, constraints, and answered questions:
+  [IF AVAILABLE]
+- Specific uncertainty or concern: [OPTIONAL]
 
-If sources are accessible, cite relevant tickets, docs, files/symbols,
-or direct stakeholder statements. Inspect only enough additional context
-to resolve a material requirements ambiguity. If something is not
-accessible, state the limitation. Do not pretend to have verified it.
+FIRST: IDENTIFY THE FEATURE CONTEXT
+- Classify the request as: new capability, enhancement/change to an
+  existing feature, new instance of an existing pattern, mixed, or unclear.
+- A new feature MAY still need to fit existing conventions and data
+  contracts. An existing feature MAY contain requested behavior already.
+- If there is no relevant codebase or accessible evidence, perform
+  conceptual requirements refinement and mark code alignment
+  NOT VERIFIED or NOT APPLICABLE. Do not invent implementation evidence.
+- Do not force separate workflows: adapt the depth of investigation
+  to the actual ticket.
 
 WORKING RULES
-- Prioritize WHAT users/business need and HOW WELL it must work, not HOW
-  it will be engineered. Leave architecture, technology selection,
-  algorithms, component design, task breakdown, and coding to Superpowers.
-- Distinguish CURRENT IMPLEMENTATION from DESIRED BEHAVIOR: evidence of
-  what code does today is not proof that stakeholders want it tomorrow.
-- Preserve the stakeholder's terminology. Flag contradictory language
-  or behavior rather than silently resolving it.
-- Label material items:
-    CONFIRMED — explicitly agreed or directly supported by a source;
-                identify whether it is an approved requirement or only
-                observed existing behavior.
-    PROPOSED — a candidate requirement or recommended clarification.
-    ASSUMED — a temporary assumption made visible for discussion.
-    UNKNOWN — insufficient evidence to determine the answer.
-- Do not invent stakeholder approvals, priorities, SLAs, targets,
-  regulatory obligations, integrations, user volumes, or constraints.
-- Keep this read-only. Do not edit application code, create an
-  implementation plan, commit changes, deploy, or run Superpowers.
-- Don't turn generic best practices into mandatory requirements.
-  Include a concern only if it affects this feature.
-- Write plainly and concisely. Prefer a few decisive questions over
-  a long speculative checklist.
+- Prioritize WHAT users/business need and HOW WELL it must work.
+  Superpowers will own technical design, architecture, technology
+  selection, algorithms, detailed plans, and coding.
+- Inspect only relevant documentation, entry points, neighboring
+  features, business rules, tests, contracts, and available history
+  necessary to check the ticket. Do not exhaustively map the system.
+- Stay read-only. Do not edit code, generate an implementation plan,
+  execute Superpowers, make commits, deploy, or call write APIs.
+- Cite meaningful claims with ticket/spec references, paths and
+  symbols, tests, PRs, or commits you actually inspected. If access
+  is unavailable, say what remains unverified.
+- SEPARATE:
+    CONFIRMED REQUIREMENT — explicitly established by the ticket,
+      approved spec, or stakeholder decision (cite its source).
+    OBSERVED BEHAVIOR — verified in current code/tests; this is NOT
+      automatically an approved product requirement.
+    PROPOSED — candidate behavior or clarification to validate.
+    ASSUMED — explicit temporary hypothesis, not a decision.
+    UNKNOWN — not established by available evidence.
+- Preserve the business terminology; flag conflicts rather than
+  silently reconciling them. Never treat code or past implementation
+  as proof of stakeholder intent or a historical design decision.
+- Never fabricate historical reasons, stakeholder approvals, priorities,
+  SLAs, numbers, integrations, or constraints. Do not present a
+  suspected bottleneck or best practice as a requirement.
+- Prefer concrete, high-impact unanswered questions over long lists.
+  Keep technical findings brief and tied to requirement implications.
 
-1. RESTATE THE PRODUCT OUTCOME AND SCOPE
-- Who is the primary actor, what problem are they solving, and what
-  observable outcome means the feature is useful?
-- What behavior is being introduced, changed, kept, or removed?
-- Separate confirmed in-scope work, proposed scope, explicit exclusions,
-  and scope decisions still pending.
-- State dependencies on other teams, business processes, permissions,
-  external data/assets, or customer actions only when supported.
+1. CLARIFY THE PRODUCT REQUEST AND SCOPE
+- Who needs the feature, which task/problem does it address, and what
+  outcome counts as success?
+- What is intended to be added, changed, preserved, reused, or removed?
+- What is explicitly in scope, out of scope, and still undecided?
+- Identify the ticket's assumptions, contradictions, missing actors,
+  dependencies, permissions, and vague terms.
 
-2. REFINE THE USER JOURNEYS
-- Give the principal happy path in plain language: actor → trigger →
-  expected behavior → observable outcome.
-- Add only meaningful alternative, permission, empty-data, invalid-input,
-  error, failure, recovery, or repeated-action scenarios.
-- Point out places where two reasonable interpretations lead to
-  different behavior. Turn these into questions, not silent choices.
-- Avoid describing controllers, databases, services, or code flows.
+2. CHECK TICKET-TO-CODEBASE ALIGNMENT (WHEN CODE EXISTS)
+- Trace the smallest relevant user-facing path: entry or screen,
+  observable behavior, key business rules, state/data inputs and
+  outputs, relevant configuration, and tests/contracts.
+- Look for related features, earlier instances, and established
+  conventions that constrain or clarify the requirement. Inspect
+  pertinent docs, tickets, PRs, or git history IF available and useful.
+- Distinguish WHAT THE SYSTEM DOES NOW from WHAT THE TICKET ASKS FOR.
+  Identify any implied change in behavior or compatibility.
+- Produce an alignment table for significant requested behaviors:
+    Ticket requirement / acceptance expectation
+    Ticket or spec evidence
+    Current implementation evidence (file/symbol/test) or not observed
+    Status: ALREADY PRESENT / PARTIAL / MISSING / CONFLICT /
+            NOT VERIFIED / NOT APPLICABLE
+    Requirement implication, risk, or needed clarification
+- Do not label a behavior MISSING merely because a search did not
+  find it; if coverage is incomplete, use NOT VERIFIED.
+- If the ticket references an older design or copied feature,
+  distinguish reusable established behavior from instance-specific
+  inputs, permissions, or business rules.
+- When implementation history is unclear, list the exact factual
+  question an involved developer could answer. Do NOT speculate
+  about why previous developers made a decision.
+- No deep call graphs, exhaustive architectural analysis, refactor
+  recommendations, query tuning, or implementation strategy.
 
-3. REFINE FUNCTIONAL REQUIREMENTS (FR)
-Produce concise, individually testable requirements. For each include:
-- FR-ID; user/system behavior; actor or trigger; observable result;
-  Must / Should / Could / Out of scope; CONFIRMED / PROPOSED /
-  ASSUMED / UNKNOWN; source or rationale; linked open question.
-- Give a short Given / When / Then acceptance example for important
-  requirements, especially business rules and error scenarios.
-- Clarify relevant permissions, state changes, boundaries, and exceptions.
-- Identify overlapping, conflicting, vague, untestable, or missing
-  requirements. Do not manufacture requirements to fill a template.
+3. REFINE THE USER JOURNEYS
+- State the normal user journey: actor -> trigger -> expected action ->
+  observable outcome.
+- Add only material alternative, permission, empty-data, invalid-input,
+  repeated-action, failure, and recovery cases.
+- Show where the ticket is ambiguous and different interpretations
+  would change user behavior or acceptance.
+- For existing features, explicitly distinguish current user behavior
+  from requested user behavior.
 
-4. REFINE NON-FUNCTIONAL REQUIREMENTS (NFR)
-For each relevant quality expectation, capture:
-- NFR-ID; user/business consequence; associated feature or journey;
-  expected quality/constraint; acceptance or measurement method;
-  confirmed target OR "target requires stakeholder confirmation";
-  priority, status, and possible decision owner.
-- Consider only relevant performance, availability, reliability,
-  consistency/freshness, durability, security/privacy, accessibility,
-  supported platforms, usability, scale, operational needs, and cost.
-- Translate vague words such as "fast", "real-time", "secure", or
-  "reliable" into what a stakeholder must define. Do not invent numbers.
-- Explain any product-level trade-off that stakeholders must choose
-  (for example: more immediate updates vs accepting temporary staleness).
-  Do not propose infrastructure to resolve the trade-off.
+4. REFINE FUNCTIONAL REQUIREMENTS (FR)
+For each material requirement include:
+- FR-ID, observable user/system behavior, actor/trigger, expected result.
+- Must / Should / Could / Out of scope (mark proposed priorities).
+- CONFIRMED REQUIREMENT / PROPOSED / ASSUMED / UNKNOWN.
+- Source/ticket reference, relationship to existing behavior (if any),
+  and linked open question.
+- A short Given / When / Then acceptance example for the important
+  happy path, business rules, and error cases.
 
-5. CHECK CONSTRAINTS, DEPENDENCIES, AND ACCEPTANCE
-- Separate hard constraints, preferences, assumptions, and choices
-  the design stage can make freely.
-- Record scope exclusions and external approvals, data/assets, roles,
-  or policies required before the feature can work as intended.
-- Check that each Must requirement has an observable acceptance condition.
-- Highlight conflicts between FRs and NFRs (such as offline behavior
-  versus freshness) without making unapproved compromises.
+Flag duplicate, conflicting, vague, missing, or untestable statements.
+Do not promote what exists in code into a new requirement without
+ticket or stakeholder support.
 
-6. USE THE FIVE BOOK LENSES AS A LIGHT REQUIREMENTS CHECK
-Use APOSD, AT, DDIA (2nd edition), FODE, and System Design Interview
-(SDI) only to expose material missing rules or quality expectations.
-For each applicable lens, give at most 1–2 important QUESTIONS and
-link each to an FR, NFR, user journey, or constraint. Mark irrelevant
-lenses not applicable. Consolidate duplicates.
+5. REFINE NON-FUNCTIONAL REQUIREMENTS (NFR)
+For each relevant expectation include:
+- NFR-ID, user/business impact, linked journey or FR, desired quality,
+  proposed verification/acceptance method, priority and status.
+- If no target is provided, write "target requires confirmation".
+- Consider relevant latency/performance, reliability/availability,
+  consistency/freshness, durability/recovery, security/privacy,
+  accessibility, supported clients, scale, usability, operating
+  constraints, and costs. Skip irrelevant categories.
+- Compare an existing verified expectation or constraint with any
+  new or conflicting expectation in the ticket.
+- Identify product-level choices (e.g., can users tolerate stale
+  information?) without designing the system to satisfy them.
+- Never invent specific thresholds, compliance duties, or SLAs.
 
-Do not produce architecture diagrams, schema proposals, algorithm
-analysis, performance tuning, or a technical solution comparison.
+6. CHECK CONSTRAINTS, DEPENDENCIES, AND ACCEPTANCE
+- Separate hard constraints, preferences, unverified assumptions,
+  and freedom intentionally left to Superpowers.
+- Identify any prerequisite business data, assets, team decisions,
+  access/approval, external system, or previous behavior that must
+  remain compatible, if evidence supports it.
+- Confirm each Must requirement has an observable acceptance condition.
+- Identify conflicts between FRs, NFRs, ticket wording, and current
+  behavior without making a product decision on anyone's behalf.
 
-7. PRIORITIZE OPEN QUESTIONS FOR STAKEHOLDERS
-Separate:
-A. BLOCKING PRODUCT DECISIONS — answers could change scope, expected
-   behavior, acceptance, or a critical NFR; resolve before Superpowers.
-B. NON-BLOCKING CLARIFICATIONS — can be made explicit assumptions,
-   if the responsible person agrees, and revisited later.
-C. ENGINEERING/DESIGN QUESTIONS — leave for Superpowers; do not send
-   these to stakeholders unless they require a product decision.
-D. NICE-TO-KNOW — optional; avoid cluttering outreach.
+7. FIVE-BOOK REQUIREMENTS CHECK (LIGHTWEIGHT)
+Apply APOSD, AT, DDIA (2nd edition), FODE, and System Design
+Interview (SDI) only when they expose a material missing business
+rule, acceptance condition, constraint, or quality expectation.
+For each applicable lens give at most 1-2 useful questions linked
+to an FR, NFR, scenario, or scope decision. Mark irrelevant lenses
+NOT APPLICABLE. Consolidate overlap.
 
-For each stakeholder-facing question, give:
-- Priority and ID (Q-01, ...).
-- The EXACT concise question I can send.
-- Why it matters; which requirement or journey it affects.
-- If useful, two plausible answer choices and how they change scope
-  or expected behavior (do not assume either answer is approved).
-- Who should decide, if known; otherwise "owner to identify".
-- Whether it BLOCKS the Superpowers handoff.
-- Source of uncertainty and any proposed temporary assumption.
+Do not produce system diagrams, technical design alternatives,
+schema proposals, algorithm analysis, or performance optimization.
 
-Do not ask stakeholders to choose technical implementation details.
-Group duplicate questions and put the highest-impact ones first.
-Provide a short stakeholder-ready message containing only blocking
-questions when there are any.
+8. ROUTE UNANSWERED QUESTIONS TO THE RIGHT PEOPLE
+Prioritize unanswered questions in these groups:
 
-8. PREPARE THE SUPERPOWERS HANDOFF
-Produce a clean, product-focused brief Superpowers can consume:
-- Problem, users, desired outcomes, and success definition.
-- In-scope / out-of-scope and priority boundaries.
-- Confirmed FRs with observable acceptance conditions.
-- Relevant NFRs and verified targets; clearly mark unknown targets.
-- Hard constraints, dependencies, and required external inputs.
-- Product decisions already made, with evidence.
-- Explicit provisional assumptions and unresolved questions.
+A. STAKEHOLDERS / PRODUCT OWNER — business intent, scope,
+   expected user behavior, acceptance criteria, priorities, quality
+   targets, policy, or externally owned input. Blocking when the
+   answer changes material requirements or design assumptions.
 
-Give a readiness verdict:
-- READY — no material product decisions remain unresolved.
-- CONDITIONAL — only named, non-blocking assumptions remain; name
-  their owners and what would invalidate the handoff.
-- BLOCKED — material stakeholder decisions prevent a trustworthy
-  design; identify the minimum answers required to unblock it.
+B. DEVELOPERS / FEATURE HISTORY — what the system already does,
+   undocumented rules, previous tickets/PRs, legacy constraints,
+   external setup, existing tests, or why an earlier behavior was
+   introduced (ask; don't invent the historical answer). Only
+   block handoff when that fact is necessary to define valid
+   requirements or avoid a material compatibility error.
 
-If BLOCKED, still produce a useful provisional brief but do not
-present it as approved or ready for implementation. Do not ask
-Superpowers to invent answers to product questions.
+C. SUPERPOWERS DESIGN QUESTIONS — architecture, libraries,
+   module organization, query/index design, implementation tasks,
+   engineering trade-offs. Preserve these for Superpowers rather
+   than presenting them as stakeholder blockers.
 
-REQUIRED OUTPUT (use these sections; be concise)
-1. Product outcome and scope
-2. Key user journeys and acceptance scenarios
-3. Functional requirements (FR table)
-4. Non-functional requirements (NFR table)
-5. Constraints, dependencies, and exclusions
-6. Five-book requirement blind spots (only where relevant)
-7. Prioritized stakeholder questions and ready-to-send message
-8. Superpowers handoff brief and READY / CONDITIONAL / BLOCKED verdict
+D. DEFER / NICE TO KNOW — questions unlikely to alter scope or
+   meaningful acceptance behavior. Avoid distracting outreach.
 
-Do not repeat the original investigation report or create an
-implementation/design document. End by identifying the single
-most consequential unanswered product question, if one exists.
+For each outreach question (A or B), provide:
+- ID (Q-01 ...), priority, owner/role (or owner to identify).
+- Exact concise question ready to send.
+- Why it matters; linked FR, NFR, journey, or code/ticket conflict.
+- Answer options and consequences only when useful; do not imply
+  an option has been approved.
+- Evidence or source of uncertainty.
+- BLOCKS HANDOFF? YES / NO, with a short reason.
+
+Separate product decisions from factual questions about existing
+behavior. Developers may explain history, but cannot approve
+product scope just because they know the code.
+Provide TWO short ready-to-send messages only when needed:
+one for stakeholders, one for involved developers. Include the
+highest-impact unanswered questions; omit resolved questions.
+
+9. CREATE A SUPERPOWERS REQUIREMENTS HANDOFF
+Produce a concise requirements brief containing:
+- Feature context (new / change / reuse), product problem, user,
+  expected outcome, and in-scope/out-of-scope boundaries.
+- Confirmed FRs, relevant NFRs, and observable acceptance criteria.
+- Required compatibility with existing behavior or contracts,
+  supported by evidence; distinguish unknown compatibility risks.
+- Hard constraints, prerequisites, dependencies, and verified targets.
+- Approved decisions and named provisional assumptions, with sources.
+- Remaining stakeholder/developer questions and their owners.
+- Engineering topics deliberately handed to Superpowers, without
+  attempting to solve them here.
+
+Give one readiness verdict:
+- READY — material requirements/acceptance are sufficiently clear;
+  no blocking product or historical/compatibility decisions remain.
+- CONDITIONAL — named non-blocking assumptions remain, with owners
+  and explicit conditions that would require revisiting the brief.
+- BLOCKED — a critical product decision or necessary existing-system
+  fact remains unknown; identify the MINIMUM answers required.
+
+If blocked, still produce a useful provisional handoff but do NOT
+present it as agreed or implementation-ready. Do not let Superpowers
+invent business answers. Mark open questions that require approval
+before execution even if design exploration can start.
+
+REQUIRED OUTPUT (keep concise; omit inapplicable detail)
+1. Product/ticket summary and in/out-of-scope boundaries.
+2. Ticket-to-codebase alignment table (or explain N/A/not verified).
+3. User journeys and key acceptance scenarios.
+4. Refined functional requirements (FR table).
+5. Refined non-functional requirements (NFR table).
+6. Constraints, dependencies, and compatibility concerns.
+7. Material five-book requirement questions (if applicable).
+8. Prioritized questions BY OWNER, plus stakeholder/developer
+   ready-to-send messages where useful.
+9. Superpowers handoff brief and READY / CONDITIONAL / BLOCKED verdict.
+
+Do not repeat the full ticket, existing code, or history. Finish
+with the most consequential unanswered question, if one exists.
 ~~~
 
 ---
 
-## Compact requirements readiness check
+## Compact ticket readiness check
 
-**Use when:** You already have a small, reasonably clear investigation and just need to know what to confirm before invoking Superpowers.
+**Use when:** An assigned ticket looks small or straightforward and you want to validate requirements and fit against the relevant existing code before Superpowers takes over.
 
 ~~~text
-Review this feature investigation or ticket as a requirements-readiness
-checkpoint before I use Superpowers for design and implementation planning.
+Review this ticket or feature idea and relevant codebase as a
+STANDALONE requirements check before I use Superpowers for design
+and implementation planning.
 
-Input: [PASTE FEATURE REQUEST + INVESTIGATION / EXISTING DECISIONS]
+Input: [TICKET / FEATURE REQUEST, REPOSITORY IF AVAILABLE, KNOWN
+DECISIONS, LINKS OR REFERENCE FILES]
 
-Do NOT perform technical design, choose libraries or architecture, create
-implementation tasks, or repeat a deep code investigation.
+This may be a NEW feature or a CHANGE to an existing one. Inspect
+only enough related code/docs/tests/history to verify observable
+current behavior and constraints; do not require an earlier
+investigation or perform deep technical analysis.
 
 Give me:
-1. The product goal and what is in/out of scope.
-2. A short list of observable functional requirements and key user
-   journeys, with acceptance examples for critical behavior.
-3. Relevant non-functional requirements; flag vague or unconfirmed
-   targets instead of inventing them.
-4. Conflicting or missing business rules, dependencies, and assumptions.
-5. A prioritized list of stakeholder questions: what to ask, why,
-   decision owner if known, and whether it blocks design.
-6. One-line insights from relevant APOSD, AT, DDIA (2nd edition),
-   FODE, and SDI lenses ONLY if they uncover a requirements gap.
-7. A concise handoff brief for Superpowers and a verdict:
-   READY / CONDITIONAL / BLOCKED, with reasons.
+1. Product goal, users, what changes, and in/out of scope.
+2. Ticket-to-existing-code alignment: already present, partial,
+   missing, conflicting, or not verified, with concise evidence.
+3. Functional requirements with key acceptance examples.
+4. Relevant non-functional requirements and targets needing approval.
+5. Material assumptions, dependencies, and compatibility risks.
+6. Separate unanswered questions for (a) stakeholders/product
+   decisions and (b) developers/existing-feature history; identify
+   owners, blockers, and concise ready-to-send questions.
+7. Brief APOSD, AT, DDIA (2nd edition), FODE, and SDI questions ONLY
+   where these uncover a requirements gap.
+8. A product-focused Superpowers handoff plus a verdict:
+   READY / CONDITIONAL / BLOCKED, and what is needed next.
 
-Distinguish confirmed requirements from proposed or assumed ones.
-Cite supplied evidence. Leave technical design to Superpowers.
+Distinguish CONFIRMED REQUIREMENTS from OBSERVED CODE BEHAVIOR,
+proposals, assumptions, and unknowns. Cite what you inspect.
+Leave technical architecture and implementation planning to
+Superpowers. Work read-only.
 ~~~
 
 ---
 
-## Relationship to other prompts
+## How this fits the engineering workflow
 
-| Stage | Use |
+| Stage | Responsibility |
 | --- | --- |
-| New idea / unclear user needs | [Investigate New Feature](investigate-new-feature.md) — discover journeys, candidate requirements, possible approaches |
-| Existing implementation / analogous feature | [Investigate Existing Feature](investigate-existing-feature.md) — verify behavior, dependencies, resource origins |
-| **After investigation, before design** | **Requirements Refinement & Superpowers Handoff** (this file) — close gaps, prepare stakeholder questions, make readiness decision |
-| Technical design, implementation plan, execution | **Superpowers** — use the confirmed requirements and explicitly noted assumptions |
-| Post-implementation evaluation | [Code Review](code-review.md) — evaluate implemented behavior and engineering trade-offs |
+| Assigned ticket / new idea / change to existing feature | Input to this prompt, with whatever source material exists |
+| **Requirements investigation and refinement (this file)** | Compare ticket with relevant code where possible; clarify behavior, FRs/NFRs, constraints, stakeholder/developer questions |
+| Confirm unanswered product and history questions | Obtain decisions or factual context from the appropriate people; update the requirements brief |
+| Design, implementation plan, execution | **Superpowers**, using confirmed requirements and explicitly noted assumptions |
+| Review implemented changes | [Code Review](code-review.md) |
 
-**Do not run every master prompt automatically.** If an investigation already gives sufficient clarity, use the compact readiness check. The goal is a sound decision about *what to build*, not a second technical investigation.
+**Use this file directly for both new and existing features.** No separate investigation prompt is required. Use the compact check for small tickets, the master for ambiguous or consequential work. The goal is to establish *what to build and what to ask*, then hand off the technical choices to Superpowers.
