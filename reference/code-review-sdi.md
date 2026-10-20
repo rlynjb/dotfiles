@@ -31,9 +31,9 @@ System Design should **complement, not replace** reviews for ordinary correctnes
 
 ## Evidence and severity calibration (applies to every review prompt)
 
-**Use this rule for master, compact, and focused prompts.** When copying a focused
-prompt on its own, carry these rules with it. The goal is an accurate review,
-not a long list of possible problems.
+**Use this rule for master, compact, and focused prompts.** Each copyable
+prompt below also includes a concise reminder, so standalone prompts still
+calibrate claims. The goal is accuracy, not a long list of possible problems.
 
 - **Ground findings in inspected evidence:** cite actual code, relevant call
   paths, tests, contracts, config, or results. Check existing guards,
@@ -264,6 +264,11 @@ Identify:
 - Where failure can interrupt the flow
 
 Separate architecture confirmed by the code or configuration from inference.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -312,6 +317,11 @@ When information is missing, state:
 - What needs to be known
 - Which design decision depends on it
 - Whether the current design is still reasonable without that information
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -361,6 +371,11 @@ For each issue explain:
 
 Review the whole path rather than optimizing individual components in
 isolation.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -411,6 +426,11 @@ For every issue explain whether it is:
 
 Prefer clear ownership and simple contracts over unnecessary service
 fragmentation.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -466,6 +486,11 @@ Do not recommend SQL, NoSQL, sharding, or another datastore merely because it
 is common in system-design interviews.
 
 Tie storage decisions to actual access patterns and requirements.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -525,6 +550,11 @@ Do not jump immediately to:
 - Complex caching
 
 unless the workload justifies them.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -572,6 +602,11 @@ What happens when the cache is unavailable?
 Can the cache be rebuilt from the authoritative source?
 
 Do not recommend caching merely because data is read frequently.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -621,6 +656,11 @@ the better trade-off.
 
 Do not introduce a queue merely because background processing appears more
 scalable.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -667,6 +707,11 @@ Then determine whether the resulting behavior is safe.
 
 Do not claim high availability merely because replicas, multiple instances, or
 multiple services exist.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -719,6 +764,11 @@ Avoid recommending observability simply to collect more data.
 
 Prefer signals tied to user impact, system health, or an actionable operational
 decision.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -770,6 +820,11 @@ Distinguish:
 Do not redesign the system for hypothetical future requirements.
 
 Use future scenarios only to expose weaknesses in today's architecture.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -823,4 +878,9 @@ Clearly separate:
 - Premature complexity
 
 Prefer the least complex architecture that satisfies the actual requirements.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
