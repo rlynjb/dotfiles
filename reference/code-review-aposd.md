@@ -25,9 +25,9 @@ APOSD should **complement, not replace** reviews for correctness, security, perf
 
 ## Evidence and severity calibration (applies to every review prompt)
 
-**Use this rule for master, compact, and focused prompts.** When copying a focused
-prompt on its own, carry these rules with it. The goal is an accurate review,
-not a long list of possible problems.
+**Use this rule for master, compact, and focused prompts.** Each copyable
+prompt below also includes a concise reminder, so standalone prompts still
+calibrate claims. The goal is accuracy, not a long list of possible problems.
 
 - **Ground findings in inspected evidence:** cite actual code, relevant call
   paths, tests, contracts, config, or results. Check existing guards,
@@ -210,6 +210,11 @@ Identify:
 - Assumptions made by the implementation
 
 Separate what is directly confirmed by the diff from what you inferred.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -238,6 +243,11 @@ Look for:
 
 For each issue, provide a concrete input or event sequence that demonstrates
 the failure.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -268,6 +278,11 @@ Classify it as:
 
 Explain whether the module makes the system easier to use or merely moves code
 into another file.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -298,6 +313,11 @@ For each candidate, determine whether it is:
 - An unnecessary pass-through
 
 Do not assume that more modules mean better modularity.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -317,6 +337,11 @@ For each changed module, identify:
   configuration, errors, or required operation ordering
 
 Determine whether the change improves or weakens information hiding.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 *Examples of details that may be leaking:*
@@ -361,6 +386,11 @@ For each duplicated rule:
 2. Explain how those locations could diverge.
 3. Identify which module should own the rule.
 4. Determine whether this change increases or reduces duplication.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -392,6 +422,11 @@ Check whether:
 - Callers perform work that should belong inside the callee
 - Ownership is ambiguous
 - Multiple modules can independently make the same decision
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -424,6 +459,11 @@ Look for:
 - State copied unnecessarily
 - State that can become temporarily inconsistent
 - Callers that must manually keep values synchronized
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -451,6 +491,11 @@ For each sequence, determine:
 - How many callers must remember it
 - What happens when the order is violated
 - Whether the module could absorb or eliminate the ordering requirement
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 *Fragile (ordering pushed onto callers):*
@@ -494,6 +539,11 @@ Ask whether the interface became simpler or more complex than before.
 
 Identify parameters that expose implementation decisions rather than genuine
 caller requirements.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -521,6 +571,11 @@ Check for two opposite problems:
 
 Recommend the simplest design that supports the known requirements without
 creating unnecessary special cases.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -543,6 +598,11 @@ Identify:
 - Whether callers must understand infrastructure-specific failures
 
 Check whether each module exposes errors appropriate to its abstraction level.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 *Example:*
@@ -580,6 +640,11 @@ Look for:
 
 Identify the smallest changes that would reduce the time needed to understand
 the code correctly.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 *Comment quality:*
@@ -618,6 +683,11 @@ For each scenario, identify:
 - Changes that would spread through unrelated layers
 
 Determine whether this patch improves or worsens change locality.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -649,6 +719,11 @@ Look for tests that are overly coupled to:
 - Exact internal data representations
 
 Explain what the tests reveal about the quality of the module interfaces.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -679,6 +754,11 @@ Look specifically for common AI-generated design problems:
 
 Determine which abstractions hide meaningful complexity and which merely add
 navigation cost.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -704,6 +784,11 @@ Determine:
   module
 
 Do not recommend extraction merely because the function is long.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -735,6 +820,11 @@ Conclude with:
 - Merge with another module
 - Move responsibility
 - Remove abstraction
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -760,6 +850,11 @@ Verify:
 
 Identify any part of the refactor that changes behavior despite being presented
 as structural only.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -789,6 +884,11 @@ Avoid comments such as:
 
 Only report issues that have a plausible maintenance, correctness, or usability
 consequence.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 *Example of a good comment:*
