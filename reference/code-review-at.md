@@ -29,9 +29,9 @@ Algorithmic Thinking should **complement, not replace** reviews for ordinary cor
 
 ## Evidence and severity calibration (applies to every review prompt)
 
-**Use this rule for master, compact, and focused prompts.** When copying a focused
-prompt on its own, carry these rules with it. The goal is an accurate review,
-not a long list of possible problems.
+**Use this rule for master, compact, and focused prompts.** Each copyable
+prompt below also includes a concise reminder, so standalone prompts still
+calibrate claims. The goal is accuracy, not a long list of possible problems.
 
 - **Ground findings in inspected evidence:** cite actual code, relevant call
   paths, tests, contracts, config, or results. Check existing guards,
@@ -239,6 +239,11 @@ Separate what is confirmed by the code, tests, or requirements from what you
 inferred.
 
 Do not evaluate algorithm choice until the problem and constraints are clear.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -283,6 +288,11 @@ Why it fails:
 Smallest fix:
 
 Do not report a correctness issue without a concrete failing scenario.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -338,6 +348,11 @@ When the difference actually matters:
 Do not recommend cleverness for its own sake.
 
 Prefer a simple correct algorithm when it satisfies the real constraints.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -387,6 +402,11 @@ For every suggested replacement explain:
 
 Do not replace a simple structure unless there is a meaningful correctness,
 clarity, or performance benefit.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -430,6 +450,11 @@ If you recommend an optimization, explain the input size or workload at which
 the current implementation becomes a meaningful problem.
 
 Do not treat a better Big-O value as automatically better engineering.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -463,6 +488,11 @@ Flag any execution path that can violate the invariant.
 If the algorithm is correct but the invariant is difficult to understand from
 the implementation, suggest the smallest change that would make the reasoning
 more obvious.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -511,6 +541,11 @@ Prioritize cases that:
 - Distinguish two competing algorithmic approaches
 
 Do not produce edge cases that are irrelevant to this problem.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -549,6 +584,11 @@ Recognition rule:
 
 Keep the explanation focused on reasoning and recognition rather than
 memorizing a list of algorithms.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -586,6 +626,11 @@ Recommend the smallest set of additional tests that would meaningfully increase
 confidence in correctness.
 
 For each suggested test explain what specific bug or invariant it protects.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -633,4 +678,9 @@ Clearly separate:
 
 If the current simple solution already satisfies the constraints, do not
 recommend a more complicated one.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
