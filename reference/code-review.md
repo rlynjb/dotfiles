@@ -22,6 +22,44 @@ What should be fixed now, and what can reasonably wait?
 
 ---
 
+## Evidence and severity calibration (applies to every review prompt)
+
+**Use this rule for master, compact, and focused prompts.** When copying a focused
+prompt on its own, carry these rules with it. The goal is an accurate review,
+not a long list of possible problems.
+
+- **Ground findings in inspected evidence:** cite actual code, relevant call
+  paths, tests, contracts, config, or results. Check existing guards,
+  validations, and surrounding behavior before claiming something is missing.
+- **Label the claim, not just its severity:**
+  - **Confirmed defect:** a contradiction of a supported requirement or a
+    reproducible error/failure, with the relevant conditions established.
+  - **Plausible risk:** a code-supported failure scenario whose likelihood,
+    reachability, or real-world impact still needs verification; state the
+    preconditions and uncertainty.
+  - **Verification gap:** needed evidence is inaccessible or checks were not
+    performed; this is not automatically a bug.
+  - **Optional improvement:** a design/performance alternative with a
+    justified trade-off, not a defect by default.
+- **Calibrate severity separately:** use **blocking** only for an evidenced
+  release-stopping correctness, security, data-loss, or agreed-contract issue;
+  **important** for consequential supported concerns; **optional** for
+  nonurgent improvements. Unknown impact is not automatically high severity.
+- **Do not overclaim:** a hypothetical failure is not an observed incident;
+  a theoretical complexity concern is not measured slowness; absent tests
+  are not proof the code is wrong; code inspection is not proof of production
+  behavior, load, cost, or deployment configuration.
+- **Report the review boundary:** say whether this is a diff, feature path,
+  representative sample, or broader repository inspection. List meaningful
+  gaps in files, environments, tests, or tools. Never claim the entire repo
+  is safe or free of issues when only part was inspected.
+- **State verification honestly:** distinguish tests/benchmarks actually run
+  and their outcomes from tests merely read or recommended. Don't invent
+  outputs, metrics, exploitability, root causes, or stakeholder intent.
+- **Prefer precision over volume:** deduplicate shared root causes and permit
+  **zero actionable findings**. If none are supported, say "No actionable
+  issues found in the inspected scope," with limitations, not "bug-free."
+
 ## Index
 
 | # | Prompt or section | Use it when |
@@ -98,6 +136,12 @@ assumptions, and future concerns. If a lens is not relevant, say so briefly.
 Do not invent system guarantees or workload requirements.
 Do not recommend abstractions, optimizations, or infrastructure without need.
 Do not modify the code. End with targeted verification steps.
+
+Calibrate every claim: distinguish CONFIRMED DEFECT, PLAUSIBLE RISK,
+VERIFICATION GAP, and OPTIONAL IMPROVEMENT. Provide the evidence and
+conditions for each; severity must match demonstrated impact, not a
+hypothetical worst case. State what was inspected or actually tested,
+and what was not. Zero findings is a valid result.
 ~~~
 
 ---
@@ -222,6 +266,16 @@ REQUIRED OUTPUT
 If no actionable issues are found, say so. Do not generate speculative findings
 to satisfy the template. Review security, privacy, accessibility, and ordinary
 correctness where relevant; the book lenses do not replace these checks.
+
+Evidence calibration: check the relevant surrounding code, tests,
+contracts, and configuration before declaring a defect. Distinguish
+confirmed defects, plausible code-backed risks, verification gaps,
+and optional improvements; attach preconditions to uncertain claims.
+Severity must follow supported impact; do not label speculative future
+scale, unmeasured latency, or unknown deployment behavior as a blocker.
+Report the reviewed scope and which tests or checks were actually run.
+If no actionable issues are supported, report zero findings with limits
+rather than implying the entire repository is defect-free.
 ~~~
 
 ---
