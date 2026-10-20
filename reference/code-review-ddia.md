@@ -26,9 +26,9 @@ DDIA should **complement, not replace** reviews for ordinary correctness, securi
 
 ## Evidence and severity calibration (applies to every review prompt)
 
-**Use this rule for master, compact, and focused prompts.** When copying a focused
-prompt on its own, carry these rules with it. The goal is an accurate review,
-not a long list of possible problems.
+**Use this rule for master, compact, and focused prompts.** Each copyable
+prompt below also includes a concise reminder, so standalone prompts still
+calibrate claims. The goal is accuracy, not a long list of possible problems.
 
 - **Ground findings in inspected evidence:** cite actual code, relevant call
   paths, tests, contracts, config, or results. Check existing guards,
@@ -222,6 +222,11 @@ Identify:
 - Assumptions made by the implementation
 
 Separate what is directly confirmed by the diff from what you inferred.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -257,6 +262,11 @@ Look for:
 
 For each issue, provide a concrete input, event sequence, or concurrent
 execution that demonstrates the failure.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -309,6 +319,11 @@ are kept in sync. Do not claim either model is automatically superior.
 
 Explain whether the data model makes valid states easy to represent and invalid
 states difficult to create.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -346,6 +361,11 @@ Look for:
 
 For every duplicated representation, explain how updates propagate and what
 happens when the copies disagree.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -404,6 +424,11 @@ the alternative; do not prescribe denormalization merely because joins exist.
 
 For each performance finding, describe the workload or data size at which it
 becomes significant.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -459,6 +484,11 @@ Search for:
 - Deadlock risks
 
 Use explicit interleavings to demonstrate concurrency problems.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -504,6 +534,11 @@ Look for:
 
 Replace vague phrases such as "eventually consistent" with a concrete account
 of what can be stale, for how long, and with what consequence.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -558,6 +593,11 @@ State the effective guarantee precisely:
 - At-least-once
 - Effectively once for a bounded side effect
 - Unknown
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -603,6 +643,11 @@ Check whether:
 
 Do not describe the flow as exactly once unless every relevant side effect is
 covered by a proven end-to-end mechanism.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -644,6 +689,11 @@ Look for:
 - Old asynchronous updates overwriting newer values
 
 Ask whether the derived representation can be deleted and rebuilt safely.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -701,6 +751,11 @@ Look for:
 - Destructive migrations before all readers change
 - Dual-write periods with no reconciliation
 - Application deployment depending on an instantaneous schema change
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -748,6 +803,11 @@ Look for:
 - Rebalancing changing ordering or latency assumptions
 
 Do not assume replication improves durability in the same way as backups.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -802,6 +862,11 @@ Look for missing:
 
 Distinguish availability from correctness: returning a response is not success
 if the underlying state is inconsistent.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -855,6 +920,11 @@ For every concern, give:
 - User-visible consequence
 - Metric that would reveal it
 - Smallest mitigation
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -904,6 +974,11 @@ Separate:
 - Missing concurrency coverage
 - Missing failure-injection coverage
 - Optional load or soak testing
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -942,6 +1017,11 @@ scenario.
 
 Prefer the simplest architecture that satisfies the actual correctness,
 freshness, availability, and workload requirements.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -987,6 +1067,11 @@ Then answer:
 7. What happens if the process crashes at each step?
 8. Can the operation be safely replayed?
 9. Which guarantee is proven and which is assumed?
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -1037,6 +1122,11 @@ Classify it as:
 - Operationally under-specified
 - Correctness risk
 - Unnecessary complexity
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -1093,6 +1183,11 @@ Look for:
 - Rollback that cannot restore transformed data
 
 For every risk, describe the exact deployment or interruption scenario.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -1137,6 +1232,11 @@ Instead explain:
 
 Avoid speculative architecture advice not supported by the expected workload or
 reliability requirement.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
