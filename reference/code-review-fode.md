@@ -27,9 +27,9 @@ Fundamentals of Data Engineering should **complement, not replace** reviews for 
 
 ## Evidence and severity calibration (applies to every review prompt)
 
-**Use this rule for master, compact, and focused prompts.** When copying a focused
-prompt on its own, carry these rules with it. The goal is an accurate review,
-not a long list of possible problems.
+**Use this rule for master, compact, and focused prompts.** Each copyable
+prompt below also includes a concise reminder, so standalone prompts still
+calibrate claims. The goal is accuracy, not a long list of possible problems.
 
 - **Ground findings in inspected evidence:** cite actual code, relevant call
   paths, tests, contracts, config, or results. Check existing guards,
@@ -240,6 +240,11 @@ Identify:
 - Assumptions made by the implementation
 
 Separate what is directly confirmed by the diff from what you inferred.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -279,6 +284,11 @@ Look for:
 
 Explain whether the change improves the whole lifecycle or merely moves work,
 risk, or ambiguity from one stage to another.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -319,6 +329,11 @@ Look for:
 - Security credentials broader than needed
 
 For every concern, explain the downstream lifecycle effect.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -360,6 +375,11 @@ Look for:
 
 Explain whether the storage design makes the data durable, usable, governable,
 and cost-aware for its lifecycle role.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -403,6 +423,11 @@ Look for:
 
 For each issue, describe the exact source or ingestion event sequence that causes
 incorrect or incomplete downstream data.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -449,6 +474,11 @@ Look for:
 
 For every issue, provide a concrete input dataset or event sequence and the
 incorrect output it produces.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -489,6 +519,11 @@ Look for:
 
 Explain whether the served data is fit for its consumer, not merely present in a
 warehouse or lake.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -529,6 +564,11 @@ Look for:
 
 For each concern, explain which consumer, process, or compliance obligation is
 at risk.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -568,6 +608,11 @@ Look for:
 - Retention conflicts between raw, transformed, and served layers
 
 Explain the specific exposure path and the smallest change that closes it.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -608,6 +653,11 @@ Look for:
 - Manual steps that are not documented or monitored
 
 For every concern, describe the failed run, delayed source, or backfill scenario.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -646,6 +696,11 @@ Look for:
 - Changes that increase on-call burden without making it visible
 
 Classify each gap as blocking, important, or optional based on dataset criticality.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -684,6 +739,11 @@ Look for:
 
 Explain whether the architecture improves lifecycle clarity or creates a tool-
 centered system that will be hard to operate and change.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -733,6 +793,11 @@ Classify the choice as:
 - Operationally under-specified
 - Cost risk
 - Unnecessary complexity
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -781,6 +846,11 @@ For every concern, give:
 - Consumer-visible consequence
 - Metric or log that would reveal it
 - Smallest mitigation
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -832,6 +902,11 @@ Separate:
 - Missing backfill/replay coverage
 - Missing security/governance coverage
 - Optional load or cost testing
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -867,6 +942,11 @@ governance scenario.
 
 Prefer the simplest lifecycle design that satisfies real source constraints,
 consumer needs, security requirements, and operational maturity.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -911,6 +991,11 @@ Then answer:
 8. Can the pipeline be debugged, backfilled, and operated?
 9. What becomes expensive or fragile as data grows?
 10. Which lifecycle assumptions are proven and which are only assumed?
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -965,6 +1050,11 @@ Classify it as:
 - Security or governance risk
 - Cost risk
 - Unnecessary complexity
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -1028,6 +1118,11 @@ Look for:
 
 For every risk, describe the exact deployment, interruption, or consumer-impact
 scenario.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
@@ -1074,6 +1169,11 @@ Instead explain:
 
 Avoid speculative architecture advice not supported by expected data volume,
 freshness, consumer value, governance requirements, or team maturity.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ```
 
 ---
