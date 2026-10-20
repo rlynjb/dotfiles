@@ -24,9 +24,9 @@ What should be fixed now, and what can reasonably wait?
 
 ## Evidence and severity calibration (applies to every review prompt)
 
-**Use this rule for master, compact, and focused prompts.** When copying a focused
-prompt on its own, carry these rules with it. The goal is an accurate review,
-not a long list of possible problems.
+**Use this rule for master, compact, and focused prompts.** Each copyable
+prompt below also includes a concise reminder, so standalone prompts still
+calibrate claims. The goal is accuracy, not a long list of possible problems.
 
 - **Ground findings in inspected evidence:** cite actual code, relevant call
   paths, tests, contracts, config, or results. Check existing guards,
@@ -300,6 +300,11 @@ Use a concise ASCII flow diagram if the path crosses several components.
 List what is proven from the code versus what is assumed or unavailable.
 
 Do not critique architecture until this path is understood.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ~~~
 
 ---
@@ -323,6 +328,11 @@ For each relevant module or interface, ask:
 
 Find concrete design costs and the smallest localized repair.
 Do not add a layer merely to reduce line count or satisfy a pattern.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ~~~
 
 **Highest-value connections:** APOSD ownership should agree with DDIA's system of record and SDI's service boundaries. APOSD change amplification should agree with FODE's source/consumer contract evolution.
@@ -348,6 +358,11 @@ Review this logic through Algorithmic Thinking.
 
 For each issue, give a failing input or a concrete scale scenario, and the
 smallest justified fix. Distinguish proof, assumption, and optimization.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ~~~
 
 **Highest-value connections:** Algorithm-level improvements do not automatically improve SDI's end-to-end latency; check I/O, remote calls, storage, and fan-out before prioritizing an optimization.
@@ -383,6 +398,11 @@ otherwise identify what to measure and label estimates as hypothetical.
 Distinguish documented expectation from implemented guarantee.
 Do not claim exactly once, atomicity, durability, or strong consistency
 without supporting evidence.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ~~~
 
 **Remember:** Retry is not idempotency. Acknowledgment is not exactly once. Replication is not a backup. A cache is not automatically a source of truth.
@@ -413,6 +433,11 @@ Identify:
 Report a concrete consumer or pipeline consequence, not a generic
 recommendation to adopt more tools. A pipeline that runs is not necessarily
 a pipeline that serves correct, trustworthy data.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ~~~
 
 **Highest-value connections:** DDIA asks whether data updates have valid guarantees; FODE asks whether trustworthy data arrives with the right meaning, freshness, ownership, and availability for the consumer.
@@ -444,6 +469,11 @@ Check:
 Differentiate a current defect from a future limit. State the workload or
 requirement that makes any infrastructure change worthwhile.
 Prefer the simplest architecture that meets current constraints.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ~~~
 
 ---
@@ -475,6 +505,11 @@ For every overlapping concern:
 
 Never recommend a deeper abstraction, faster algorithm, stronger data
 guarantee, new pipeline tool, or distributed component solely on principle.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ~~~
 
 ---
@@ -500,6 +535,11 @@ Look for:
 Identify concrete faults without penalizing code simply because AI wrote it.
 Avoid rewriting working code solely for elegance. Separate confirmed findings
 from suspicions requiring tests or environment verification.
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ~~~
 
 ---
@@ -518,6 +558,11 @@ Scenario: input, timeline, concurrent sequence, workload, or consumer example
 Expected vs actual: observed behavior, or a clearly qualified potential risk
 Recommendation: smallest reasonable improvement
 Verification: focused test, inspection, metric, or reproduction
+
+Calibrate conclusions: cite inspected evidence and concrete conditions.
+Separate confirmed defects, plausible risks, verification gaps, and
+optional improvements. Do not inflate severity or imply unverified
+production impact; zero actionable findings is a valid outcome.
 ~~~
 
 **Severity:**
