@@ -14,7 +14,7 @@ Modern developer environment for macOS — Zsh, Vim, tmux, and a suite of fast R
 
 This repository is the macOS development environment and the upstream home for some prompt/reference material in [`reference/`](reference/). **[DotSkills](https://github.com/rlynjb/dotskills)** is the separate, canonical, version-controlled library that packages agent skills for compatible harnesses.
 
-DotSkills' distinguishing approach is **conference-informed methodology with explicit source labels**, **human approval gates**, **guided/deep-dive/fast learning modes**, **evidence-based evaluation and specialist routing**, and **portable skill provenance**. It complements skill creators and eval tools rather than replacing their engines. See [Why DotSkills is different](https://github.com/rlynjb/dotskills#why-dotskills-is-different) for the full comparison, including current limitations and planned integrations.
+DotSkills owns the portable skill library and source provenance. Within that library, **[Refine Skill](https://github.com/rlynjb/dotskills/tree/main/skills/refine-skill)** is an *optional methodology skill* offering conference-informed recommendations with source labels, human approval gates, guided/deep-dive/fast learning modes, evidence-based evaluation, and specialist routing. Those operating modes belong to `refine-skill`, **not to every DotSkills skill**. See [Why DotSkills is different](https://github.com/rlynjb/dotskills#why-dotskills-is-different) for the broader comparison and current limitations.
 
 ## Quick start
 
