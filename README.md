@@ -4,10 +4,17 @@ Modern developer environment for macOS — Zsh, Vim, tmux, and a suite of fast R
 
 ## Contents
 
+- [Related project: DotSkills](#related-project-dotskills)
 - [Quick start](#quick-start)
 - [Commands](#commands)
   - [Tmux](#tmux)
   - [Vim](#vim)
+
+## Related project: DotSkills
+
+This repository is the macOS development environment and the upstream home for some prompt/reference material in [`reference/`](reference/). **[DotSkills](https://github.com/rlynjb/dotskills)** is the separate, canonical, version-controlled library that packages agent skills for compatible harnesses.
+
+DotSkills' distinguishing approach is **conference-informed methodology with explicit source labels**, **human approval gates**, **guided/deep-dive/fast learning modes**, **evidence-based evaluation and specialist routing**, and **portable skill provenance**. It complements skill creators and eval tools rather than replacing their engines. See [Why DotSkills is different](https://github.com/rlynjb/dotskills#why-dotskills-is-different) for the full comparison, including current limitations and planned integrations.
 
 ## Quick start
 
