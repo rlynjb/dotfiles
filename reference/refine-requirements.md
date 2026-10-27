@@ -6,7 +6,7 @@ You do **not** need to run a separate "investigate new feature" or "investigate 
 
 **Core questions:** What comparable features or established patterns already exist in this codebase? Can the requested behavior follow them, or are there requirements that genuinely differ? Where do the ticket and existing behavior agree or conflict? Only after checking those facts, which functional/non-functional requirements and stakeholder/developer questions remain?
 
-**Workflow:** Ticket / idea → **review relevant code and find similar patterns** → compare ticket against existing behavior → **refine FRs, NFRs, and acceptance criteria** → ask only the remaining stakeholder/developer questions → hand off requirements and reusable-pattern evidence to **Superpowers** for design, planning, and execution → [Code Review](code-review.md).
+**Workflow:** Ticket / idea → **inspect code and create evidence & pattern map** → **overview of all initial FR/NFR findings, gaps, and system-design inputs** → **stakeholder questions at the bottom** → **user chooses which requirement to explore** → focused interview loop and updated findings → final requirements & **Superpowers** handoff → [Code Review](code-review.md).
 
 **Boundary:** Investigate **just enough existing behavior, nearby patterns, and history to validate requirements**. Prefer alignment with proven local conventions over inventing a new approach, **when those conventions satisfy the confirmed requirements**; Superpowers makes the actual technical reuse/design decision. This is not a deep technical walkthrough, code review, architecture design, technology selection, or implementation plan.
 
@@ -14,43 +14,35 @@ You do **not** need to run a separate "investigate new feature" or "investigate 
 
 ## Interview-style requirements refinement (default)
 
-The default experience follows a **system-design/DSA-inspired engineering interview** rather than immediately printing a nine-section report. It is also a teaching workflow, modeled on the guided question style used in Code Review: explain why a question matters, ask one feature-specific question, show a worked answer and scenario trace, challenge it with a changed constraint, then extract a precise requirement.
+The default is **overview first, selective interviews second**, inspired by system-design/DSA clarification and the Code Review learning style. First inspect the ticket and relevant code/tests/contracts. **Before any individual “Problem question,” show the whole concise initial findings index**; then let the user select a specific FR, NFR, scenario, or system-design gap for one-question-at-a-time analysis.
 
-**Start with evidence, not guesses.** Read the ticket to locate the feature, then inspect nearby code, tests, contracts, and established patterns before drafting requirements or stakeholder outreach. If code is unavailable, mark the pattern comparison NOT VERIFIED and use provisional ticket-based discussion.
+**First response — Findings Overview (mandatory):**
 
-**Suggested interview progression** (adapt to the feature; skip answered or irrelevant steps):
+1. **Feature snapshot:** problem, actor, outcome, scope, inspected source revision/coverage, and evidence limits.
+2. **Evidence & pattern map:** similar feature; path/symbol/test evidence; observed behavior; difference/reuse fit; **FOLLOW / ADAPT / NO SUITABLE PATTERN FOUND / NOT VERIFIED**. Include this even with unavailable code (mark **NOT VERIFIED**).
+3. **Functional requirements — all material initial findings:** a compact `FR-xx` table with behavior, priority, status, evidence/pattern link, and outstanding `Q-xx`. No individual long answers yet.
+4. **Non-functional requirements — all material initial findings:** a compact `NFR-xx` table with linked FR/journey, quality/grounded target (or **target requires confirmation**), status/priority, evidence/owner, and open question.
+5. **Bigger-picture gaps:** concise edge/failure cases, dependencies, permissions, data ownership/contracts, scale, reliability/security, and other requirements-level system-design inputs.
+6. **Readiness and next choice:** provisional readiness or **NOT YET ASSESSED**, key blockers, and **choose an FR/NFR/gap to explore**. Do not automatically start Problem question 1.
+7. **Post-interview — Questions to ask stakeholders:** **very last section**, a short consolidated deduplicated list with Q-ID, decision owner, exact question, linked FR/NFR, priority and whether it blocks handoff. Avoid in-depth explanations of each question.
 
-1. **Clarify:** actor, problem, expected outcome, scope, exclusions, and decisive ambiguities.
-2. **Baseline:** which inspected existing feature fits; FOLLOW, ADAPT, NO SUITABLE PATTERN, or NOT VERIFIED.
-3. **Functional requirements (FRs):** what users/systems do; roles, business rules, success/failure paths, Must/Should/Could, and Given/When/Then acceptance.
-4. **DSA-style scenario reasoning:** trace a normal example, then relevant empty/invalid inputs, retries, duplicates, concurrency, permission failures, timeouts, and recovery. Refine requirements; do not write algorithms.
-5. **Non-functional requirements (NFRs):** relevant latency, throughput, load, consistency/freshness, availability, durability, authorization, privacy, accessibility, clients, compatibility, operations, and cost; connect each to a user journey or FR.
-6. **System-design preparation:** define required domain entities, observable state, source of truth, interfaces/contracts, integrations, read/write patterns, scale inputs, failure semantics, ownership boundaries, and trade-off questions. These are design **inputs**, not an architecture proposal.
-7. **Challenge and verify:** change one constraint, explain its consequences, and decide whether an FR, NFR, acceptance test, or product-owner question changes.
-8. **Handoff:** produce a verified requirements brief and READY / CONDITIONAL / BLOCKED verdict only at completion or on request.
+Treat **CONFIRMED REQUIREMENTS** (approved ticket/spec/decision) differently from **OBSERVED BEHAVIOR**, **PROPOSED**, **ASSUMED**, and **UNKNOWN**. Code reuse is evidence, never product approval. When ticket/approved decisions/code changes, re-inspect what is affected, **refresh the evidence & pattern map and FR/NFR overview**, and highlight what changed or cannot be verified.
 
-**Modes:** Guided is the default: one Problem question per response, worked answer, learning checkpoint, and stakeholder questions. In Practice mode (when requested), ask the candidate one question and **wait** before providing hints, worked answers, or stakeholder questions. Full walkthrough runs the entire interview and final report when requested; compact ticket readiness remains a one-shot alternative.
+**After the user selects a requirement**, interview it in Guided or Practice mode. For the selected item, clarify scope, existing pattern fit, applicable FR/NFR, normal and edge/failure behavior, system-design inputs, changed constraints and trade-offs, acceptance/testability, and remaining decisions. Skip irrelevant questions; do not force a fixed interview order or design an architecture.
 
-**Each completed Guided question:**
-1. What and why (teach the concept in plain English)
-2. Problem question N — concrete requirement or system-design question
-3. How to reason: evidence to inspect and questions to clarify
-4. Worked answer: source-backed or explicitly PROPOSED; never invent a stakeholder decision
-5. Scenario walkthrough: small happy/edge/failure case, labeled hypothetical where applicable
-6. Trade-off and interviewer follow-up: changed constraint and its impact
-7. Refined FR/NFR/acceptance: ID, source/status, measurable condition or missing target
-8. Takeaway
-9. LEARNING CHECKPOINT — Next question or explore this one?
-10. **Post-interview — Questions to ask stakeholders** (always the last section)
+**Modes:**
+- **Guided (default):** findings overview first, wait for the selected item, then one short worked question/scenario/trade-off/takeaway/checkpoint for that item. Preserve IDs and the evolving register.
+- **Practice (on request):** overview first, wait for the selected item, then ask one question and **wait for my answer** before worked explanation or critique.
+- **Full walkthrough (on request):** overview followed by relevant deep dives and a consolidated handoff without a per-question pause.
+- **Concise/refinement-only (on request):** overview-first tables and handoff without interview teaching sections.
+
+**Each selected-item Guided question (not the initial overview):** What and why → **Problem question N** → how to reason → worked answer (clearly proposed if unapproved) → scenario → one changed-constraint follow-up → refined FR/NFR/acceptance → takeaway → **LEARNING CHECKPOINT — Explore this item, choose another ID, or refresh the overview?** → compact stakeholder questions **at the bottom**.
 
 **FR format:** FR-ID, actor/trigger, observable result, priority, source and CONFIRMED/PROPOSED/ASSUMED/UNKNOWN status, reuse link, Given/When/Then, and owner of unresolved decisions.
 
-**NFR format:** NFR-ID, linked FR/journey, quality expectation, business importance, priority/status, verification method, and source-backed target; if missing use **target requires confirmation**. Do not invent SLAs, growth assumptions, or numerical guarantees. For mock interviews, hypothetical numbers must be clearly marked and never promoted to product facts.
+**NFR format:** NFR-ID, linked FR/journey, quality expectation, business importance, priority/status, verification method, and source-backed target; if missing use **target requires confirmation**. Do not invent SLAs, growth assumptions, or numerical guarantees. Mock-interview assumptions are explicitly hypothetical.
 
-**Final section: Post-interview — Questions to ask stakeholders.** Include only material unresolved questions, grouped into product/stakeholder decisions and developer/history or contracts when appropriate. For each, give Q-ID, owner, exact ready-to-ask wording, linked FR/NFR and uncertainty, priority, and whether it blocks handoff. Drop answered or redundant questions. If there are none, say **No unresolved stakeholder questions for this topic.** Do not generate code-review comments, automatically contact anyone, or send questions to external tools.
-
-The full report retains the master prompt's scope, pattern map, FR/NFR and acceptance tables, system-design inputs, open questions, and Superpowers handoff. It does **not** select technology, decide architecture, write code, or execute Superpowers.
-
+The final Superpowers report expands the working overview with acceptance, coverage, system-design input and readiness detail; end with only remaining **Post-interview — Questions to ask stakeholders**. Never generate code-review comments, automatically contact anyone, design architecture, or execute Superpowers.
 ---
 
 ## Index
@@ -99,48 +91,63 @@ similar features and reusable conventions. Only AFTER reporting
 that evidence should you refine functional/non-functional
 requirements or draft questions for stakeholders or developers.
 
-DEFAULT INTERVIEW DELIVERY (unless user asks for a complete report):
-- You are interviewer and coach; I am the candidate. First provide a
-  compact evidence/pattern map based on inspected code, or state NOT VERIFIED.
-- Then deliver ONE high-value "Problem question N" at a time in Guided mode.
-  Explain what and why, how to reason, give an evidence-based worked
-  answer, trace a small user/failure scenario, discuss an interviewer
-  follow-up/trade-off, refine the relevant FR/NFR/acceptance, and state
-  a takeaway. End with "LEARNING CHECKPOINT — Next question or explore
-  this one?" and then "Post-interview — Questions to ask stakeholders".
-- Practice mode (on request): ask one question then STOP; do not reveal
-  worked answers or stakeholder questions until I respond. Give
-  feedback, hints if requested, and the remaining teaching sections
-  for the SAME question before proceeding.
-- Full walkthrough (on request): deliver the interview plus one final
-  requirements handoff without per-question pauses. Compact mode
+DEFAULT INTERVIEW DELIVERY (unless user requests a full report):
+- You are interviewer and coach; I am the candidate.
+- FIRST inspect the ticket and relevant existing code, tests,
+  contracts, and approved decisions (or mark code NOT VERIFIED).
+- FIRST RESPONSE MUST BE A CONCISE "Findings Overview" containing:
+  1. Feature problem, actors/scope, source revision and coverage.
+  2. **Evidence & pattern map**: similar feature, path/symbol/test,
+     observed behavior, key difference, FOLLOW/ADAPT/NO SUITABLE
+     PATTERN FOUND/NOT VERIFIED. Always show it, even unverified.
+  3. ALL material candidate functional requirements in a brief
+     FR-ID table with priority, evidence/status and open Q-ID.
+  4. ALL material candidate non-functional requirements in a brief
+     NFR-ID table linked to FRs, with evidence/status and grounded
+     targets or "target requires confirmation".
+  5. Material edge/failure cases, dependencies and system-design
+     inputs: data ownership, contracts, scale, reliability, security,
+     permissions and unresolved trade-offs, summarized briefly.
+  6. Provisional readiness/blockers and an invitation for me to
+     choose FR-01, NFR-02, an edge case, or a design gap to explore.
+     DO NOT start an individual Problem question automatically.
+  7. "Post-interview — Questions to ask stakeholders" AS THE LAST
+     SECTION. Only unresolved questions, grouped/deduplicated.
+     List Q-ID, owner, ready-to-ask wording, linked FR/NFR, priority,
+     and BLOCKS HANDOFF? YES/NO. Avoid lengthy per-question analysis.
+- THEN, only when I select an item, ask ONE "Problem question N"
+  at a time in Guided mode; explain what/why, show evidence-based
+  worked answer and scenario, one changed-constraint trade-off,
+  refined acceptance/FR/NFR, and takeaway. End with the checkpoint
+  "Explore this item, select another ID, or refresh the overview?"
+  and a concise stakeholder-question section at the bottom.
+- Practice mode: also show overview first, then wait for my chosen
+  item. Ask one question and STOP before revealing worked answers.
+  Give fair feedback and hints if requested on the SAME item.
+- Full walkthrough (on request): overview, relevant interviews,
+  then the final handoff without per-question pauses. Concise mode
   uses the separate one-shot readiness check.
-- Track reviewed / not applicable / unverified interview coverage.
-  Never call a partial exploration complete.
-- Distinguish FRs (what users/systems must do) from NFRs (how well,
-  under what load/conditions). Record FR-ID, actor/trigger, result,
-  source/status, priority and Given/When/Then. Record NFR-ID,
-  related FR, quality, source/status, priority, verification, and
-  confirmed target or "target requires confirmation".
-- Probe meaningful edge cases and system-design inputs: permissions,
-  duplicate/retried/concurrent actions, failures and recovery,
-  ownership and lifecycle of data, API/consumer contracts,
-  compatibility, scale/read-write/load expectations, latency,
-  reliability, freshness/consistency, availability, security/privacy,
-  accessibility, operational needs, and architectural trade-offs.
-  Ask only what is relevant. These are requirements questions,
-  NOT permission to design architecture or implement code.
-- Conclude each completed question and the final report with
-  "Post-interview — Questions to ask stakeholders", listing only
-  unresolved decision-owner questions with Q-ID, wording, linked
-  FR/NFR, why it matters, priority and blocking status. If none,
-  state "No unresolved stakeholder questions for this topic."
-  Do not output draft code-review comments.
-- Treat hypothetical mock-interview constraints as explicit assumptions,
-  not approved real-product requirements. Never impersonate actual
-  stakeholders or fabricate numerical quality targets.
-- The required nine-section output below is for interview COMPLETION
-  or when I explicitly request a full report, not each question.
+- Preserve FR/NFR/Q IDs and my decisions across turns. If ticket,
+  code, approved constraints or stakeholder decisions change,
+  REFRESH affected evidence and pattern map before updating the
+  overview; identify changed and unverified findings.
+- Track reviewed / not applicable / unverified interview coverage;
+  never call a partial exploration complete.
+- Distinguish FRs (behavior) from NFRs (quality under conditions).
+  For a selected item, capture testable Given/When/Then where
+  relevant. Link targets, verification, status, priority and owner.
+- Probe relevant permissions, duplicates, concurrency, recovery,
+  contracts, compatibility, data ownership, read/write workload,
+  scale, latency, reliability, freshness, security, accessibility,
+  operations and trade-offs. These are design INPUTS, not permission
+  to design architecture or implement code.
+- Questions to stakeholders stay in ONE SHORT FINAL SECTION;
+  omit answered and duplicate questions. Never produce draft code
+  review comments or send any message automatically.
+- Mock-interview constraints remain hypothetical. Do not fabricate
+  approval, numbers, stakeholder statements or production evidence.
+- The detailed master output below is for COMPLETION or an explicit
+  final report, not for the first Findings Overview or every question.
 
 INPUTS (use what is available; missing inputs are not blockers by
 themselves)
@@ -405,12 +412,13 @@ FINAL OUTPUT — ON INTERVIEW COMPLETION OR EXPLICIT FULL REPORT
    baseline vs new expectations.
 6. Constraints, dependencies, and compatibility concerns.
 7. Material five-book requirement questions (if applicable).
-8. Remaining questions BY OWNER, plus stakeholder/developer
-   ready-to-send messages where useful.
+8. Decision coverage and ownership (Q-IDs only; do not duplicate
+   outreach wording here).
 9. Superpowers handoff brief with existing-pattern references
    and READY / CONDITIONAL / BLOCKED verdict.
 10. Post-interview — Questions to ask stakeholders as the FINAL
-    section (or "No unresolved stakeholder questions for this topic.").
+    section, with concise ready-to-send wording by owner
+    (or "No unresolved stakeholder questions for this topic.").
 
 Do not repeat the full ticket, existing code, or history. Finish
 with the Post-interview stakeholder question section; never post
@@ -448,14 +456,14 @@ Only AFTER the code review, give me:
 4. Non-functional requirements: existing quality expectations,
    gaps, and targets needing approval.
 5. Material assumptions, dependencies, and compatibility risks.
-6. Only remaining questions after checking code and docs:
-   (a) stakeholder/product decisions, (b) involved developers
-   about history, conventions, or pattern applicability. Include
-   decision owner, blockers, and ready-to-send wording.
-7. APOSD, AT, DDIA (2nd edition), FODE, and SDI questions ONLY
+6. APOSD, AT, DDIA (2nd edition), FODE, and SDI questions ONLY
    where these uncover a material requirements gap.
-8. A product-focused Superpowers handoff citing relevant
+7. A product-focused Superpowers handoff citing relevant
    reusable patterns, plus READY / CONDITIONAL / BLOCKED verdict.
+8. **Post-interview — Questions to ask stakeholders** LAST:
+   only remaining product/developer decisions after checking
+   evidence, with concise owner, Q-ID, blockers and ready-to-ask
+   wording. Avoid deep per-question explanations.
 
 Distinguish CONFIRMED REQUIREMENTS from OBSERVED CODE BEHAVIOR,
 proposals, assumptions, and unknowns. Cite what you inspect.
